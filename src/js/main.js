@@ -17,6 +17,9 @@ puckt.main = (function () {
         
         // Eventually load in the levels into here
         new Flick(p);
+
+        var wall = new puckt.Wall(0, 0, 300, 10);
+        stage.addChild(wall.shape);
     },
     tickrolled = function (e) {
         if (!e.paused) {
