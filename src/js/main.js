@@ -1,17 +1,15 @@
-var box2d, stage, world, mppx = 50, canvasWidth = 300, canvasHeight = 440;
+var box2d, stage, world, mppx = 50, CANVASWIDTH = 300, CANVASHEIGHT = 440;
 
 puckt.main = (function () {
     "use strict";
     var init = function () {
         // Set up stage and enable touch controls
         var canvas = document.getElementById("ice-rink");
-        puckt.util.setCanvasSize(canvas, canvasWidth, canvasHeight);
+        puckt.util.setCanvasSize(canvas, CANVASWIDTH, CANVASHEIGHT);
         stage = new createjs.Stage(canvas);
         createjs.Touch.enable(stage);
-        
         // Create scene
         createScene();
-        
         // Declare settings for scene ticker
         createjs.Ticker.addListener(this);
         createjs.Ticker.setFPS(60);
@@ -25,14 +23,11 @@ puckt.main = (function () {
         puckt.debug.run(function () {
             var debugDraw = new box2d.b2DebugDraw(),
                 debugCanvas = document.createElement('canvas');
-            
-            puckt.util.setCanvasSize(debugCanvas, canvasWidth, canvasHeight);
+            puckt.util.setCanvasSize(debugCanvas, CANVASWIDTH, CANVASHEIGHT);
             stage.canvas.parentNode.appendChild(debugCanvas);
-                
             debugDraw.SetSprite(stage.canvas.getContext("2d"));
             debugDraw.SetFlags(box2d.b2DebugDraw.e_shapeBit | box2d.b2DebugDraw.e_jointBit);
             world.SetDebugDraw(debugDraw);
-            
             // Set up event proxies
             puckt.debug.proxyEvents(debugCanvas, stage.canvas, 'mousedown', 'mousemove', 'mouseup');
         });
@@ -45,7 +40,6 @@ puckt.main = (function () {
     tickrolled = function () {
         // Update stage
         stage.update();
-        
         world.Step(1/60, 10, 10);
         world.ClearForces();
     };
@@ -71,5 +65,4 @@ puckt.main = (function () {
 function tick () {
     puckt.main.tickrolled();
 }
-
 window.addEventListener("load", puckt.main.init);
