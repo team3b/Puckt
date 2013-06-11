@@ -21,7 +21,7 @@
             });
             e.addEventListener('mouseup', function (e) {
                 var xVel, yVel, end;
-                if (d.length < 2) {
+                if (d.length > 2) {
                     // Initial checks on release.
                     if (d.length>20)
                         d.splice(0, (d.length*0.9));
@@ -32,8 +32,8 @@
                     // Calculate the velocity
                     xVel = puckt.util.calcVelocity([d[0].pos.x, d[end].pos.x], 
                         [d[0].timestamp, d[end].timestamp]);
-                    yVel = puckt.util.calcVelocity([d[0].pos.y, d[end].pos.y], 
-                        [d[0].timestamp, d[end].timestamp]);
+                    yVel = -(puckt.util.calcVelocity([d[0].pos.y, d[end].pos.y], 
+                        [d[0].timestamp, d[end].timestamp]));
                 }
             });
         });

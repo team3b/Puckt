@@ -8,9 +8,9 @@ puckt.util = (function () {
     // Takes a distance in pixels, and an array of times, converts pixels to
     // metres, and calculates the time period covered
     calcVelocity = function (distances, timestamps) {
-        var distance = convertToMetres(findDiff(distances[0], distances[distances.length-1])),
+        var distance = convertToMetres(distances[distances.length-1]-distances[0]),
             time = findDiff(timestamps[0], timestamps[timestamps.length-1]);
-        return dist / time;
+        return distance / time;
     },
     // A helper function to find the difference between two numbers
     findDiff = function (num1, num2) {
