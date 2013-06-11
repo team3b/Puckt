@@ -43,7 +43,7 @@
                         [d[0].timestamp, d[end].timestamp]));
 
                     // Convert velocity to b2Vec2()
-                    var momentumVect = new box2d.b2Vec2(xVel * mass * 10000, yVel * mass * 10000);
+                    var momentumVect = new box2d.b2Vec2(xVel * mass, yVel * mass);
                     console.log('momentumVect', momentumVect);
                     pk.body.SetLinearVelocity(new box2d.b2Vec2(0, 0));
                     pk.body.ApplyImpulse(momentumVect, pk.body.GetWorldCenter());
