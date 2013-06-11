@@ -46,8 +46,7 @@ puckt.main = (function () {
     tickrolled = function () {
         // Update stage
         stage.update();
-        // Un-comment to turn debugging on
-        //world.DrawDebugData();
+        
         world.Step(1/60, 10, 10);
         world.ClearForces();
     };
