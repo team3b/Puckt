@@ -1,17 +1,5 @@
-var box2d = {
-        b2Vec2 : Box2D.Common.Math.b2Vec2,
-        b2BodyDef : Box2D.Dynamics.b2BodyDef,
-        b2Body : Box2D.Dynamics.b2Body,
-        b2FixtureDef : Box2D.Dynamics.b2FixtureDef,
-        b2Fixture : Box2D.Dynamics.b2Fixture,
-        b2World : Box2D.Dynamics.b2World,
-        b2MassData : Box2D.Collision.Shapes.b2MassData,
-        b2PolygonShape : Box2D.Collision.Shapes.b2PolygonShape,
-        b2CircleShape : Box2D.Collision.Shapes.b2CircleShape,
-        b2DebugDraw : Box2D.Dynamics.b2DebugDraw
-    },
-    stage, world,
-    mpp = 50;
+var box2d, stage, world, mppx = 50;
+
 puckt.main = (function () {
     "use strict";
     var init = function () {
@@ -47,6 +35,19 @@ puckt.main = (function () {
         world.Step(1/60, 10, 10);
         world.ClearForces();
     };
+    // Set the options for the box2d variable
+    box2d = {
+        b2Vec2 : Box2D.Common.Math.b2Vec2,
+        b2BodyDef : Box2D.Dynamics.b2BodyDef,
+        b2Body : Box2D.Dynamics.b2Body,
+        b2FixtureDef : Box2D.Dynamics.b2FixtureDef,
+        b2Fixture : Box2D.Dynamics.b2Fixture,
+        b2World : Box2D.Dynamics.b2World,
+        b2MassData : Box2D.Collision.Shapes.b2MassData,
+        b2PolygonShape : Box2D.Collision.Shapes.b2PolygonShape,
+        b2CircleShape : Box2D.Collision.Shapes.b2CircleShape,
+        b2DebugDraw : Box2D.Dynamics.b2DebugDraw
+    };
     return {
         init: init,
         tickrolled: tickrolled
@@ -56,4 +57,5 @@ puckt.main = (function () {
 function tick () {
     puckt.main.tickrolled();
 }
+
 window.addEventListener("load", puckt.main.init);

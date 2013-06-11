@@ -20,21 +20,21 @@
                 });
             });
             e.addEventListener('mouseup', function (e) {
-                var hyp, opp, ang, v, end;
-                // Initial checks on release.
-                if (d.length>20)
-                    d.splice(0, (d.length*0.9));
-                else if (d.length>10)
-                    d.splice(0, (d.length*0.7));
-                // After checks are complete, calculate array length
-                end = d.length - 1;
-                // Compute hypotenuse, and opposite edge lengths
-                hyp = puckt.util.calcHyp(d[0].pos, d[end].pos);
-                opp = puckt.util.findDiff(d[0].pos.x, d[end].pos.x);
-                // Calculate the projection
-                ang = puckt.util.calcAngle(opp, hyp);
-                // Calculate the velocity
-                v = puckt.util.calcVelocity(hyp, d);
+                var xVel, yVel, end;
+                if (d.length < 2) {
+                    // Initial checks on release.
+                    if (d.length>20)
+                        d.splice(0, (d.length*0.9));
+                    else if (d.length>10)
+                        d.splice(0, (d.length*0.7));
+                    // After checks are complete, calculate array length
+                    end = d.length - 1;
+                    // Calculate the velocity
+                    xVel = puckt.util.calcVelocity([d[0].pos.x, d[end].pos.x], 
+                        [d[0].timestamp, d[end].timestamp]);
+                    yVel = puckt.util.calcVelocity([d[0].pos.y, d[end].pos.y], 
+                        [d[0].timestamp, d[end].timestamp]);
+                }
             });
         });
     }
