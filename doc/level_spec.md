@@ -7,7 +7,7 @@ Each level should be defined in a seperate file, stored in `/src/levels/{level n
 		"boundaries": [Bool, Bool, Bool, Bool], // top, right, bottom, left. All default to true
 		"walls": [Wall, ...], // 0 or more walls present in this level
 		"puck-start": Position, // The initial puck position
-        "stars": [Integer, ...]
+        "stars": [Integer, …] // 0 or more
 	}
 
 `stars` is the minimum number of bounces required to get 1 star, 2 stars, ..., n stars. The length of the `stars` array is the number of stars available.
