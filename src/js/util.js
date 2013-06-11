@@ -3,10 +3,7 @@ puckt.util = (function () {
     "use strict";
     // Convert pixels to representive metres
     var convertToMetres = function (pixels) {
-        return pixels * puckt.mppx;
-    },
-    convertFromMetres = function (metres) {
-        return metres / puckt.mppx;
+        return pixels * (1 / mppx);
     },
     // Takes a distance in pixels, and an array of times, converts pixels to
     // metres, and calculates the time period covered
@@ -28,7 +25,6 @@ puckt.util = (function () {
     
     return {
         convertToMetres: convertToMetres,
-        convertFromMetres: convertFromMetres,
         calcVelocity: calcVelocity,
         findDiff: findDiff,
         setCanvasSize: setCanvasSize
