@@ -15,10 +15,18 @@ puckt.util = (function () {
     // A helper function to find the difference between two numbers
     findDiff = function (num1, num2) {
         return (num1 > num2) ? num1 - num2 : num2 - num1;
+    },
+    
+    // Set the width and height of an HTML canvas element
+    setCanvasSize = function (canvas, width, height) {
+        canvas.setAttribute('width', width);
+        canvas.setAttribute('height', height);
     };
+    
     return {
         convertToMetres: convertToMetres,
         calcVelocity: calcVelocity,
-        findDiff: findDiff
+        findDiff: findDiff,
+        setCanvasSize: setCanvasSize
     }
 }());

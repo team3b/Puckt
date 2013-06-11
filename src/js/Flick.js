@@ -1,16 +1,12 @@
-// RENAME TO FLICK
 (function(window) {
     function Touch(target) {
         // Event listener for the initial touch on the puck
-        target.addEventListener('mousedown', function (e) {
-            // Data array of flick information, and offset detail
+        
+        var mousedown = (function () {
             var d = [],
-                offset = {
-                    x: target.x - e.stageX,
-                    y: target.y - e.stageY
-                };
-            // Event listener on move.
-            e.addEventListener('mousemove', function (e) {
+                offset = {},
+            
+            mousemove = function (e) {
                 // Move the puck as the finger move
                 target.x = e.stageX + offset.x;
                 target.y = e.stageY + offset.y;
@@ -19,8 +15,9 @@
                     pos: {x: e.rawX, y: e.rawY},
                     timestamp: e.nativeEvent.timeStamp
                 });
-            });
-            e.addEventListener('mouseup', function (e) {
+            },
+            
+            mouseup = function(e) {
                 var xVel, yVel, end;
                 if (d.length > 2) {
                     // Initial checks on release.
@@ -40,8 +37,22 @@
                     var vector = new box2d.b2Vec2(xVel, yVel);
                     console.log(e.target.body.GetWorldCenter());
                 }
-            });
-        });
+            },
+            
+            mousedown = function (e) {
+                offset = {
+                    x: target.x - e.stageX,
+                    y: target.y - e.stageY
+                };
+                
+                e.addEventListener('mousemove', mousemove);
+                e.addEventListener('mouseup', mouseup);
+            };
+            
+            return mousedown;
+        })();
+        
+        target.addEventListener('mousedown', mousedown);
     }
     window.Touch = Touch;
 })(window);
