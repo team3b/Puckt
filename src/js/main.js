@@ -16,22 +16,22 @@ puckt.main = (function () {
     createScene = function () {
         // Create world with no gravity
         world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
+        // Create objects in scene
+        var p = new Puck(150, 440/8*7);
+        stage.addChild(p.view);
+        // Eventually load in the levels into here
+        new Touch(p.view);
         // Enables debugging shapes for box2d
         var debugDraw = new box2d.b2DebugDraw();
         debugDraw.SetSprite(stage.canvas.getContext("2d"));
         debugDraw.SetFlags(box2d.b2DebugDraw.e_shapeBit | box2d.b2DebugDraw.e_jointBit);
         world.SetDebugDraw(debugDraw);
-        // Create objects in scene
-        var p = new Puck();
-        stage.addChild(p.view);
-        // Eventually load in the levels into here
-        new Touch(p.view);
     },
     tickrolled = function () {
         // Update stage
         stage.update();
         // Un-comment to turn debugging on
-        //world.DrawDebugData();
+        world.DrawDebugData();
         world.Step(1/60, 10, 10);
         world.ClearForces();
     };
