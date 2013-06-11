@@ -10,16 +10,27 @@ puckt.main = (function () {
        
         // Initialise debugger
         puckt.debug.init();
+
+        // Draw walls round the outside, round the outside, round the outside...
+        drawPerimeterWalls();
         
         // Create objects in scene
-        var p = new puckt.Puck(150, 440/8*7, 25);
+        var p = new puckt.Puck(canvasWidth / 2, canvasHeight / 8 * 7, 25);
         console.log('stage.addChild', stage.addChild(p.shape));
         
         // Eventually load in the levels into here
         new Flick(p);
-
-        var wall = new puckt.Wall(0, 0, 300, 10);
-        stage.addChild(wall.shape);
+    },
+    // Bit hacky, possibly loop through a JSON object of walls to draw?
+    drawPerimeterWalls = function () {
+        var top = new puckt.Wall(0, 0, canvasWidth, 0),
+            right = new puckt.Wall(canvasWidth, 0, 0, canvasHeight),
+            bottom = new puckt.Wall(0, canvasHeight, canvasWidth, 0),
+            left = new puckt.Wall(0, 0, 0, canvasHeight);
+        stage.addChild(top.shape);
+        stage.addChild(right.shape);
+        stage.addChild(bottom.shape);
+        stage.addChild(left.shape);
     },
     tickrolled = function (e) {
         if (!e.paused) {
