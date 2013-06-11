@@ -36,9 +36,8 @@ puckt.main = (function () {
             // Set up event proxies
             puckt.debug.proxyEvents(debugCanvas, stage.canvas, 'mousedown', 'mousemove', 'mouseup');
         });
-        
         // Create objects in scene
-        var p = new Puck();
+        var p = new Puck(150, 440/8*7);
         stage.addChild(p.view);
         // Eventually load in the levels into here
         new Touch(p.view);
