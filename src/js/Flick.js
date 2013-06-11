@@ -39,12 +39,13 @@
                     // Calculate the velocity (in metres per second)
                     xVel = puckt.util.calcVelocity([d[0].pos.x, d[end].pos.x], 
                         [d[0].timestamp, d[end].timestamp]);
-                    yVel = -(puckt.util.calcVelocity([d[0].pos.y, d[end].pos.y], 
+                    yVel = (puckt.util.calcVelocity([d[0].pos.y, d[end].pos.y], 
                         [d[0].timestamp, d[end].timestamp]));
 
                     // Convert velocity to b2Vec2()
-                    var momentumVect = new box2d.b2Vec2(xVel * mass, yVel * mass);
+                    var momentumVect = new box2d.b2Vec2(xVel * mass * 10000, yVel * mass * 10000);
                     console.log('momentumVect', momentumVect);
+                    pk.body.SetLinearVelocity(new box2d.b2Vec2(0, 0));
                     pk.body.ApplyImpulse(momentumVect, pk.body.GetWorldCenter());
                 }
             },
