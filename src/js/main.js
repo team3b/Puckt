@@ -11,15 +11,21 @@ var box2d = {
         b2DebugDraw : Box2D.Dynamics.b2DebugDraw
     },
     stage, world,
-    mpp = 50;
+    mpp = 50,
+    CANVAS_WIDTH = 300,
+    CANVAS_HEIGHT = 440;
 puckt.main = (function () {
     "use strict";
     var init = function () {
         // Set up stage and enable touch controls
-        stage = new createjs.Stage(document.getElementById("ice-rink"));
+        var canvas = document.getElementById("ice-rink");
+        puckt.util.setCanvasSize(canvas, CANVAS_WIDTH, CANVAS_HEIGHT);
+        stage = new createjs.Stage(canvas);
         createjs.Touch.enable(stage);
+        
         // Create scene
         createScene();
+        
         // Declare settings for scene ticker
         createjs.Ticker.addListener(this);
         createjs.Ticker.setFPS(60);
@@ -28,11 +34,23 @@ puckt.main = (function () {
     createScene = function () {
         // Create world with no gravity
         world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
+        
         // Enables debugging shapes for box2d
-        var debugDraw = new box2d.b2DebugDraw();
-        debugDraw.SetSprite(stage.canvas.getContext("2d"));
-        debugDraw.SetFlags(box2d.b2DebugDraw.e_shapeBit | box2d.b2DebugDraw.e_jointBit);
-        world.SetDebugDraw(debugDraw);
+        puckt.debug.run(function () {
+            var debugDraw = new box2d.b2DebugDraw(),
+                debugCanvas = document.createElement('canvas');
+            
+            puckt.util.setCanvasSize(debugCanvas, CANVAS_WIDTH, CANVAS_HEIGHT);
+            stage.canvas.parentNode.appendChild(debugCanvas);
+                
+            debugDraw.SetSprite(stage.canvas.getContext("2d"));
+            debugDraw.SetFlags(box2d.b2DebugDraw.e_shapeBit | box2d.b2DebugDraw.e_jointBit);
+            world.SetDebugDraw(debugDraw);
+            
+            // Set up event proxies
+            puckt.debug.proxyEvents(debugCanvas, stage.canvas, 'mousedown', 'mousemove', 'mouseup');
+        });
+        
         // Create objects in scene
         var p = new Puck();
         stage.addChild(p.view);
