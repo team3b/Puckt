@@ -4,25 +4,45 @@ Level Specification
 Each level should be defined in a seperate file, stored in `/src/levels/{level number}.json`
 
 	{
-		"boundaries": [Bool, Bool, Bool, Bool], // top, right, bottom, left
+		"boundaries": [Bool, Bool, Bool, Bool], // top, right, bottom, left. All default to true
 		"walls": [Wall, ...], // 0 or more walls present in this level
 		"puck-start": Position, // The initial puck position
-        "stars": [1, 2, 3] // minimum number of hops required to achieve 3 stars, 2 stars, 1 star
+        "stars": [Integer, ...]
+	}
+
+`stars` is the minimum number of bounces required to get 1 star, 2 stars, ..., n stars. The length of the `stars` array is the number of stars available.
+
+### Defaults
+
+	{
+		"boundaries": [true, true, true, true],
+		"walls": [],
+		"puck-start": { // This is due to change
+			"x": 0,
+			"y": 0
+		},
+		"stars": []
 	}
 
 ### To do:
 * Define default values for `puck-start`.
 
 ## Wall Object
+Defines a single wall in the game, which may or may not have a light up panel
 
 	{
-		"type": Integer, // [0 - 3]
-		"colour": "#000000", // A valid HEX colour
+		"light-colours": [HexColour | null, HexColour | null],
 		"coords": [Position, Position]
 	}
 
-### To do:
-* Define default value for `type` and `colour`.
+Any of the following types are valid for `light-colours`: `[]`, `[HexColour]`, `[null, HexColour]`, `[HexColour, null]`, `[HexColour, HexColour]`, `[null, null]`
+
+### Defaults
+
+	{
+		"light-colours": ["#ff0000", "#ff0000"],
+		"coords: undefined
+	}
 
 ## Position
 
@@ -30,3 +50,6 @@ Each level should be defined in a seperate file, stored in `/src/levels/{level n
 		"x": Float,
 		"y": Float
 	}
+
+## HexColour
+A valid hex colour, like you would use in CSS. E.g. `#f5f5f5`
