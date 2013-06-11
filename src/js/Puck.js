@@ -1,37 +1,51 @@
-(function(window) {
-	function Puck(x, y) {
-		var fixtureDef = new box2d.b2FixtureDef(),
-            bodyDef = new box2d.b2BodyDef(),
-            _this = this;
-        // Create shape (will eventually be a bitmap or SVG)
-        this.view = new createjs.Shape();
-        // Style existing shape
-        this.view.graphics.beginFill("#222222").drawCircle(x, y, 25);
-        // Set scale
-        this.view.scaleX = this.view.scaleY = this.view.scale = 1;
-        // Define the position
-        bodyDef.position.x = x;
-        bodyDef.position.y = y;
-        // Set attributes for fixture
-        fixtureDef.density = 5;
-        fixtureDef.friction = 0.5;
-        fixtureDef.resitution = 0.8;
-        // Ensure the puck is affected by forces (gravity etc.)
-        bodyDef.type = box2d.b2Body.b2_dynamicBody;
-        // Set the fixture shape size the same as the object (for collisions)
-        fixtureDef.shape = new box2d.b2CircleShape(25);
+"use strict";
+
+var puckt = puckt || {};
+puckt.Puck = (function () {
+    function Puck(x, y, radius) {
+        this.fixDef = new box2d.b2FixtureDef();
+        this.bodyDef = new box2d.b2BodyDef();
+        this.shape = new createjs.Shape();
+        
+        // Set shape properties
+        this.shape.scale = 1;
+        this.shape.x = x;
+        this.shape.y = y;
+        this.shape.graphics.beginFill('#222222').drawCircle(0, 0, radius);
+        
+        // Set fixture attributes
+        this.fixDef.density = 5;
+        this.fixDef.friction = 0.5;
+        this.fixDef.restitution = 0.8;
+        this.fixDef.shape = new box2d.b2CircleShape(radius);
+        
+        // Ensure puck is affected by forces
+        this.bodyDef.type = box2d.b2Body.b2_dynamicBody;
+        this.bodyDef.position = new box2d.b2Vec2(x, y);
+        
         // Create shape's body
-        this.view.body = world.CreateBody(bodyDef);
-        this.view.body.CreateFixture(fixtureDef);
-        // Set tick function listener
-        this.view.addEventListener("tick", function () {
-        	tick(_this.view.body);
+        this.body = this.shape.body = world.CreateBody(this.bodyDef);
+        this.body.CreateFixture(this.fixDef);
+        this.body.SetUserData(this.shape);
+        
+        // Attach tick event listener
+        this.shape.addEventListener('tick', tick.bind(this));
+    }
+    
+    Puck.prototype.SetPosition = function (x, y) {
+        this.body.SetPosition(new box2d.b2Vec2(x, y));
+        console.log('Puck.SetPosition', x, y, this.body.GetPosition());
+    };
+    
+    function tick() {
+        var pos = this.body.GetPosition();
+        
+        this.shape.set({
+            x: pos.x,
+            y: pos.y,
+            rotation: this.body.GetAngle() * (180 / Math.PI)
         });
-	}
-	function tick(view) {
-		this.x = view.GetPosition().x;
-        this.y = view.GetPosition().y;
-        this.rotation = view.GetAngle() * (180 / Math.PI);
-	}
-	window.Puck = Puck;
-})(window);
+    }
+    
+    return Puck;
+})();

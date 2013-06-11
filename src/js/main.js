@@ -1,11 +1,39 @@
-var box2d, stage, world, mppx = 50, canvasWidth = 300, canvasHeight = 440;
+"use strict";
+var box2d, world, stage, mppx = 50, fps = 60, canvasWidth = 300, canvasHeight = 440;
 
+var puckt = puckt || {};
 puckt.main = (function () {
-    "use strict";
-    var init = function () {
+    var canvas, debugCanvas,
+    createScene = function () {
+        // Create world with no gravity
+        world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
+       
+        // Initialise debugger
+        puckt.debug.init();
+        
+        // Create objects in scene
+        var p = new puckt.Puck(150, 440/8*7, 25);
+        console.log('stage.addChild', stage.addChild(p.shape));
+        
+        // Eventually load in the levels into here
+        new Flick(p);
+    },
+    tickrolled = function (e) {
+        if (!e.paused) {
+            // Update stage
+            stage.update();
+            
+            puckt.debug.run(world.DrawDebugData);
+            
+            world.Step(1/fps, 10, 10);
+            world.ClearForces();
+        }
+    },
+   init = function () {
         // Set up stage and enable touch controls
-        var canvas = document.getElementById("ice-rink");
+        canvas = document.getElementById("ice-rink");
         puckt.util.setCanvasSize(canvas, canvasWidth, canvasHeight);
+        
         stage = new createjs.Stage(canvas);
         createjs.Touch.enable(stage);
         
@@ -13,42 +41,11 @@ puckt.main = (function () {
         createScene();
         
         // Declare settings for scene ticker
-        createjs.Ticker.addListener(this);
-        createjs.Ticker.setFPS(60);
+        createjs.Ticker.addEventListener('tick', tickrolled);
+        createjs.Ticker.setFPS(fps);
         createjs.Ticker.useRAF = true;
-    },
-    createScene = function () {
-        // Create world with no gravity
-        world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
-        
-        // Enables debugging shapes for box2d
-        puckt.debug.run(function () {
-            var debugDraw = new box2d.b2DebugDraw(),
-                debugCanvas = document.createElement('canvas');
-            
-            puckt.util.setCanvasSize(debugCanvas, canvasWidth, canvasHeight);
-            stage.canvas.parentNode.appendChild(debugCanvas);
-                
-            debugDraw.SetSprite(stage.canvas.getContext("2d"));
-            debugDraw.SetFlags(box2d.b2DebugDraw.e_shapeBit | box2d.b2DebugDraw.e_jointBit);
-            world.SetDebugDraw(debugDraw);
-            
-            // Set up event proxies
-            puckt.debug.proxyEvents(debugCanvas, stage.canvas, 'mousedown', 'mousemove', 'mouseup');
-        });
-        // Create objects in scene
-        var p = new Puck(150, 440/8*7);
-        stage.addChild(p.view);
-        // Eventually load in the levels into here
-        new Touch(p.view);
-    },
-    tickrolled = function () {
-        // Update stage
-        stage.update();
-        
-        world.Step(1/60, 10, 10);
-        world.ClearForces();
     };
+    
     // Set the options for the box2d variable
     box2d = {
         b2Vec2 : Box2D.Common.Math.b2Vec2,
@@ -67,9 +64,5 @@ puckt.main = (function () {
         tickrolled: tickrolled
     }
 }());
-// Declare tick function outside of the namespace to ensure it is called
-function tick () {
-    puckt.main.tickrolled();
-}
 
 window.addEventListener("load", puckt.main.init);

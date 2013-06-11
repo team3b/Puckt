@@ -1,15 +1,22 @@
 (function(window) {
-    function Touch(target) {
-        // Event listener for the initial touch on the puck
+    var mass;
+    
+    function Flick(pk) {
+        mass = pk.body.GetMass();
+        window.PUCKX = pk;
         
+        // Event listener for the initial touch on the puck
         var mousedown = (function () {
             var d = [],
                 offset = {},
             
             mousemove = function (e) {
+                console.log('mousemove', e, pk.body.GetPosition());
+                
                 // Move the puck as the finger move
-                target.x = e.stageX + offset.x;
-                target.y = e.stageY + offset.y;
+                pk.SetPosition(e.stageX + offset.x,
+                               e.stageY + offset.y);
+                
                 // Detail of current movement
                 d.push({
                     pos: {x: e.rawX, y: e.rawY},
@@ -18,6 +25,8 @@
             },
             
             mouseup = function(e) {
+                console.log('mouseup', e);
+                
                 var xVel, yVel, end;
                 if (d.length > 2) {
                     // Initial checks on release.
@@ -34,15 +43,19 @@
                         [d[0].timestamp, d[end].timestamp]));
 
                     // Convert velocity to b2Vec2()
-                    var vector = new box2d.b2Vec2(xVel, yVel);
-                    console.log(e.target.body.GetWorldCenter());
+                    var momentumVect = new box2d.b2Vec2(xVel * mass, yVel * mass);
+                    console.log('momentumVect', momentumVect);
+                    pk.body.ApplyImpulse(momentumVect, pk.body.GetWorldCenter());
                 }
             },
             
             mousedown = function (e) {
+                console.log('mousedown', e, pk.body, pk.body.GetPosition());
+                
+                var pos = pk.body.GetPosition();
                 offset = {
-                    x: target.x - e.stageX,
-                    y: target.y - e.stageY
+                    x: pos.x - e.stageX,
+                    y: pos.y - e.stageY
                 };
                 
                 e.addEventListener('mousemove', mousemove);
@@ -52,7 +65,7 @@
             return mousedown;
         })();
         
-        target.addEventListener('mousedown', mousedown);
+        pk.shape.addEventListener('mousedown', mousedown);
     }
-    window.Touch = Touch;
+    window.Flick = Flick;
 })(window);
