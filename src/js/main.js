@@ -7,6 +7,12 @@ puckt.main = (function () {
     createScene = function () {
         // Create world with no gravity
         world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
+
+        var contactListener = new Box2D.Dynamics.b2ContactListener;
+        contactListener.BeginContact = function(contact, manifold) {
+           console.log(contact);
+        };
+        world.SetContactListener(contactListener);
        
         // Initialise debugger
         puckt.debug.init();
