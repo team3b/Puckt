@@ -1,14 +1,17 @@
 (function(window) {
-	function Puck() {
+	function Puck(x, y) {
 		var fixtureDef = new box2d.b2FixtureDef(),
             bodyDef = new box2d.b2BodyDef(),
             _this = this;
         // Create shape (will eventually be a bitmap or SVG)
         this.view = new createjs.Shape();
         // Style existing shape
-        this.view.graphics.beginFill("#222222").drawCircle(150, (440/8)*7, 25);
+        this.view.graphics.beginFill("#222222").drawCircle(x, y, 25);
         // Set scale
         this.view.scaleX = this.view.scaleY = this.view.scale = 1;
+        // Define the position
+        bodyDef.position.x = x;
+        bodyDef.position.y = y;
         // Set attributes for fixture
         fixtureDef.density = 5;
         fixtureDef.friction = 0.5;
@@ -28,7 +31,7 @@
 	function tick(view) {
 		this.x = view.GetPosition().x;
         this.y = view.GetPosition().y;
-        this.rotation = view.GetAngle() * (180 / Math.PI); //converts radians to degrees
+        this.rotation = view.GetAngle() * (180 / Math.PI);
 	}
 	window.Puck = Puck;
 })(window);

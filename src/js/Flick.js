@@ -35,8 +35,6 @@
 
                     // Convert velocity to b2Vec2()
                     var vector = new box2d.b2Vec2(xVel, yVel);
-                    console.log(target.body.GetWorldCenter);
-                    // Get center point of puck
                     console.log(e.target.body.GetWorldCenter());
                 }
             },
