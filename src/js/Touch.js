@@ -1,3 +1,4 @@
+// RENAME TO FLICK
 (function(window) {
     function Touch(target) {
         // Event listener for the initial touch on the puck
@@ -29,11 +30,17 @@
                         d.splice(0, (d.length*0.7));
                     // After checks are complete, calculate array length
                     end = d.length - 1;
-                    // Calculate the velocity
+                    // Calculate the velocity (in metres per second)
                     xVel = puckt.util.calcVelocity([d[0].pos.x, d[end].pos.x], 
                         [d[0].timestamp, d[end].timestamp]);
                     yVel = -(puckt.util.calcVelocity([d[0].pos.y, d[end].pos.y], 
                         [d[0].timestamp, d[end].timestamp]));
+
+                    // Convert velocity to b2Vec2()
+                    var vector = new box2d.b2Vec2(xVel, yVel);
+                    console.log(target.body.GetWorldCenter);
+                    // Get center point of puck
+                    console.log(e.target.body.GetWorldCenter());
                 }
             });
         });
