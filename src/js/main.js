@@ -1,5 +1,5 @@
 "use strict";
-var box2d, world, stage, mppx = 50, fps = 60, canvasWidth = 300, canvasHeight = 440;
+var box2d, world, stage, mppx = 0.0001, fps = 60, canvasWidth = 300, canvasHeight = 440;
 
 var puckt = puckt || {};
 puckt.main = (function () {
