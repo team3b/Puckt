@@ -9,6 +9,12 @@ puckt.util = (function () {
     metresToPixels = function (metres) {
         return metres * puckt.pxpm;
     },
+    degreesToRadians = function (deg) {
+        return deg * (180 / Math.PI); // To do: cache this value
+    },
+    radiansToDegrees = function (rad) {
+        return rad / (180 / Math.PI); // To do: cache this value
+    },
     // Takes a distance in pixels, and an array of times, converts pixels to
     // metres, and calculates the time period covered
     calcVelocity = function (distances, timestamps) {
@@ -25,13 +31,23 @@ puckt.util = (function () {
     setCanvasSize = function (canvas, width, height) {
         canvas.setAttribute('width', width);
         canvas.setAttribute('height', height);
+    },
+
+    // Extend an object with more properties, overwriting exiting ones
+    extendObject = function (original, newProps) {
+        for (var prop in newProps) {
+            original[prop] = newProps[prop];
+        }
     };
     
     return {
         pixelsToMetres: pixelsToMetres,
         metresToPixels: metresToPixels,
+        degreesToRadians: degreesToRadians,
+        radiansToDegrees: radiansToDegrees,
         calcVelocity: calcVelocity,
         findDiff: findDiff,
-        setCanvasSize: setCanvasSize
+        setCanvasSize: setCanvasSize,
+        extendObject: extendObject
     }
 }());
