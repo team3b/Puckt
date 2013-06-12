@@ -11,9 +11,11 @@ puckt.canvas = {
 puckt.pxpm = 30 / puckt.Puck.realRadius;
 
 puckt.main = (function () {
-
     var init = function () {
+        // Set canvas size
         puckt.util.setCanvasSize(puckt.canvas.elem, puckt.canvas.width, puckt.canvas.height);
+        // Add background image
+        canvg(document.getElementById("ice-rink"), "img/ice_rink.svg");
         // Create test level
         new puckt.Game();
     };

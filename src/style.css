@@ -1,7 +1,8 @@
 body {
     margin: 0;
 }
-canvas {
-    position: absolute;
+canvas { position: absolute; top: 0; left: 0; }
+
+#svg {
+	opacity: 0.3;
 }
-#ice-rink { border: 1px solid #17b; }

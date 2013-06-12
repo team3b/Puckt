@@ -78,7 +78,7 @@ puckt.Level = (function () {
                     w: walls[i].dimensions.w,
                     h: walls[i].dimensions.h,
                     angle: walls[i].angle,
-                    lightColour: walls[i].lightColours
+                    lightColour: walls[i].lightColour
                 });
                 stage.addChild(wall.shape);
             }

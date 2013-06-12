@@ -8,7 +8,7 @@
 
     "walls": [
     {
-        "lightColours": ["#FF0000"],
+        "lightColour": "#FF0000",
         "coords":
         {
             "x": 50,
@@ -21,7 +21,6 @@
         "angle": 0
     },
     {
-        "lightColours": [],
         "coords":
         {
             "x": 250,
@@ -34,7 +33,6 @@
         "angle": 90
     },
     {
-        "lightColours": [],
         "coords":
         {
             "x": 60,
