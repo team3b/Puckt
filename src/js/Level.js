@@ -1,5 +1,6 @@
-var puckt = puckt || {};
+"use strict";
 
+var puckt = puckt || {};
 puckt.Level = (function () {
     function Level() {
         
