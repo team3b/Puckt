@@ -5,6 +5,7 @@ puckt.flick = (function() {
     var mass,
      
     attachEvents = function (pk) {
+        console.log('puckt.flick.attachEvents()', pk, pk.setPosition);
         // Event listener for the initial touch on the puck
         var mousedown = (function () {
             var d = [],
@@ -14,7 +15,7 @@ puckt.flick = (function() {
                 console.log('mousemove', e, pk.body.GetPosition());
                 
                 // Move the puck as the finger move
-                pk.SetPosition(e.stageX + offset.x,
+                pk.setPosition(e.stageX + offset.x,
                                e.stageY + offset.y);
                 
                 // Detail of current movement

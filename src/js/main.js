@@ -1,6 +1,6 @@
 "use strict";
 
-var box2d, world, stage, fps = 60, canvasWidth = 300, canvasHeight = 440;
+var box2d, stage, fps = 60, canvasWidth = 300, canvasHeight = 440;
 
 var puckt = puckt || {};
 
@@ -10,7 +10,7 @@ puckt.puck_mass = 0.17;
 puckt.pxpm = 30 / puckt.puck_radius;
 
 puckt.main = (function () {
-    var canvas, debugCanvas,
+    var canvas, debugCanvas, world,
     createScene = function () {
         // Create world with no gravity
         world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
@@ -22,24 +22,50 @@ puckt.main = (function () {
         world.SetContactListener(contactListener);
        
         // Initialise debugger
-        puckt.debug.init();
+        puckt.debug.init(world);
 
         // Draw walls round the outside, round the outside, round the outside...
         drawPerimeterWalls();
         
         // Create objects in scene
-        var p = new puckt.Puck(canvasWidth / 2, canvasHeight / 8 * 7, 15);
-        console.log('stage.addChild', stage.addChild(p.shape));
-        
+        var p = new puckt.Puck(world, {
+            x: canvasWidth / 2,
+            y: canvasHeight / 8 * 7,
+            radius: 15
+        });
+        stage.addChild(p.shape);
+        console.log(p, p.shape);
+
+
         // Eventually load in the levels into here
         puckt.flick.init(p);
     },
     // Bit hacky, possibly loop through a JSON object of walls to draw?
     drawPerimeterWalls = function () {
-        var top = new puckt.Wall(0, 0, canvasWidth, 0),
-            right = new puckt.Wall(canvasWidth, 0, 0, canvasHeight),
-            bottom = new puckt.Wall(0, canvasHeight, canvasWidth, 0),
-            left = new puckt.Wall(0, 0, 0, canvasHeight);
+        var top = new puckt.Wall(world, {
+            x: 0,
+            y: 0,
+            w: canvasWidth,
+            h: 0
+        }),
+        right = new puckt.Wall(world, {
+            x: canvasWidth,
+            y: 0,
+            w: 0,
+            h: canvasHeight
+        }),
+        bottom = new puckt.Wall(world, {
+            x: 0,
+            y: canvasHeight,
+            w: canvasWidth,
+            h: 0
+        }),
+        left = new puckt.Wall(world, {
+            x: 0,
+            y: 0,
+            w: 0,
+            h: canvasHeight
+        });
         stage.addChild(top.shape);
         stage.addChild(right.shape);
         stage.addChild(bottom.shape);

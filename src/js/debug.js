@@ -13,7 +13,7 @@ puckt.debug = (function () {
         if (DEBUGGING) fn();
     }
     
-    function init() {
+    function init(world) {
         if (DEBUGGING) {
             var debugDraw;
             
