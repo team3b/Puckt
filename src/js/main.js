@@ -1,12 +1,10 @@
 "use strict";
 
-var box2d, stage, fps = 60, canvasWidth = 300, canvasHeight = 440;
+var box2d, stage, fps = 60, canvasWidth = 300, canvasHeight = 440,
 
-var puckt = puckt || {};
-
-puckt.puck_radius = 0.0762 / 2;
-puckt.puck_mass = 0.17;
-
+puckt = puckt || {};
+puckt.puck_radius = (0.0762 / 2) * 100;
+puckt.puck_mass = 0.17 * 100;
 puckt.pxpm = 30 / puckt.puck_radius;
 
 puckt.main = (function () {
@@ -15,14 +13,21 @@ puckt.main = (function () {
         // Create world with no gravity
         world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
 
-        var contactListener = new Box2D.Dynamics.b2ContactListener;
-        contactListener.BeginContact = function(contact, manifold) {
-           console.log(contact);
+        /*var contactListener = new Box2D.Dynamics.b2ContactListener;
+        contactListener.BeginContact = function(contact) {
+           // TODO Toggle wall light.
+           var shape = contact.GetFixtureA().GetBody().GetUserData();
+           // Clear current data
+           shape.graphics.clear();
+           // Redraw new wall
+           shape.graphics.beginFill("#FF0000").drawRect(0, 0, 200, 10);
         };
-        world.SetContactListener(contactListener);
+        world.SetContactListener(contactListener);*/
        
         // Initialise debugger
         puckt.debug.init(world);
+
+        new puckt.Level(1);
 
         // Draw walls round the outside, round the outside, round the outside...
         drawPerimeterWalls();
@@ -34,8 +39,6 @@ puckt.main = (function () {
             radius: 15
         });
         stage.addChild(p.shape);
-        console.log(p, p.shape);
-
 
         // Eventually load in the levels into here
         puckt.flick.init(p);
