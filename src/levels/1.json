@@ -24,7 +24,7 @@
         "light-colours": [],
         "coords":
         {
-            "x": 200,
+            "x": 250,
             "y": 100
         },
         "dimensions": {
@@ -32,6 +32,19 @@
             "h": 10
         },
         "angle": 90
+    },
+    {
+        "light-colours": [],
+        "coords":
+        {
+            "x": 60,
+            "y": 200
+        },
+        "dimensions": {
+            "w": 100,
+            "h": 10
+        },
+        "angle": 0
     }],
 
     "puck": {
