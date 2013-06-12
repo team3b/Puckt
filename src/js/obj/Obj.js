@@ -13,7 +13,6 @@ puckt.Obj = (function () {
 
 	return Class.extend({
 		init: function (world, objType, props) {
-			console.log('Obj.init', world, objType, props);
 	        this.fixDef = new box2d.b2FixtureDef();
 	        this.bodyDef = new box2d.b2BodyDef();
 	        this.shape = new createjs.Shape();

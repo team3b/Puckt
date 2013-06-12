@@ -3,9 +3,7 @@
 var box2d, stage, fps = 60, canvasWidth = 300, canvasHeight = 440,
 
 puckt = puckt || {};
-puckt.puck_radius = (0.0762 / 2) * 100;
-puckt.puck_mass = 0.17 * 100;
-puckt.pxpm = 30 / puckt.puck_radius;
+puckt.pxpm = 30 / puckt.Puck.realRadius;
 
 puckt.main = (function () {
     var canvas, debugCanvas, world,
@@ -13,16 +11,12 @@ puckt.main = (function () {
         // Create world with no gravity
         world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
 
-        /*var contactListener = new Box2D.Dynamics.b2ContactListener;
+        var contactListener = new Box2D.Dynamics.b2ContactListener;
         contactListener.BeginContact = function(contact) {
-           // TODO Toggle wall light.
            var shape = contact.GetFixtureA().GetBody().GetUserData();
-           // Clear current data
-           shape.graphics.clear();
-           // Redraw new wall
-           shape.graphics.beginFill("#FF0000").drawRect(0, 0, 200, 10);
+           shape.toggleLight();
         };
-        world.SetContactListener(contactListener);*/
+        world.SetContactListener(contactListener);
        
         // Initialise debugger
         puckt.debug.init(world);
@@ -31,6 +25,14 @@ puckt.main = (function () {
 
         // Draw walls round the outside, round the outside, round the outside...
         drawPerimeterWalls();
+
+        var testWall = new puckt.Wall(world, {
+            x: 20,
+            y: 20,
+            w: 40,
+            h: 20
+        });
+        stage.addChild(testWall.shape);
         
         // Create objects in scene
         var p = new puckt.Puck(world, {
