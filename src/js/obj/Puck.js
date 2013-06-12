@@ -22,7 +22,7 @@ puckt.Puck = (function () {
                 }
             });
 
-            this.shape.graphics.beginFill('#fff').drawCircle(0, 0, props.radius);
+            this.shape.graphics.beginFill('#222222').drawCircle(0, 0, props.radius);
         }
     });
 
