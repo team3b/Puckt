@@ -23,7 +23,7 @@ puckt.Wall = (function () {
                 },
                 bodyDef: {
                     type: box2d.b2Body.b2_staticBody,
-                    angle: props.angle || 0
+                    angle: puckt.util.degreesToRadians(props.angle || 0)
                 }
             });
 

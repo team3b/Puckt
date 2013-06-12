@@ -7,7 +7,7 @@ puckt.Obj = (function () {
         this.shape.set({
             x: puckt.util.metresToPixels(pos.x),
             y: puckt.util.metresToPixels(pos.y),
-            rotation: puckt.util.degreesToRadians(this.body.GetAngle())
+            rotation: puckt.util.radiansToDegrees(this.body.GetAngle())
         });
     }
 

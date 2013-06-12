@@ -27,10 +27,11 @@ puckt.main = (function () {
         drawPerimeterWalls();
 
         var testWall = new puckt.Wall(world, {
-            x: 20,
-            y: 20,
+            x: 40,
+            y: 40,
             w: 40,
-            h: 20
+            h: 10,
+            angle: 18
         });
         stage.addChild(testWall.shape);
         
