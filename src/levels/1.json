@@ -1,13 +1,13 @@
 {
     "walls": [
         {
-            "coords": { "x": 50, "y": 50 },
+            "coords": { "x": 160, "y": 50 },
             "dimensions": { "w": 200, "h": 5 }
         }
     ],
 
     "puck": {
-        "coords": { "x": 150, "y": 380 },
+        "coords": { "x": 160, "y": 390 },
         "radius": 15
     },
 

@@ -24,7 +24,7 @@ puckt.util = (function () {
     },
     // Takes pixel x-axis, y-axis, width, & height and returns a b2Vect2 object
     dimTob2Vec2 = function (props) {
-        return new box2d.b2Vec2(puckt.util.pixelsToMetres(props.x + props.w / 2), puckt.util.pixelsToMetres(props.y + props.h / 2)); 
+        return new box2d.b2Vec2(pixelsToMetres(props.x), pixelsToMetres(props.y)); 
     },
     // Takes a distance in pixels, and an array of times, converts pixels to
     // metres, and calculates the time period covered

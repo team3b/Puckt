@@ -24,10 +24,11 @@ puckt.Puck = (function () {
                 }
             });
 
-
-            puckImg = new Image(props.w, props.h);
+            /*puckImg = new Image(props.w, props.h);
             puckImg.src = '/img/puck.svg';
-            this.shape.graphics.beginBitmapFill(puckImg).drawCircle(0, 0, props.radius);
+            this.shape.graphics.beginBitmapFill(puckImg).drawCircle(0, 0, props.radius);*/
+
+            this.shape.graphics.beginFill('#222222').drawCircle(props.x, props.y, props.radius);
         }
     });
 

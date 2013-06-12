@@ -5,8 +5,8 @@ puckt.Obj = (function () {
     function tick() {
         var pos = this.body.GetPosition();
         this.shape.set({
-            x: puckt.util.metresToPixels(pos.x) - this.w / 2,
-            y: puckt.util.metresToPixels(pos.y) - this.h / 2,
+            x: puckt.util.metresToPixels(pos.x),
+            y: puckt.util.metresToPixels(pos.y),
             rotation: puckt.util.radiansToDegrees(this.body.GetAngle())
         });
     }
@@ -20,6 +20,8 @@ puckt.Obj = (function () {
 	        // Set shape properties
 	        this.shape.x = props.x;
 	        this.shape.y = props.y;
+            this.shape.regX = props.w / 2;
+            this.shape.regY = props.h / 2;
 	        this.shape.type = objType;
 
             this.w = props.w;
