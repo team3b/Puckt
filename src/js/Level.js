@@ -34,6 +34,7 @@ puckt.Level = (function () {
     };
 
     function drawBoundaries (boundaries) {
+        boundaries = boundaries || {};
         // Draw the boundaries
         switch (true) {
             case boundaries.top !== false:
@@ -69,6 +70,7 @@ puckt.Level = (function () {
     }
 
     function drawWalls (walls) {
+        // Check it isn't empty
         if (walls.length) {
             for (var i=0, len=walls.length; i<len; i++) {
                 // Create Wall object
@@ -88,8 +90,8 @@ puckt.Level = (function () {
     function drawPuck (puck) {
         // Create Puck object
         var p = new puckt.Puck(w, {
-            x: puck.x,
-            y: puck.y,
+            x: puck.coords.x,
+            y: puck.coords.y,
             radius: puck.radius
         });
         stage.addChild(p.shape);

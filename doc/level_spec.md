@@ -52,7 +52,7 @@ Defines a single wall in the game, which may or may not have a light up panel
 		"rotation": 0
 	}
 
-#### Note: If the `lightColour` is `null`, it will not light up when hit
+**Note:** If the `lightColour` is `null`, it will not light up when hit
 
 Any undefined default values are required to be filled in, and will not render
 
