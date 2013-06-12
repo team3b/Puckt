@@ -1,5 +1,11 @@
 {
-    "boundaries": [true, true, true, true],
+    "boundaries": {
+        "top": true,
+        "bottom": true,
+        "left": true,
+        "right": true
+    },
+
     "walls": [
     {
         "light-colours": [],
@@ -12,11 +18,39 @@
             "w": 200,
             "h": 10
         },
-        "rotation": 0
+        "angle": 0
+    },
+    {
+        "light-colours": [],
+        "coords":
+        {
+            "x": 250,
+            "y": 100
+        },
+        "dimensions": {
+            "w": 200,
+            "h": 10
+        },
+        "angle": 90
+    },
+    {
+        "light-colours": [],
+        "coords":
+        {
+            "x": 60,
+            "y": 200
+        },
+        "dimensions": {
+            "w": 100,
+            "h": 10
+        },
+        "angle": 0
     }],
-    "puck-start": {
+
+    "puck": {
         "x": 150,
         "y": 350
     },
+
     "stars": []
 }

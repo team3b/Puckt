@@ -24,24 +24,8 @@ puckt.main = (function () {
         // Initialise debugger
         puckt.debug.init(world);
 
-        new puckt.Level(1);
-
-        // Draw walls round the outside, round the outside, round the outside...
-        drawPerimeterWalls();
-
-        var testWall = new puckt.Wall(world, {
-            x: 40,
-            y: 40,
-            w: 40,
-            h: 10,
-            angle: 18
-        });
-
-        testWall.addEventListener('collide', function () {
-            console.log('ding');
-        });
-
-        stage.addChild(testWall.shape);
+        // Create test level
+        new puckt.Level(world, 1);
         
         // Create objects in scene
         var p = new puckt.Puck(world, {
@@ -53,37 +37,6 @@ puckt.main = (function () {
 
         // Eventually load in the levels into here
         puckt.flick.init(p);
-    },
-    // Bit hacky, possibly loop through a JSON object of walls to draw?
-    drawPerimeterWalls = function () {
-        var top = new puckt.Wall(world, {
-            x: 0,
-            y: 0,
-            w: canvasWidth,
-            h: 0
-        }),
-        right = new puckt.Wall(world, {
-            x: canvasWidth,
-            y: 0,
-            w: 0,
-            h: canvasHeight
-        }),
-        bottom = new puckt.Wall(world, {
-            x: 0,
-            y: canvasHeight,
-            w: canvasWidth,
-            h: 0
-        }),
-        left = new puckt.Wall(world, {
-            x: 0,
-            y: 0,
-            w: 0,
-            h: canvasHeight
-        });
-        stage.addChild(top.shape);
-        stage.addChild(right.shape);
-        stage.addChild(bottom.shape);
-        stage.addChild(left.shape);
     },
     tickrolled = function (e) {
         if (!e.paused) {
