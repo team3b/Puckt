@@ -4,7 +4,8 @@ var puckt = puckt || {};
 puckt.Puck = (function () {
     var Puck = puckt.Obj.extend({
         init: function (world, props) {
-            var s = new box2d.b2CircleShape(puckt.util.pixelsToMetres(props.radius));
+            var s, puckImg;
+            s = new box2d.b2CircleShape(puckt.util.pixelsToMetres(props.radius));
 
             this._super(world, "puck", {
                 x: props.x,
@@ -21,6 +22,10 @@ puckt.Puck = (function () {
                     angle: props.angle || 0
                 }
             });
+
+            /*puckImg = new Image(props.w, props.h);
+            puckImg.src = '/img/puck.svg';
+            this.shape.graphics.beginBitmapFill(puckImg).drawCircle(0, 0, props.radius);*/
 
             this.shape.graphics.beginFill('#222222').drawCircle(props.x, props.y, props.radius);
         }
