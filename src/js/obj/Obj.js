@@ -39,8 +39,6 @@ puckt.Obj = (function () {
 	        this.body = this.shape.body = world.CreateBody(this.bodyDef);
 	        this.body.CreateFixture(this.fixDef);
 	        this.body.SetUserData(this.shape);
-
-            console.log(this.shape.x, this.shape.y);
 	        
 	        // Attach tick event listener
 	        this.shape.addEventListener('tick', tick.bind(this));
