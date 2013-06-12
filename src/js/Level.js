@@ -2,12 +2,14 @@
 
 var puckt = puckt || {};
 puckt.Level = (function () {
-    var level, w;
-    function Level (world, number) {
+    var level, w, number;
+
+    function Level (world, lvlNum) {
         w = world;
+        number = lvlNum;
     }
 
-    function load (number) {
+    Level.prototype.boot = function (success, failed) {
         // AJAX call to retreive level definition
         var xhr = new XMLHttpRequest();
         xhr.open("GET", 'levels/' + number + '.json', true);
@@ -16,17 +18,20 @@ puckt.Level = (function () {
         xhr.onload = function (e) {
             if (this.status == 200) {
                 level = JSON.parse(xhr.responseText);
+                success();
+            } else {
+                failed();
             }
         }
         xhr.send(null);
-    }
+    };
 
-    function begin () {
+    Level.prototype.begin = function () {
         // Draw level to canvas
         drawBoundaries(level.boundaries);
         drawWalls(level.walls);
         drawPuck(level.puck);
-    }
+    };
 
     function drawBoundaries (boundaries) {
         // Draw the boundaries
@@ -35,7 +40,7 @@ puckt.Level = (function () {
                 new puckt.Wall(w, {
                     x: 0,
                     y: 0,
-                    w: canvasWidth,
+                    w: puckt.canvas.width,
                     h: 0
                 });
             case boundaries.left:
@@ -43,21 +48,21 @@ puckt.Level = (function () {
                     x: 0,
                     y: 0,
                     w: 0,
-                    h: canvasHeight
+                    h: puckt.canvas.height
                 });
             case boundaries.bottom:
                 new puckt.Wall(w, {
                     x: 0,
-                    y: canvasHeight,
-                    w: canvasWidth,
+                    y: puckt.canvas.height,
+                    w: puckt.canvas.width,
                     h: 0
                 });
             case boundaries.right:
                 new puckt.Wall(w, {
-                    x: canvasWidth,
+                    x: puckt.canvas.width,
                     y: 0,
                     w: 0,
-                    h: canvasHeight
+                    h: puckt.canvas.height
                 })
                 break;
         }

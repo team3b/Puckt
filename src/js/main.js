@@ -1,58 +1,21 @@
 "use strict";
 
-var box2d, stage, fps = 60, canvasWidth = 300, canvasHeight = 440,
+var box2d, stage;
 
 puckt = puckt || {};
+puckt.canvas = {
+    elem: document.getElementById("canvas"),
+    width: 320,
+    height: 420
+};
 puckt.pxpm = 30 / puckt.Puck.realRadius;
 
 puckt.main = (function () {
-    var canvas, debugCanvas, world,
-    createScene = function () {
-        // Create world with no gravity
-        world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
 
-        var contactListener = new Box2D.Dynamics.b2ContactListener;
-        contactListener.BeginContact = function(contact) {
-           var shape = contact.GetFixtureA().GetBody().GetUserData();
-
-           if (shape.type = "light") {
-               shape.collide();
-           }
-        };
-        world.SetContactListener(contactListener);
-       
-        // Initialise debugger
-        puckt.debug.init(world);
-
+    var init = function () {
+        puckt.util.setCanvasSize(puckt.canvas.elem, puckt.canvas.width, puckt.canvas.height);
         // Create test level
-        new puckt.Level(world, 1);
-    },
-    tickrolled = function (e) {
-        if (!e.paused) {
-            // Update stage
-            stage.update();
-            
-            puckt.debug.run(world.DrawDebugData);
-            
-            world.Step(1/fps, 10, 10);
-            world.ClearForces();
-        }
-    },
-   init = function () {
-        // Set up stage and enable touch controls
-        canvas = document.getElementById("ice-rink");
-        puckt.util.setCanvasSize(canvas, canvasWidth, canvasHeight);
-        
-        stage = new createjs.Stage(canvas);
-        createjs.Touch.enable(stage);
-        
-        // Create scene
-        createScene();
-        
-        // Declare settings for scene ticker
-        createjs.Ticker.addEventListener('tick', tickrolled);
-        createjs.Ticker.setFPS(fps);
-        createjs.Ticker.useRAF = true;
+        new puckt.Game();
     };
     
     // Set the options for the box2d variable
@@ -68,9 +31,9 @@ puckt.main = (function () {
         b2CircleShape : Box2D.Collision.Shapes.b2CircleShape,
         b2DebugDraw : Box2D.Dynamics.b2DebugDraw
     };
+
     return {
-        init: init,
-        tickrolled: tickrolled
+        init: init
     }
 }());
 

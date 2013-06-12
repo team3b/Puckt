@@ -18,7 +18,7 @@ puckt.debug = (function () {
             var debugDraw;
             
             debugCanvas = document.createElement('canvas');
-            puckt.util.setCanvasSize(debugCanvas, canvasWidth, canvasHeight);
+            puckt.util.setCanvasSize(debugCanvas, puckt.canvas.width, puckt.canvas.height);
             
             
             var oldStage = stage;
