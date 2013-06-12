@@ -6,18 +6,18 @@ puckt.Wall = (function () {
         init: function (world, props) {
             var s;
             s = new box2d.b2PolygonShape();
-            s.SetAsBox(puckt.util.pixelsToMetres(props.w), puckt.util.pixelsToMetres(props.h));
+            s.SetAsBox(puckt.util.pixelsToMetres(props.w) / 2, puckt.util.pixelsToMetres(props.h) / 2);
 
-            this.w = props.w;
-            this.h = props.h;
             this.lightColour = props.lightColour || '#92d548';
 
             this._super(world, "wall", {
                 x: props.x,
                 y: props.y,
+                w: props.w,
+                h: props.h,
                 fixDef: {
                     density: 5,
-                    friction: 0.5,
+                    friction: 1,
                     restitution: 0.8,
                     shape: s
                 },

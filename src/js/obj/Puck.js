@@ -4,15 +4,16 @@ var puckt = puckt || {};
 puckt.Puck = (function () {
     var Puck = puckt.Obj.extend({
         init: function (world, props) {
-            var s;
-            s = new box2d.b2CircleShape(puckt.util.pixelsToMetres(props.radius));
+            var s = new box2d.b2CircleShape(puckt.util.pixelsToMetres(props.radius));
 
             this._super(world, "puck", {
                 x: props.x,
                 y: props.y,
+                w: props.radius * 2,
+                h: props.radios * 2,
                 fixDef: {
                     density: Puck.realMass / (Math.PI * Math.pow(Puck.realRadius, 2)),
-                    friction: 0.01,
+                    friction: 1,
                     restitution: 0.8,
                     shape: s
                 },
@@ -22,7 +23,7 @@ puckt.Puck = (function () {
                 }
             });
 
-            this.shape.graphics.beginFill('#222222').drawCircle(0, 0, props.radius);
+            this.shape.graphics.beginFill('#ffffff').drawCircle(props.x, props.y, props.radius);
         }
     });
 

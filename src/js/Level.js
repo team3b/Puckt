@@ -33,6 +33,11 @@ puckt.Level = (function () {
         drawPuck(level.puck);
     };
 
+    Level.prototype.reset = function () {
+        puckt.util.resetWorld(w);
+        this.begin();
+    }
+
     function drawBoundaries (boundaries) {
         boundaries = boundaries || {};
         // Draw the boundaries
