@@ -10,27 +10,31 @@ puckt.debug = (function () {
     }
     
     function run(fn) {
-        if (DEBUGGING) fn();
+        if (DEBUGGING) {
+            fn();
+        }
     }
-    
+
     function init(world) {
         if (DEBUGGING) {
             var debugDraw;
             
             debugCanvas = document.createElement('canvas');
             puckt.util.setCanvasSize(debugCanvas, puckt.canvas.width, puckt.canvas.height);
-            
-            
-            var oldStage = stage;
-            stage = new createjs.Stage(debugCanvas);
-            oldStage.canvas.parentNode.appendChild(debugCanvas);
-            createjs.Touch.enable(stage);
+
+            puckt.canvas.elem.parentNode.appendChild(debugCanvas);
             
             debugDraw = new box2d.b2DebugDraw();
-            debugDraw.SetSprite(stage.canvas.getContext("2d"));
+            debugDraw.SetSprite(debugCanvas.getContext('2d'));
+            debugDraw.SetDrawScale(puckt.pxpm);
+            debugDraw.SetFillAlpha(0.6);
             debugDraw.SetFlags(box2d.b2DebugDraw.e_shapeBit | box2d.b2DebugDraw.e_jointBit);
             world.SetDebugDraw(debugDraw);
         }
+    }
+
+    function initFlick() {
+
     }
     
     return {

@@ -51,7 +51,7 @@ puckt.Game = (function () {
             // Update stage
             stage.update();
             
-            puckt.debug.run(world.DrawDebugData);
+            puckt.debug.run(world.DrawDebugData.bind(world));
             
             world.Step(1/fps, 10, 10);
             world.ClearForces();
