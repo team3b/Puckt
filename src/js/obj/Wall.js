@@ -10,7 +10,7 @@ puckt.Wall = (function () {
 
             this.w = props.w;
             this.h = props.h;
-            this.lightColour = props.lightColour || '#92d548'
+            this.lightColour = props.lightColour || '#92d548';
 
             this._super(world, "wall", {
                 x: props.x,
