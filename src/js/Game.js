@@ -34,7 +34,7 @@ puckt.Game = (function () {
         };
         world.SetContactListener(contactListener);
 
-         // Initialise debugger
+        // Initialise debugger
         puckt.debug.init(world);
 
         // Draw Level
