@@ -1,21 +1,8 @@
 {
     "walls": [
         {
-            "lightColour": "#FF0000",
-            "coords": { "x": 50, "y": 100 },
+            "coords": { "x": 50, "y": 50 },
             "dimensions": { "w": 200, "h": 10 }
-        },
-
-        {
-            "coords": { "x": 250, "y": 100 },
-            "dimensions": { "w": 200, "h": 10 },
-            "angle": 90
-        },
-
-        {
-            "coords": { "x": 60, "y": 200 },
-            "dimensions": { "w": 100, "h": 10 },
-            "angle": 35
         }
     ],
 
@@ -24,5 +11,5 @@
         "radius": 15
     },
 
-    "stars": []
+    "stars": [1,2,3]
 }
