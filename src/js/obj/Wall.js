@@ -2,7 +2,7 @@
 
 var puckt = puckt || {};
 puckt.Wall = (function () {
-    function Wall(x, y, w, h) {
+    function Wall(x, y, w, h, a) {
         this.fixDef = new box2d.b2FixtureDef();
         this.bodyDef = new box2d.b2BodyDef();
         this.shape = new createjs.Shape();
@@ -23,11 +23,12 @@ puckt.Wall = (function () {
         this.bodyDef.type = box2d.b2Body.b2_staticBody;
         this.bodyDef.position = new box2d.b2Vec2(puckt.util.pixelsToMetres(x),
                                                  puckt.util.pixelsToMetres(y));
-        
+
         // Create shape's body
         this.body = this.shape.body = world.CreateBody(this.bodyDef);
         this.body.CreateFixture(this.fixDef);
         this.body.SetUserData(this.shape);
+        this.body.SetAngle(a * (Math.PI / 180));
         
         // Attach tick event listener
         this.shape.addEventListener('tick', tick.bind(this));

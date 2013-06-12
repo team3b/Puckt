@@ -7,13 +7,13 @@ puckt.flick = (function() {
     attachEvents = function (pk) {
         // Event listener for the initial touch on the puck
         var mousedown = (function () {
-            pk.body.SetLinearVelocity(new box2d.b2Vec2(0, 0));
             
             var d = [],
                 offset = {},
             
             mousemove = function (e) {
-                console.log('mousemove', e, pk.body.GetPosition());
+                // Reset velocity of puck once the user moves the Puck
+                pk.body.SetLinearVelocity(new box2d.b2Vec2(0, 0));
                 
                 // Move the puck as the finger move
                 pk.SetPosition(e.stageX + offset.x,

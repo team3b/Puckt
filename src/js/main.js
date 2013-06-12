@@ -1,11 +1,11 @@
 "use strict";
 
-var box2d, world, stage, fps = 60, canvasWidth = 300, canvasHeight = 440;
+var box2d, world, stage, fps = 60, canvasWidth = 300, canvasHeight = 440, counter = 0;
 
 var puckt = puckt || {};
 
-puckt.puck_radius = 0.0762 / 2;
-puckt.puck_mass = 0.17;
+puckt.puck_radius = (0.0762 / 2) * 100;
+puckt.puck_mass = 0.17 * 100;
 
 puckt.pxpm = 30 / puckt.puck_radius;
 
@@ -16,23 +16,38 @@ puckt.main = (function () {
         world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
 
         var contactListener = new Box2D.Dynamics.b2ContactListener;
-        contactListener.BeginContact = function(contact, manifold) {
-           console.log(contact);
+        contactListener.BeginContact = function(contact) {
+           // TODO Toggle wall light.
+           var shape = contact.GetFixtureA().GetBody().GetUserData();
+           // Clear current data
+           shape.graphics.clear();
+           // Redraw new wall
+           shape.graphics.beginFill("#FF0000").drawRect(0, 0, 200, 10);
         };
         world.SetContactListener(contactListener);
        
         // Initialise debugger
         puckt.debug.init();
 
+        new puckt.Level(1);
+
         // Draw walls round the outside, round the outside, round the outside...
-        drawPerimeterWalls();
+        //drawPerimeterWalls();
         
         // Create objects in scene
+        drawLevel();
+
         var p = new puckt.Puck(canvasWidth / 2, canvasHeight / 8 * 7, 15);
         console.log('stage.addChild', stage.addChild(p.shape));
         
         // Eventually load in the levels into here
         puckt.flick.init(p);
+    },
+    // // Take a JSON object and make it look pretty
+    drawLevel = function () {
+         var wall = new puckt.Wall(50, 100, 200, 10, 0);
+
+        stage.addChild(wall.shape);
     },
     // Bit hacky, possibly loop through a JSON object of walls to draw?
     drawPerimeterWalls = function () {
