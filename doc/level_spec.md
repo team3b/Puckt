@@ -32,7 +32,9 @@ Defines a single wall in the game, which may or may not have a light up panel
 
 	{
 		"light-colours": [HexColour | null, HexColour | null],
-		"coords": [Position, Position]
+		"coords": Position,
+		"dimensions": Dimension,
+		"rotation": Integer
 	}
 
 Any of the following types are valid for `light-colours`: `[]`, `[HexColour]`, `[null, HexColour]`, `[HexColour, null]`, `[HexColour, HexColour]`, `[null, null]`
@@ -42,13 +44,24 @@ Any of the following types are valid for `light-colours`: `[]`, `[HexColour]`, `
 	{
 		"light-colours": ["#ff0000", "#ff0000"],
 		"coords: undefined
+		"dimensions": undefined,
+		"rotation": 0
 	}
+
+Any undefined default values are required to be filled in, and will not render
 
 ## Position
 
 	{
 		"x": Float,
 		"y": Float
+	}
+
+## Dimension
+
+	{
+		"w": Float,
+		"h": Float
 	}
 
 ## HexColour
