@@ -1,5 +1,6 @@
-var puckt = puckt || {};
+"use strict";
 
+var puckt = puckt || {};
 puckt.debug = (function () {
     var DEBUGGING = true,
         debugCanvas;
@@ -9,9 +10,7 @@ puckt.debug = (function () {
     }
     
     function run(fn) {
-        if (DEBUGGING) {
-            fn();
-        }
+        if (DEBUGGING) fn();
     }
     
     function init() {

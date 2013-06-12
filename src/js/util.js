@@ -1,6 +1,7 @@
+"use strict";
+
 var puckt = puckt || {};
 puckt.util = (function () {
-    "use strict";
     // Convert pixels to representive metres
     var pixelsToMetres = function (pixels) {
         return pixels / puckt.pxpm;
