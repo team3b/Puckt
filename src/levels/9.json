@@ -1,0 +1,70 @@
+{
+    "walls": [
+        {
+            "coords": { "x": 80, "y": 150 },
+            "dimensions": { "w": 100, "h": 5 },
+            "angle": 135
+        },
+
+        {
+            "coords": { "x": 50, "y": 0 },
+            "dimensions": { "w": 100, "h": 5 },
+            "angle": 135
+        },
+
+        {
+            "coords": { "x": 290, "y": 180 },
+            "dimensions": { "w": 100, "h": 5 },
+            "angle": 225
+        },
+
+        {
+            "coords": { "x": 170, "y": 80 },
+            "dimensions": { "w": 100, "h": 5 },
+            "angle": 225
+        },
+
+        {
+            "coords": { "x": 140, "y": 285 },
+            "dimensions": { "w": 40, "h": 5 },
+            "angle": 315
+        },
+
+        {
+            "lightColour": "#FF0000",
+            "coords": { "x": 120, "y": 285 },
+            "dimensions": { "w": 40, "h": 5 },
+            "angle": 225
+        },
+
+        {
+            "lightColour": "#FF0000",
+            "coords": { "x": 165, "y": 280 },
+            "dimensions": { "w": 250, "h": 5 },
+            "angle": 225
+        },
+
+        {
+            "coords": { "x": 300, "y": 360 },
+            "dimensions": { "w": 100, "h": 5 },
+            "angle": 135
+        },
+
+        {
+            "lightColour": "#000000",
+            "coords": { "x": 100, "y": 440 },
+            "dimensions": { "w": 100, "h": 5 },
+            "angle": 225
+        }
+
+
+
+    ],
+
+    "puck": {
+        "coords": { "x": 150, "y": 380 },
+        "radius": 15
+    },
+
+    "stars": [3,5,7]
+}
