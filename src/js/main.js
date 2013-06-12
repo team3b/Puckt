@@ -12,11 +12,8 @@ puckt.pxpm = 30 / puckt.Puck.realRadius;
 
 puckt.main = (function () {
     var init = function () {
-        //puckt.canvas.elem = document.getElementById('canvas');
-
         // Inject puckt.canvas.elem
         document.body.appendChild(puckt.canvas.elem);
-
         // Set canvas size
         puckt.util.setCanvasSize(puckt.canvas.elem, puckt.canvas.width, puckt.canvas.height);
         // Add background image

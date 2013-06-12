@@ -38,7 +38,11 @@ puckt.util = (function () {
         for (var prop in newProps) {
             original[prop] = newProps[prop];
         }
-    };
+    },
+
+    clamp = function (min, max, x) {
+        return Math.min(Math.max(x, min), max);
+    }
     
     return {
         pixelsToMetres: pixelsToMetres,
@@ -48,6 +52,7 @@ puckt.util = (function () {
         calcVelocity: calcVelocity,
         findDiff: findDiff,
         setCanvasSize: setCanvasSize,
-        extendObject: extendObject
+        extendObject: extendObject,
+        clamp: clamp
     }
 }());

@@ -15,8 +15,17 @@ puckt.flick = (function() {
                 pk.body.SetLinearVelocity(new box2d.b2Vec2(0, 0));
                 
                 // Move the puck as the finger move
-                pk.setPosition(e.stageX + offset.x,
-                               e.stageY + offset.y);
+                pk.setPosition(
+                    puckt.util.clamp(
+                        puckt.Puck.realRadius, 
+                        puckt.canvas.width - puckt.Puck.realRadius,
+                        e.stageX + offset.x
+                    ), puckt.util.clamp(
+                        puckt.canvas.height - 112 + puckt.Puck.realRadius,
+                        puckt.canvas.height - puckt.Puck.realRadius,
+                        e.stageY + offset.y
+                    )
+                );
                 
                 // Detail of current movement
                 d.push({
@@ -62,7 +71,7 @@ puckt.flick = (function() {
             
             return mousedown;
         })();
-        
+
         pk.shape.addEventListener('mousedown', mousedown);
     },
     
