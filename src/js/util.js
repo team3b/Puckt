@@ -2,15 +2,18 @@ var puckt = puckt || {};
 puckt.util = (function () {
     "use strict";
     // Convert pixels to representive metres
-    var convertToMetres = function (pixels) {
-        return pixels * (1 / mppx);
+    var pixelsToMetres = function (pixels) {
+        return pixels / puckt.pxpm;
+    },
+    metresToPixels = function (metres) {
+        return metres * puckt.pxpm;
     },
     // Takes a distance in pixels, and an array of times, converts pixels to
     // metres, and calculates the time period covered
     calcVelocity = function (distances, timestamps) {
-        var distance = convertToMetres(distances[distances.length-1]-distances[0]),
+        var distance = pixelsToMetres(distances[distances.length-1]-distances[0]),
             time = findDiff(timestamps[0], timestamps[timestamps.length-1]);
-        return distance / time;
+        return distance / (time * 0.001);
     },
     // A helper function to find the difference between two numbers
     findDiff = function (num1, num2) {
@@ -24,7 +27,8 @@ puckt.util = (function () {
     };
     
     return {
-        convertToMetres: convertToMetres,
+        pixelsToMetres: pixelsToMetres,
+        metresToPixels: metresToPixels,
         calcVelocity: calcVelocity,
         findDiff: findDiff,
         setCanvasSize: setCanvasSize

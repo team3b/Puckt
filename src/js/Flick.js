@@ -56,8 +56,8 @@
                 
                 var pos = pk.body.GetPosition();
                 offset = {
-                    x: pos.x - e.stageX,
-                    y: pos.y - e.stageY
+                    x: puckt.util.metresToPixels(pos.x) - e.stageX,
+                    y: puckt.util.metresToPixels(pos.y) - e.stageY
                 };
                 
                 e.addEventListener('mousemove', mousemove);

@@ -1,7 +1,13 @@
 "use strict";
-var box2d, world, stage, mppx = 0.0001, fps = 60, canvasWidth = 300, canvasHeight = 440;
+var box2d, world, stage, fps = 60, canvasWidth = 300, canvasHeight = 440;
 
 var puckt = puckt || {};
+
+puckt.puck_radius = 0.0762 / 2;
+puckt.puck_mass = 0.17;
+
+puckt.pxpm = 30 / puckt.puck_radius;
+
 puckt.main = (function () {
     var canvas, debugCanvas,
     createScene = function () {
@@ -15,7 +21,7 @@ puckt.main = (function () {
         drawPerimeterWalls();
         
         // Create objects in scene
-        var p = new puckt.Puck(canvasWidth / 2, canvasHeight / 8 * 7, 25);
+        var p = new puckt.Puck(canvasWidth / 2, canvasHeight / 8 * 7, 15);
         console.log('stage.addChild', stage.addChild(p.shape));
         
         // Eventually load in the levels into here

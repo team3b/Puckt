@@ -1,5 +1,6 @@
 "use strict";
 
+var puckt = puckt || {};
 puckt.Wall = (function () {
     function Wall(x, y, w, h) {
         this.fixDef = new box2d.b2FixtureDef();
