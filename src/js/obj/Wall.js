@@ -26,6 +26,8 @@ puckt.Wall = (function () {
                     angle: props.angle || 0
                 }
             });
+
+            this.shape.graphics.beginFill('#222222').drawRect(0, 0, props.w, props.h);
         }
     });
 })();
