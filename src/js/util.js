@@ -13,7 +13,7 @@ puckt.util = (function () {
         return deg * (180 / Math.PI); // To do: cache this value
     },
     radiansToDegrees = function (rad) {
-        return rad / (180 / Math.PI); // To do: cache this value
+        return rad * (Math.PI / 180); // To do: cache this value
     },
     // Takes a distance in pixels, and an array of times, converts pixels to
     // metres, and calculates the time period covered

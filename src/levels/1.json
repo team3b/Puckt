@@ -1,5 +1,11 @@
 {
-    "boundaries": [true, true, true, true],
+    "boundaries": {
+        "top": true,
+        "bottom": true,
+        "left": true,
+        "right": true
+    },
+
     "walls": [
     {
         "light-colours": [],
@@ -13,10 +19,25 @@
             "h": 10
         },
         "rotation": 0
+    },
+    {
+        "light-colours": [],
+        "coords":
+        {
+            "x": 200,
+            "y": 100
+        },
+        "dimensions": {
+            "w": 200,
+            "h": 10
+        },
+        "rotation": 90
     }],
-    "puck-start": {
+
+    "puck": {
         "x": 150,
         "y": 350
     },
+
     "stars": []
 }
