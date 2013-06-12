@@ -2,7 +2,7 @@
 
 var puckt = puckt || {};
 puckt.debug = (function () {
-    var DEBUGGING = true,
+    var DEBUGGING = false,
         debugCanvas;
     
     function isOn() {
