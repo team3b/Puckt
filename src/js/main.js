@@ -14,6 +14,7 @@ puckt.main = (function () {
     var init = function () {
         // Inject puckt.canvas.elem
         document.body.appendChild(puckt.canvas.elem);
+        puckt.canvas.elem.setAttribute("id", "canvas");
         // Set canvas size
         puckt.util.setCanvasSize(puckt.canvas.elem, puckt.canvas.width, puckt.canvas.height);
         // Add background image

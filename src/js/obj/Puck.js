@@ -10,7 +10,6 @@ puckt.Puck = (function () {
                 x: props.x,
                 y: props.y,
                 w: props.radius * 2,
-                h: props.radios * 2,
                 fixDef: {
                     density: Puck.realMass / (Math.PI * Math.pow(Puck.realRadius, 2)),
                     friction: 1,
@@ -23,7 +22,7 @@ puckt.Puck = (function () {
                 }
             });
 
-            this.shape.graphics.beginFill('#ffffff').drawCircle(props.x, props.y, props.radius);
+            this.shape.graphics.beginFill('#222222').drawCircle(props.x, props.y, props.radius);
         }
     });
 

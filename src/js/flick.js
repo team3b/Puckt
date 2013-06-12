@@ -59,7 +59,7 @@ puckt.flick = (function() {
             
             mousedown = function (e) {
                 pk.body.SetLinearVelocity(new box2d.b2Vec2(0, 0));
-                
+
                 var pos = pk.body.GetPosition();
                 offset = {
                     x: puckt.util.metresToPixels(pos.x) - e.stageX,
