@@ -66,13 +66,14 @@ puckt.Level = (function () {
         // Draw the walls
         if (walls.length) {
             for (var i=0, len=walls.length; i<len; i++) {
-                new puckt.Wall(w, {
+                var wall = new puckt.Wall(w, {
                     x: walls[i].coords.x,
                     y: walls[i].coords.y,
                     w: walls[i].dimensions.w,
                     h: walls[i].dimensions.h,
-                    rotation: walls[i].rotation
+                    angle: walls[i].angle
                 });
+                stage.addChild(wall.shape);
             }
         }
     }

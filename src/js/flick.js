@@ -5,7 +5,6 @@ puckt.flick = (function() {
     var mass,
      
     attachEvents = function (pk) {
-        console.log('puckt.flick.attachEvents()', pk, pk.setPosition);
         // Event listener for the initial touch on the puck
         var mousedown = (function () {
             var d = [],
@@ -27,8 +26,6 @@ puckt.flick = (function() {
             },
             
             mouseup = function(e) {
-                console.log('mouseup', e);
-                
                 var xVel, yVel, end;
                 if (d.length > 2) {
                     // Initial checks on release.
@@ -45,14 +42,12 @@ puckt.flick = (function() {
                         [d[0].timestamp, d[end].timestamp]));
 
                     // Convert velocity to b2Vec2()
-                    var momentumVect = new box2d.b2Vec2(xVel * mass, yVel * mass);
-                    console.log('momentumVect', momentumVect);
+                    var momentumVect = new box2d.b2Vec2(xVel * puckt.Puck.realMass, yVel * puckt.Puck.realMass);
                     pk.body.ApplyImpulse(momentumVect, pk.body.GetWorldCenter());
                 }
             },
             
             mousedown = function (e) {
-                console.log('mousedown', e, pk.body, pk.body.GetPosition());
                 pk.body.SetLinearVelocity(new box2d.b2Vec2(0, 0));
                 
                 var pos = pk.body.GetPosition();
