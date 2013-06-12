@@ -6,10 +6,14 @@ puckt = puckt || {};
 puckt.pxpm = 30 / puckt.Puck.realRadius;
 
 puckt.main = (function () {
-    var canvas, debugCanvas, world,
+    var canvas, ice_rink, debugCanvas, world,
     createScene = function () {
         // Create world with no gravity
         world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
+
+        // Add ice rink to canvas
+        ice_rink = document.getElementById("ice-rink");
+        canvg(ice_rink, "img/ice_rink.svg");
 
         var contactListener = new Box2D.Dynamics.b2ContactListener;
         contactListener.BeginContact = function(contact) {
@@ -40,7 +44,7 @@ puckt.main = (function () {
     },
    init = function () {
         // Set up stage and enable touch controls
-        canvas = document.getElementById("ice-rink");
+        canvas = document.getElementById("canvas");
         puckt.util.setCanvasSize(canvas, canvasWidth, canvasHeight);
         
         stage = new createjs.Stage(canvas);
