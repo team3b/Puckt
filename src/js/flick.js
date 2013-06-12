@@ -52,7 +52,8 @@ puckt.flick = (function() {
 
                     // Convert velocity to b2Vec2()
                     var momentumVect = new box2d.b2Vec2(xVel * puckt.Puck.realMass, yVel * puckt.Puck.realMass);
-                    pk.body.ApplyImpulse(momentumVect, pk.body.GetWorldCenter());
+                    if (d[end].pos.y >= puckt.canvas.height - 112 + puckt.Puck.realRadius)
+                        pk.body.ApplyImpulse(momentumVect, pk.body.GetWorldCenter());
                 }
             },
             

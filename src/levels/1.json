@@ -2,7 +2,7 @@
     "walls": [
         {
             "coords": { "x": 50, "y": 50 },
-            "dimensions": { "w": 200, "h": 10 }
+            "dimensions": { "w": 200, "h": 5 }
         }
     ],
 

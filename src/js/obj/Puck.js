@@ -10,9 +10,11 @@ puckt.Puck = (function () {
             this._super(world, "puck", {
                 x: props.x,
                 y: props.y,
+                w: props.radius * 2,
+                h: props.radios * 2,
                 fixDef: {
                     density: Puck.realMass / (Math.PI * Math.pow(Puck.realRadius, 2)),
-                    friction: 0.01,
+                    friction: 1,
                     restitution: 0.8,
                     shape: s
                 },
@@ -21,6 +23,8 @@ puckt.Puck = (function () {
                     angle: props.angle || 0
                 }
             });
+
+
 
             this.shape.graphics.beginFill('#222222').drawCircle(0, 0, props.radius);
         }
