@@ -14,7 +14,10 @@ puckt.main = (function () {
         var contactListener = new Box2D.Dynamics.b2ContactListener;
         contactListener.BeginContact = function(contact) {
            var shape = contact.GetFixtureA().GetBody().GetUserData();
-           shape.toggleLight();
+
+           if (shape.type = "light") {
+               shape.collide();
+           }
         };
         world.SetContactListener(contactListener);
        
@@ -33,6 +36,11 @@ puckt.main = (function () {
             h: 10,
             angle: 18
         });
+
+        testWall.addEventListener('collide', function () {
+            console.log('ding');
+        });
+
         stage.addChild(testWall.shape);
         
         // Create objects in scene

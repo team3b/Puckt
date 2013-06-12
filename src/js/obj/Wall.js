@@ -27,8 +27,12 @@ puckt.Wall = (function () {
                 }
             });
 
-            this.shape.toggleLight = this.toggleLight.bind(this);
+            this.shape.collide = this.collide.bind(this);
             this.setLightSwitch(props.isOn === true);
+
+            this.collideEvents = [(function () {
+                this.toggleLight();
+            }).bind(this)];
         },
         isOn: false,
         toggleLight: function () {
@@ -40,10 +44,18 @@ puckt.Wall = (function () {
             this.isOn = on;
             colour = on ? this.lightColour : '#222222';
 
-            console.log('Wall.setLightSwitch', on, colour);
-
             this.shape.graphics.clear();
             this.shape.graphics.beginFill(colour).drawRect(0, 0, this.w, this.h);
+        },
+        collide: function () {
+            for (var i in this.collideEvents) {
+                this.collideEvents[i](this);
+            }
+        },
+        addEventListener: function (event, fn) {
+            if (event == 'collide') {
+                this.collideEvents.push(fn);
+            }
         }
     });
 
