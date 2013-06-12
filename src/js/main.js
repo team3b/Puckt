@@ -20,7 +20,8 @@ puckt.main = (function () {
        
         // Initialise debugger
         puckt.debug.init(world);
-        
+
+        // Create test level
         new puckt.Level(world, 1);
         
         // Create objects in scene
