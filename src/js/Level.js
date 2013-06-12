@@ -36,28 +36,28 @@ puckt.Level = (function () {
     function drawBoundaries (boundaries) {
         // Draw the boundaries
         switch (true) {
-            case boundaries.top:
+            case boundaries.top !== false:
                 new puckt.Wall(w, {
                     x: 0,
                     y: 0,
                     w: puckt.canvas.width,
                     h: 0
                 });
-            case boundaries.left:
+            case boundaries.right !== false:
                 new puckt.Wall(w, {
                     x: 0,
                     y: 0,
                     w: 0,
                     h: puckt.canvas.height
                 });
-            case boundaries.bottom:
+            case boundaries.bottom !== false:
                 new puckt.Wall(w, {
                     x: 0,
                     y: puckt.canvas.height,
                     w: puckt.canvas.width,
                     h: 0
                 });
-            case boundaries.right:
+            case boundaries.left !== false:
                 new puckt.Wall(w, {
                     x: puckt.canvas.width,
                     y: 0,

@@ -12,33 +12,33 @@ Each level should be defined in a seperate file, stored in `/src/levels/{level n
 
 `stars` is the minimum number of bounces required to get 1 star, 2 stars, ..., n stars. The length of the `stars` array is the number of stars available.
 
-### Defaults
+## Boundaries
+Defines which boundary walls are present, allows the puck to glide off the canvas
 
 	{
-		"boundaries": {
-			"top": true,
-			"left": true,
-			"bottom": true,
-			"right": true
-		},
-		"walls": [],
-		"puck": { // This is due to change
-			"x": 150,
-			"y": 380,
-			"radius": 15
-		},
-		"stars": []
+		"top": Bool,
+		"right": Bool,
+		"bottom": Bool,
+		"left": Bool
 	}
 
-### To do:
-* Define default values for `puck-start`.
+### Defaults
+All boundaries are defaulted to present
+	
+	{
+		"top": true,
+		"right": true,
+		"bottom": true,
+		"left": true
+	}
+
 
 ## Wall Object
 Defines a single wall in the game, which may or may not have a light up panel
 
 	{
-		"lightColours": HexColour,
-		"coords": Position,
+		"lightColour": HexColour,
+		"coords": Coords,
 		"dimensions": Dimension,
 		"rotation": Integer // Degrees
 	}
@@ -46,20 +46,28 @@ Defines a single wall in the game, which may or may not have a light up panel
 ### Defaults
 
 	{
-		"light-colours": #ff0000",
-		"coords: undefined
+		"lightColour": null,
+		"coords: undefined,
 		"dimensions": undefined,
 		"rotation": 0
 	}
+
+#### Note: If the `lightColour` is `null`, it will not light up when hit
 
 Any undefined default values are required to be filled in, and will not render
 
 ## Puck Object
 
 	{
+		coords: Coords,
+		"radius": Float
+	}
+
+## Coords Object
+
+	{
 		"x": Float,
 		"y": Float,
-		"radius": Float
 	}
 
 ## Dimension Object
