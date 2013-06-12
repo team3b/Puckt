@@ -1,10 +1,10 @@
-(function(window) {
-    var mass;
-    
-    function Flick(pk) {
-        mass = pk.body.GetMass();
-        window.PUCKX = pk;
-        
+"use strict";
+
+var puckt = puckt || {};
+puckt.flick = (function() {
+    var mass,
+     
+    attachEvents = function (pk) {
         // Event listener for the initial touch on the puck
         var mousedown = (function () {
             pk.body.SetLinearVelocity(new box2d.b2Vec2(0, 0));
@@ -68,6 +68,15 @@
         })();
         
         pk.shape.addEventListener('mousedown', mousedown);
-    }
-    window.Flick = Flick;
-})(window);
+    },
+    
+    init = function(pk) {
+        mass = pk.body.GetMass();
+        attachEvents(pk);
+    };
+    
+    return {
+        init: init,
+        attachEvents: attachEvents
+    };
+})();

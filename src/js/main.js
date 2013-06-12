@@ -31,7 +31,7 @@ puckt.main = (function () {
         console.log('stage.addChild', stage.addChild(p.shape));
         
         // Eventually load in the levels into here
-        new Flick(p);
+        puckt.flick.init(p);
     },
     // Bit hacky, possibly loop through a JSON object of walls to draw?
     drawPerimeterWalls = function () {
