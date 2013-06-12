@@ -5,10 +5,9 @@ puckt.Level = (function () {
     var level, w;
     function Level (world, number) {
         w = world;
-        get(number);
     }
 
-    function get (number) {
+    function load (number) {
         // AJAX call to retreive level definition
         var xhr = new XMLHttpRequest();
         xhr.open("GET", 'levels/' + number + '.json', true);
@@ -17,14 +16,16 @@ puckt.Level = (function () {
         xhr.onload = function (e) {
             if (this.status == 200) {
                 level = JSON.parse(xhr.responseText);
-                // Draw boundaries
-                drawBoundaries(level.boundaries);
-                // Draw walls
-                drawWall(level.walls);
-                // Draw Puck
             }
         }
         xhr.send(null);
+    }
+
+    function begin () {
+        // Draw level to canvas
+        drawBoundaries(level.boundaries);
+        drawWalls(level.walls);
+        drawPuck(level.puck);
     }
 
     function drawBoundaries (boundaries) {
@@ -62,20 +63,33 @@ puckt.Level = (function () {
         }
     }
 
-    function drawWall (walls) {
-        // Draw the walls
+    function drawWalls (walls) {
         if (walls.length) {
             for (var i=0, len=walls.length; i<len; i++) {
+                // Create Wall object
                 var wall = new puckt.Wall(w, {
                     x: walls[i].coords.x,
                     y: walls[i].coords.y,
                     w: walls[i].dimensions.w,
                     h: walls[i].dimensions.h,
-                    angle: walls[i].angle
+                    angle: walls[i].angle,
+                    lightColour: walls[i].lightColours
                 });
                 stage.addChild(wall.shape);
             }
         }
+    }
+
+    function drawPuck (puck) {
+        // Create Puck object
+        var p = new puckt.Puck(w, {
+            x: puck.x,
+            y: puck.y,
+            radius: puck.radius
+        });
+        stage.addChild(p.shape);
+        // Eventually load in the levels into here
+        puckt.flick.init(p);
     }
     
     return Level;

@@ -8,7 +8,7 @@
 
     "walls": [
     {
-        "light-colours": [],
+        "lightColours": ["#FF0000"],
         "coords":
         {
             "x": 50,
@@ -21,7 +21,7 @@
         "angle": 0
     },
     {
-        "light-colours": [],
+        "lightColours": [],
         "coords":
         {
             "x": 250,
@@ -34,7 +34,7 @@
         "angle": 90
     },
     {
-        "light-colours": [],
+        "lightColours": [],
         "coords":
         {
             "x": 60,
@@ -49,7 +49,8 @@
 
     "puck": {
         "x": 150,
-        "y": 350
+        "y": 380,
+        "radius": 15
     },
 
     "stars": []

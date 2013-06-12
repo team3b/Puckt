@@ -26,17 +26,6 @@ puckt.main = (function () {
 
         // Create test level
         new puckt.Level(world, 1);
-        
-        // Create objects in scene
-        var p = new puckt.Puck(world, {
-            x: canvasWidth / 2,
-            y: canvasHeight / 8 * 7,
-            radius: 15
-        });
-        stage.addChild(p.shape);
-
-        // Eventually load in the levels into here
-        puckt.flick.init(p);
     },
     tickrolled = function (e) {
         if (!e.paused) {
