@@ -44,6 +44,7 @@ puckt.Level = (function () {
             }
             if (lightWalls === lightWallsOn) {
                 console.log("User won with " + collisions + " collision");
+                puckt.Wall.collisionHandler = function () {};
                 LevelComplete(won);
             }
         }
