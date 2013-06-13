@@ -54,7 +54,7 @@ puckt.Game = (function () {
             puckt.ui.openPopup(popupProps);
         }
 
-        puckt.Level.failCallback = function (collisions) {
+        puckt.Level.failCallback = function (stars, collisions) {
             var currentLevel = this;
             puckt.ui.openPopup({
                 content: "<p>Unlucky, please try again.</p>",

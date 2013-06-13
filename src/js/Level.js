@@ -96,7 +96,11 @@ puckt.Level = (function () {
             }
         }
 
-        Level.successCallback.call(this, stars, this.collisions);
+        if (stars > 0) {
+            Level.successCallback.call(this, stars, this.collisions);
+        } else {
+            Level.failCallback.call(this,stars, this.collisions);
+        }
     }
     
     Level.prototype.stopFailTimer = function () {
