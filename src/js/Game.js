@@ -11,8 +11,8 @@ puckt.Game = (function () {
         currentLevel = startingLevel;
 
         puckt.Level.successCallback = function (stars, collisions) {
-            var currentLevel = this;
-            puckt.ui.openPopup({
+            var currentLevel = this,
+            popupProps = {
                 content: "<p>Congratulations, you completed level " + currentLevel.number + " with " + stars + " star" + (stars != 1 ? "s" : "") + "!</p>",
                 buttons: [
                     {
@@ -28,23 +28,30 @@ puckt.Game = (function () {
                             });
                             levelText.innerHTML = "Level " + currentLevel.number;
                         }
-                    },
-                    {
-                        text: "Retry",
-                        callback: function () {
-                            puckt.ui.closePopup();
-                            currentGame.begin();
-                        }
-                    },
-                    {
-                        text: "Quit",
-                        callback: function () {
-                            puckt.ui.closePopup();
-                            // Return to Navigation
-                        }
                     }
                 ]
+            };
+
+            if (stars != currentLevel.data.stars.length) {
+                popupProps.buttons.push({
+                    text: "Retry",
+                    callback: function () {
+                        puckt.ui.closePopup();
+                        currentGame.begin();
+                    }
+                });
+            }
+
+            popupProps.buttons.push(
+            {
+                text: "Quit",
+                callback: function () {
+                    puckt.ui.closePopup();
+                    // Return to Navigation
+                }
             });
+
+            puckt.ui.openPopup(popupProps);
         }
 
         puckt.Level.failCallback = function (collisions) {
