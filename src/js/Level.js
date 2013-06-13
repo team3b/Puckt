@@ -2,7 +2,8 @@
 
 var puckt = puckt || {};
 puckt.Level = (function () {
-    var level, w, number;
+    var data, w, number, 
+        lightWalls = 0, lightWallsOn = 0, collisions = 0;
 
     function Level (world, lvlNum) {
         w = world;
@@ -17,7 +18,7 @@ puckt.Level = (function () {
         // Once ready state is 4
         xhr.onload = function (e) {
             if (this.status == 200) {
-                level = JSON.parse(xhr.responseText);
+                data = JSON.parse(xhr.responseText);
                 success();
             } else {
                 failed();
@@ -26,16 +27,33 @@ puckt.Level = (function () {
         xhr.send(null);
     };
 
-    Level.prototype.begin = function () {
+    Level.prototype.begin = function (won, lost) {
         // Draw level to canvas
-        drawBoundaries(level.boundaries);
-        drawWalls(level.walls);
-        drawPuck(level.puck);
+        drawBoundaries(data.boundaries);
+        drawWalls(data.walls);
+        drawPuck(data.puck);
+        puckt.Wall.collisionHandler = function (on) {
+            collisions++;
+            if (on) {
+                lightWallsOn++;
+            } else {
+                lightWallsOn--;
+            }
+            console.log(collisions, lightWallsOn, lightWalls);
+            if (lightWalls === lightWallsOn) {
+                console.log("User won with " + collisions + " collision");
+                LevelComplete(won);
+            }
+        }
     };
 
     Level.prototype.reset = function () {
         puckt.util.resetWorld(w);
         this.begin();
+    }
+
+    function LevelComplete (callback) {
+        //won(stars, collisions);
     }
 
     function drawBoundaries (boundaries) {
@@ -85,8 +103,15 @@ puckt.Level = (function () {
                     w: walls[i].dimensions.w,
                     h: walls[i].dimensions.h,
                     angle: walls[i].angle,
-                    lightColour: walls[i].lightColour
+                    lightColour: walls[i].lightColour,
+                    lightOn: walls[i].lightOn
                 });
+
+                if (wall.isLightWall()) {
+                    lightWalls++;
+                    if (wall.isOn()) lightWallsOn++;
+                }
+
                 stage.addChild(wall.shape);
             }
         }

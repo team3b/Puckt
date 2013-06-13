@@ -37,6 +37,7 @@ puckt.Wall = (function () {
                 this.toggleLight();
             }).bind(this)];
         },
+        isLightWall: function () { return this.lightColour !== null },
         isOn: function () { return this.on },
         toggleLight: function () {
             this.setLightSwitch(!this.on);
