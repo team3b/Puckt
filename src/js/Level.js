@@ -31,6 +31,7 @@ puckt.Level = (function () {
     Level.prototype.begin = function () {
         var theLevel = this;
         console.log('Level.begin theLevel', theLevel);
+        puckt.Wall.disabled = false;
         puckt.util.resetWorld(w);
         finished = false;
 
