@@ -47,7 +47,7 @@ puckt.Level = (function () {
                     stopFailTimer();
                     finished = true;
                     puckt.Wall.collisionHandler = function () {};
-                    LevelComplete();
+                    LevelComplete.call(this);
                 }
             }
         }
