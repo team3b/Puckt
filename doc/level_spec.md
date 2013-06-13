@@ -83,3 +83,17 @@ Any undefined default values are required to be filled in, and will not render
 
 ## HexColour
 A valid hex colour, like you would use in CSS. E.g. `#f5f5f5`
+
+## Stars Array
+This array uses the index as the number of stars, and stored in each position is the maximum number of collision allowed to achieve that star
+
+**Notes** 
+- The array index starts at `1`
+- An empty array signals *no* stars can be achieved - that's just mean
+
+### Example
+
+	stars: [3, 2, 1]
+
+This example outlines that 1 star is achieved if the user turns on all lights in 3 collisions,
+2 stars in 2 collitions, and 3 stars (maximum) if they complete in 1 collision - *Hole in one*

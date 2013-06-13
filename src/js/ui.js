@@ -12,7 +12,7 @@ puckt.ui = (function () {
         section.innerHTML = props.content;
         // Ensure dimensions are the same dimensions as the canvas
         message.style.width = puckt.canvas.width + "px";
-        message.style.height = puckt.canvas.height + "px";
+        message.style.height = puckt.canvas.height + puckt.canvas.navHeight + "px";
         // Make transparent (for fading)
         message.style.opacity = "0";
         // Add buttons to message
