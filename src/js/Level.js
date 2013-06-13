@@ -3,7 +3,7 @@
 var puckt = puckt || {};
 puckt.Level = (function () {
     var data, w, number, 
-        lightWalls = 0, lightWallsOn = 0, collisions = 0, failTimeout = 4, failTimer, finished;
+        lightWalls = 0, lightWallsOn = 0, collisions = 0, failTimeout = 4000, failTimer, finished;
 
     function Level (world, lvlNum) {
         w = world;
