@@ -30,28 +30,35 @@ puckt.main = (function () {
     },
 
     init = function () {
+        var popupProps = {
+            content: "<h1>Puckt</h1> <small>beta</small><p>Puckt is a mobile HTML5 game designed to test your visual and mathematical skills.</p>",
+            buttons: [
+                {
+                    text: "New Game",
+                    callback: function () {
+                        puckt.ui.closePopup();
+                        // Set up local storage
+                        localStorage.setItem("levelsCompleted", JSON.stringify([]));
+                        createGame(1);
+                    }
+                }
+            ]
+        };
+        // Check to see if the user can continue a previous game
+        if (JSON.parse(localStorage.getItem("levelsCompleted")).length > 0) {
+            popupProps.buttons.push({
+                text: "Continue Game",
+                callback: function () {
+                    puckt.ui.closePopup();
+                    var highestLevel = JSON.parse(localStorage.getItem("levelsCompleted")).pop().number + 1;
+                    createGame(highestLevel);
+                }
+            });
+        }
         // Ensure game is viewed from the home screen
         // if (window.navigator.standalone) {
             // Inject menu
-            puckt.ui.openPopup({
-                content: "<h1>Puckt</h1> <small>beta</small><p>Puckt is a mobile HTML5 game designed to test your visual and mathematical skills. The game was developed during a week-long Game Jam hosted at the University of Portsmouth.</p>",
-                buttons: [
-                    {
-                        text: "New Game",
-                        callback: function () {
-                            puckt.ui.closePopup();
-                            createGame(1);
-                        }
-                    },
-                    {
-                        text: "Continue Game",
-                        callback: function () {
-                            puckt.ui.closePopup();
-                            createGame(1); // Get local storage's highest level completed
-                        }
-                    }
-                ]
-            })
+            puckt.ui.openPopup(popupProps);
         // } else {
         //     // Inject install instructions
         //     puckt.ui.openPopup({
