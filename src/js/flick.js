@@ -17,12 +17,12 @@ puckt.flick = (function() {
                 // Move the puck as the finger move
                 pk.setPosition(
                     puckt.util.clamp(
-                        puckt.Puck.realRadius, 
-                        puckt.canvas.width - puckt.Puck.realRadius,
+                        pk.radius + 1, 
+                        puckt.canvas.width - pk.radius - 1,
                         e.stageX + offset.x
                     ), puckt.util.clamp(
-                        puckt.canvas.height - 104 + puckt.Puck.realRadius,
-                        puckt.canvas.height - puckt.Puck.realRadius,
+                        puckt.canvas.height - 104 + pk.radius,
+                        puckt.canvas.height - pk.radius - 1,
                         e.stageY + offset.y
                     )
                 );

@@ -24,7 +24,8 @@ puckt.Puck = (function () {
                 }
             });
 
-
+            this.radius = props.radius;
+            
             this.body.SetLinearDamping(0.4);
             //this.body.SetAngularDamping(0.4);
 
