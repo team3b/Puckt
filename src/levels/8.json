@@ -1,32 +1,32 @@
 {
     "walls": [
         {
-            "coords": { "x": 80, "y": 10 },
-            "dimensions": { "w": 100, "h": 10 },
+            "coords": { "x": 81, "y": 55 },
+            "dimensions": { "w": 100, "h": 5 },
             "angle": 135
         },
 
         {
-            "coords": { "x": 290, "y": 80 },
-            "dimensions": { "w": 100, "h": 10 },
-            "angle": 225
+            "coords": { "x": 155, "y": 20 },
+            "dimensions": { "w": 80, "h": 5 }
         },
 
         {
-            "coords": { "x": 210, "y": 300 },
-            "dimensions": { "w": 100, "h": 10 },
+            "coords": { "x": 285, "y": 140 },
+            "dimensions": { "w": 100, "h": 5 },
+            "angle": 90
+        },
+
+        {
+            "coords": { "x": 60, "y": 250 },
+            "dimensions": { "w": 100, "h": 5 },
+            "angle": 45
+        },
+
+        {
+            "coords": { "x": 210, "y": 260 },
+            "dimensions": { "w": 100, "h": 5 },
             "angle": 315
-        },
-
-        {
-            "coords": { "x": 190, "y": 305 },
-            "dimensions": { "w": 100, "h": 10 },
-            "angle": 225
-        },
-
-        {
-            "coords": { "x": 90, "y": 0 },
-            "dimensions": { "w": 120, "h": 10 }
         }
 
     ],

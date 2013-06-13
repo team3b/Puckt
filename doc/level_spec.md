@@ -43,10 +43,12 @@ Defines a single wall in the game, which may or may not have a light up panel
 		"rotation": Integer // Degrees
 	}
 
+To turn the lights off on a wall, set `lightColour: null`
+
 ### Defaults
 
 	{
-		"lightColour": null,
+		"lightColour": "#92D548",
 		"coords: undefined,
 		"dimensions": undefined,
 		"rotation": 0
