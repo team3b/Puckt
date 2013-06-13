@@ -61,7 +61,6 @@ puckt.util = (function () {
         metresToPixels: metresToPixels,
         degreesToRadians: degreesToRadians,
         radiansToDegrees: radiansToDegrees,
-        findDiff: findDiff,
         clamp: clamp,
         findDiff: findDiff,
         dimTob2Vec2: dimTob2Vec2,
