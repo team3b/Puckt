@@ -38,23 +38,25 @@ Defines a single wall in the game, which may or may not have a light up panel
 
 	{
 		"lightColour": HexColour,
+		"lightOn": Boolean, // Whether the light is on initially
 		"coords": Coords,
 		"dimensions": Dimension,
 		"rotation": Integer // Degrees
 	}
 
-To turn the lights off on a wall, set `lightColour: null`
+If you want a wall that doesn't light up at all, set `lightColour: null`.
 
 ### Defaults
 
 	{
 		"lightColour": "#92D548",
+		"lightOn": false,
 		"coords: undefined,
 		"dimensions": undefined,
 		"rotation": 0
 	}
 
-**Note:** If the `lightColour` is `null`, it will not light up when hit
+**Note:** If the `lightColour` is `null`, it will not light up when hit. Also, if `lightColour` is `null`, `lightOn` will be ignored.
 
 Any undefined default values are required to be filled in, and will not render
 
