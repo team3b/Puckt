@@ -23,9 +23,9 @@ puckt.Level = (function () {
         xhr.onload = function (e) {
             if (this.status == 200) {
                 theLevel.data = JSON.parse(xhr.responseText);
-                success();
+                success(e);
             } else {
-                fail();
+                fail(e);
             }
         };
         xhr.send(null);
