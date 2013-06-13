@@ -18,7 +18,6 @@ puckt.Game = (function () {
                     {
                         text: "Proceed",
                         callback: function () {
-                            var levelText = document.getElementById("level_text");
                             puckt.ui.closePopup();
                             currentGame = new puckt.Level(world, ++currentLevel.number);
                             currentGame.boot(function () {
@@ -27,7 +26,7 @@ puckt.Game = (function () {
                                 // To do: display failure dialog
                                 console.log("Ah, man!");
                             });
-                            levelText.innerHTML = "Level " + currentLevel.number;
+                            puckt.ui.drawNavigation(currentGame);
                         }
                     }
                 ]
@@ -112,7 +111,7 @@ puckt.Game = (function () {
         currentGame.boot(function () {
             currentGame.begin();
         }, function () {
-            console.log("Ah, man!");
+            console.log("Ah, man! Unable to load");
         });
 
         // Draw navigation bar

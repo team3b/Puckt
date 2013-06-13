@@ -57,10 +57,16 @@ puckt.ui = (function () {
     };
 
     function drawNavigation (currentGame) {
-        var navigation = document.createElement("nav"),
+        var oldNavigation = document.querySelector("nav"),
+            navigation = document.createElement("nav"),
             backButton = document.createElement("a"),
             resetButton = document.createElement("a"),
             levelText = document.createElement("span");
+
+        if (oldNavigation) {
+            oldNavigation.parentNode.removeChild(oldNavigation);
+        }
+
         // Set up navigation properties
         navigation.style.width = puckt.canvas.width + "px";
         navigation.style.height = puckt.canvas.navHeight + "px";
@@ -85,7 +91,7 @@ puckt.ui = (function () {
         resetButton.addEventListener("click", function (e) {
             e.preventDefault();
             currentGame.begin();
-        });
+        }, false);
         // Add buttons to navigation
         navigation.appendChild(backButton);
         navigation.appendChild(resetButton);
@@ -97,6 +103,6 @@ puckt.ui = (function () {
     return {
         openPopup: openPopup,
         closePopup: closePopup,
-        drawNavigation: drawNavigation
+        drawNavigation: drawNavigation,
     }
 })();
