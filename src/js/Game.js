@@ -29,7 +29,7 @@ puckt.Game = (function () {
            var shape = contact.GetFixtureA().GetBody().GetUserData();
 
            if (shape.type = "wall") {
-               shape.collision(shape.isOn(), contact);
+               shape.collision(!shape.isOn(), contact);
            }
         };
         world.SetContactListener(contactListener);
