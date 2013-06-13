@@ -32,7 +32,7 @@ puckt.main = (function () {
     init = function () {
         // Inject menu
         puckt.ui.openPopup({
-            content: "<h1>Puckt</h1><p>Puckt is a mobile HTML5 game designed to test your visual and mathematical skills. The game was developed during a week-long Game Jam hosted at the University of Portsmouth.</p>",
+            content: "<h1>Puckt</h1> <small>beta</small><p>Puckt is a mobile HTML5 game designed to test your visual and mathematical skills. The game was developed during a week-long Game Jam hosted at the University of Portsmouth.</p>",
             buttons: [
                 {
                     text: "New Game",
