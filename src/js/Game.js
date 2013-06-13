@@ -18,6 +18,7 @@ puckt.Game = (function () {
                     {
                         text: "Proceed &rarr;",
                         callback: function () {
+                            var levelText = document.getElementById("level_text");
                             puckt.ui.closePopup();
                             currentGame = new puckt.Level(world, ++currentLevel.number);
                             currentGame.boot(function () {
@@ -25,6 +26,7 @@ puckt.Game = (function () {
                             }, function () {
                                 console.log("Ah, man!");
                             });
+                            levelText.innerHTML = "Level " + currentLevel.number;
                         }
                     },
                     {
@@ -102,6 +104,9 @@ puckt.Game = (function () {
         }, function () {
             console.log("Ah, man!");
         });
+
+        // Draw navigation bar
+        puckt.ui.drawNavigation(currentGame);
     }
 
     function tickrolled (e) {
