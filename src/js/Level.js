@@ -2,19 +2,19 @@
 
 var puckt = puckt || {};
 puckt.Level = (function () {
-    var data, w, number, 
+    var data, w, 
         lightWalls = 0, lightWallsOn = 0, collisions = 0, failTimeout = 3200, failTimer, finished;
 
     function Level (world, level) {
         w = world;
-        number = level;
+        this.number = level;
     }
 
     Level.prototype.boot = function (success, fail) {
 
         // AJAX call to retreive level definition
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", 'levels/' + number + '.json', true);
+        xhr.open("GET", 'levels/' + this.number + '.json', true);
         xhr.responseType = 'text';
         // Once ready state is 4
         xhr.onload = function (e) {
