@@ -1,21 +1,21 @@
 {
     "walls": [
         {
-            "coords": { "x": 140, "y": 142 },
-            "dimensions": { "w": 325, "h": 5 },
-            "angle":45
-        },
-
-        {
-            "coords": { "x": 130, "y": 200 },
+            "coords": { "x": 142, "y": 150 },
             "dimensions": { "w": 300, "h": 5 },
-            "angle":45
+            "angle":90
         },
 
         {
-            "coords": { "x": 25 , "y": 60 },
-            "dimensions": { "w": 70, "h": 5 },
+            "coords": { "x": 178, "y": 150 },
+            "dimensions": { "w": 300, "h": 5 },
             "angle":90
+        },
+
+        {
+            "coords": { "x": 160 , "y": 10 },
+            "dimensions": { "w": 50, "h": 5 },
+            "angle":2
         }
     ],
 
