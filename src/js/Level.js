@@ -175,7 +175,7 @@ puckt.Level = (function () {
 
                 if (wall.isLightWall()) {
                     this.lightWalls++;
-                    if (wall.isOn()) this.initialLightOn++;
+                    if (wall.isOn()) this.initialLightsOn++;
                 }
 
                 stage.addChild(wall.shape);
