@@ -43,7 +43,7 @@ puckt.Wall = (function () {
             var colour;
 
             this.isOn = on;
-            colour = on ? this.lightColour : '#222222';
+            colour = on && this.lightColour != null ? this.lightColour : '#222222';
 
             this.shape.graphics.clear();
             this.shape.graphics.beginFill(colour).drawRect(0, 0, this.w, this.h);
