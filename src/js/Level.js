@@ -88,8 +88,6 @@ puckt.Level = (function () {
         this.stopFailTimer();
         this.finished = true;
 
-        console.log("User won with " + this.collisions + " collision(s)");
-
         var stars = 0;
         for (var i in this.data.stars) {
             if (this.collisions <= this.data.stars[i]) {
