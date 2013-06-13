@@ -24,6 +24,10 @@ puckt.Puck = (function () {
                 }
             });
 
+
+            this.body.SetLinearDamping(0.4);
+            //this.body.SetAngularDamping(0.4);
+
             // puckImg = new Image(props.w, props.h);
             // puckImg.src = 'img/puck.svg';
             // this.shape.graphics.beginBitmapFill(puckImg).drawCircle(props.radius, props.radius, props.radius);
