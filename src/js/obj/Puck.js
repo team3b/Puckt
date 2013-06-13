@@ -24,8 +24,6 @@ puckt.Puck = (function () {
                 }
             });
 
-            console.log(props.radius);
-
             /*puckImg = new Image(props.w, props.h);
             puckImg.src = '/img/puck.svg';
             this.shape.graphics.beginBitmapFill(puckImg).drawCircle(0, 0, props.radius);*/

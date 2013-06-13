@@ -21,7 +21,7 @@ puckt.flick = (function() {
                         puckt.canvas.width - puckt.Puck.realRadius,
                         e.stageX + offset.x
                     ), puckt.util.clamp(
-                        puckt.canvas.height - 112 + puckt.Puck.realRadius,
+                        puckt.canvas.height - 104 + puckt.Puck.realRadius,
                         puckt.canvas.height - puckt.Puck.realRadius,
                         e.stageY + offset.y
                     )
@@ -54,6 +54,8 @@ puckt.flick = (function() {
                     var momentumVect = new box2d.b2Vec2(xVel * puckt.Puck.realMass, yVel * puckt.Puck.realMass);
                     if (d[end].pos.y >= puckt.canvas.height - 112 + puckt.Puck.realRadius)
                         pk.body.ApplyImpulse(momentumVect, pk.body.GetWorldCenter());
+
+                    pk.shape.removeEventListener('mousedown', mousedown);
                 }
             },
             
@@ -74,6 +76,7 @@ puckt.flick = (function() {
         })();
 
         pk.shape.addEventListener('mousedown', mousedown);
+
     },
     
     init = function(pk) {
