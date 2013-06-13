@@ -56,22 +56,20 @@ puckt.flick = (function() {
                         pk.body.ApplyImpulse(momentumVect, pk.body.GetWorldCenter());
                         onflick();
                     }
-
-                    pk.shape.removeEventListener('mousedown', mousedown);
                 }
             },
             
             mousedown = function (e) {
-                pk.body.SetLinearVelocity(new box2d.b2Vec2(0, 0));
-
                 var pos = pk.body.GetPosition();
-                offset = {
-                    x: puckt.util.metresToPixels(pos.x) - e.stageX,
-                    y: puckt.util.metresToPixels(pos.y) - e.stageY
-                };
-                
-                e.addEventListener('mousemove', mousemove);
-                e.addEventListener('mouseup', mouseup);
+                if (puckt.util.metresToPixels(pos.y) > 300) {
+                    pk.body.SetLinearVelocity(new box2d.b2Vec2(0, 0));
+                    offset = {
+                        x: puckt.util.metresToPixels(pos.x) - e.stageX,
+                        y: puckt.util.metresToPixels(pos.y) - e.stageY
+                    };
+                    e.addEventListener('mousemove', mousemove);
+                    e.addEventListener('mouseup', mouseup);
+                }
             };
             
             return mousedown;

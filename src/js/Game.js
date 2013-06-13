@@ -30,12 +30,14 @@ puckt.Game = (function () {
                         text: "Retry",
                         callback: function () {
                             puckt.ui.closePopup();
+                            currentGame.reset();
                         }
                     },
                     {
                         text: "Quit",
                         callback: function () {
                             puckt.ui.closePopup();
+                            // Return to Navigation
                         }
                     }
                 ]

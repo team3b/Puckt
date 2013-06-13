@@ -23,8 +23,8 @@ canvas {
 	left: 0;
 }
 
-#svg {
-	opacity: 0.3;
+canvas#ice-rink {
+    opacity: 0.2;
 }
 
 .message {
