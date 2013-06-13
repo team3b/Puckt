@@ -8,7 +8,8 @@ puckt.Wall = (function () {
             s = new box2d.b2PolygonShape();
             s.SetAsBox(puckt.util.pixelsToMetres(props.w) / 2, puckt.util.pixelsToMetres(props.h) / 2);
 
-            this.lightColour = props.lightColour || '#92d548';
+            this.lightColour = props.lightColour == undefined ? '#92d548' : props.lightColour;
+            this.on = props.lightOn === true && this.lightColour != null;
 
             this._super(world, "wall", {
                 x: props.x,
@@ -36,19 +37,20 @@ puckt.Wall = (function () {
                 this.toggleLight();
             }).bind(this)];
         },
-        on: false,
         isOn: function () { return this.on },
         toggleLight: function () {
             this.setLightSwitch(!this.on);
         },
         setLightSwitch: function (on) {
-            var colour;
+            if (this.lightColour != null) {
+                var colour;
 
-            this.on = on;
-            colour = this.lightColour != null && on ? this.lightColour : Wall.offColour;
+                this.on = on;
+                colour = on ? this.lightColour : Wall.offColour;
 
-            this.shape.graphics.clear();
-            this.shape.graphics.beginFill(colour).drawRect(0, 0, this.w, this.h);
+                this.shape.graphics.clear();
+                this.shape.graphics.beginFill(colour).drawRect(0, 0, this.w, this.h);
+            }
         },
         collision: function (on, contact) {
             for (var i in this.collisionEvents) {
