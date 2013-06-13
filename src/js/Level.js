@@ -62,6 +62,7 @@ puckt.Level = (function () {
         switch (true) {
             case boundaries.top !== false:
                 new puckt.Wall(w, {
+                    lightColour: null,
                     x: puckt.canvas.width / 2,
                     y: 0,
                     w: puckt.canvas.width,
@@ -69,6 +70,7 @@ puckt.Level = (function () {
                 });
             case boundaries.right !== false:
                 new puckt.Wall(w, {
+                    lightColour: null,
                     x: puckt.canvas.width,
                     y: puckt.canvas.height / 2,
                     w: 0,
@@ -76,6 +78,7 @@ puckt.Level = (function () {
                 });
             case boundaries.bottom !== false:
                 new puckt.Wall(w, {
+                    lightColour: null,
                     x: puckt.canvas.width / 2,
                     y: puckt.canvas.height,
                     w: puckt.canvas.width,
@@ -83,6 +86,7 @@ puckt.Level = (function () {
                 });
             case boundaries.left !== false:
                 new puckt.Wall(w, {
+                    lightColour: null,
                     x: 0,
                     y: puckt.canvas.height / 2,
                     w: 0,
