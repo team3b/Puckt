@@ -32,14 +32,16 @@ puckt.Level = (function () {
         drawBoundaries(data.boundaries);
         drawWalls(data.walls);
         drawPuck(data.puck);
-        puckt.Wall.collisionHandler = function (on) {
+        puckt.Wall.collisionHandler = function () {
             collisions++;
-            if (on) {
-                lightWallsOn++;
-            } else {
-                lightWallsOn--;
+
+            if (this.isLightWall()) {
+                if (this.isOn()) {
+                    lightWallsOn++;
+                } else {
+                    lightWallsOn--;
+                }
             }
-            console.log(collisions, lightWallsOn, lightWalls);
             if (lightWalls === lightWallsOn) {
                 console.log("User won with " + collisions + " collision");
                 LevelComplete(won);

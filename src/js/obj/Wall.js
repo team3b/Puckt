@@ -8,8 +8,8 @@ puckt.Wall = (function () {
             s = new box2d.b2PolygonShape();
             s.SetAsBox(puckt.util.pixelsToMetres(props.w) / 2, puckt.util.pixelsToMetres(props.h) / 2);
 
-            this.lightColour = props.lightColour == undefined ? '#92d548' : props.lightColour;
-            this.on = props.lightOn === true && this.lightColour != null;
+            this.lightColour = props.lightColour === undefined ? '#92d548' : props.lightColour;
+            this.on = props.lightOn === true && this.isLightWall();
 
             this._super(world, "wall", {
                 x: props.x,
@@ -37,13 +37,15 @@ puckt.Wall = (function () {
                 this.toggleLight();
             }).bind(this)];
         },
-        isLightWall: function () { return this.lightColour !== null },
+        isLightWall: function () {
+            return this.lightColour !== null
+        },
         isOn: function () { return this.on },
         toggleLight: function () {
             this.setLightSwitch(!this.on);
         },
         setLightSwitch: function (on) {
-            if (this.lightColour != null) {
+            if (this.isLightWall()) {
                 var colour;
 
                 this.on = on;
@@ -53,11 +55,11 @@ puckt.Wall = (function () {
                 this.shape.graphics.beginFill(colour).drawRect(0, 0, this.w, this.h);
             }
         },
-        collision: function (on, contact) {
+        collision: function (contact) {
             for (var i in this.collisionEvents) {
-                this.collisionEvents[i](this, on, contact);
+                this.collisionEvents[i].call(this, contact);
             }
-            Wall.collisionHandler.call(this, on, contact);
+            Wall.collisionHandler.call(this, contact);
         },
         addEventListener: function (event, fn) {
             if (event == 'collision') {
