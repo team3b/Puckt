@@ -13,9 +13,7 @@ body {
     color: #444444;
 }
 
-a {
-	text-decoration: none;
-}
+a { text-decoration: none; }
 
 canvas {
 	position: absolute;
@@ -28,9 +26,7 @@ h1 {
 	margin: 0 0 20px;
 }
 
-canvas#ice-rink {
-    opacity: 0.35;
-}
+canvas#ice-rink { opacity: 0.2; }
 
 .message {
 	position: absolute;
@@ -81,10 +77,6 @@ nav a {
 	padding: 11px 16px;
 }
 
-nav a.left {
-	left: 0;
-}
+nav a.left { left: 0; }
 
-nav a.right {
-	right: 0;
-}
+nav a.right { right: 0; }
