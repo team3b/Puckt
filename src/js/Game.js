@@ -16,7 +16,7 @@ puckt.Game = (function () {
                 content: "<p>Congratulations, you completed level " + currentLevel.number + " with " + stars + " star" + (stars != 1 ? "s" : "") + "!</p>",
                 buttons: [
                     {
-                        text: "Proceed &rarr;",
+                        text: "Proceed",
                         callback: function () {
                             var levelText = document.getElementById("level_text");
                             puckt.ui.closePopup();
