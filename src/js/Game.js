@@ -2,7 +2,7 @@
 
 var puckt = puckt || {};
 puckt.Game = (function () {
-    var world, level = 3, fps = 60;
+    var world, level = 2, fps = 60;
 
     function Game () {
         // Create stage and enable touch
@@ -29,7 +29,7 @@ puckt.Game = (function () {
            var shape = contact.GetFixtureA().GetBody().GetUserData();
 
            if (shape.type = "wall") {
-               shape.collide();
+               shape.collision(contact);
            }
         };
         world.SetContactListener(contactListener);

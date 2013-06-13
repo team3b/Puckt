@@ -8,7 +8,8 @@ puckt.Wall = (function () {
             s = new box2d.b2PolygonShape();
             s.SetAsBox(puckt.util.pixelsToMetres(props.w) / 2, puckt.util.pixelsToMetres(props.h) / 2);
 
-            this.lightColour = props.lightColour || '#92d548';
+            this.lightColour = props.lightColour === undefined ? '#92d548' : props.lightColour;
+            this.on = props.lightOn === true && this.isLightWall();
 
             this._super(world, "wall", {
                 x: props.x,
@@ -28,37 +29,49 @@ puckt.Wall = (function () {
                 }
             });
 
-            this.shape.collide = this.collide.bind(this);
+            this.shape.collision = this.collision.bind(this);
+            this.shape.isOn = this.isOn.bind(this);
             this.setLightSwitch(props.isOn === true);
 
-            this.collideEvents = [(function () {
+            this.collisionEvents = [(function () {
                 this.toggleLight();
             }).bind(this)];
         },
-        isOn: false,
+        isLightWall: function () {
+            return this.lightColour !== null
+        },
+        isOn: function () { return this.on },
         toggleLight: function () {
-            this.setLightSwitch(!this.isOn);
+            this.setLightSwitch(!this.on);
         },
         setLightSwitch: function (on) {
-            var colour;
+            if (this.isLightWall()) {
+                var colour;
 
-            this.isOn = on;
-            colour = on ? this.lightColour : '#222222';
+                this.on = on;
+                colour = on ? this.lightColour : Wall.offColour;
 
-            this.shape.graphics.clear();
-            this.shape.graphics.beginFill(colour).drawRect(0, 0, this.w, this.h);
-        },
-        collide: function () {
-            for (var i in this.collideEvents) {
-                this.collideEvents[i](this);
+                this.shape.graphics.clear();
+                this.shape.graphics.beginFill(colour).drawRect(0, 0, this.w, this.h);
             }
         },
+        collision: function (contact) {
+            for (var i in this.collisionEvents) {
+                this.collisionEvents[i].call(this, contact);
+            }
+            Wall.collisionHandler.call(this, contact);
+        },
         addEventListener: function (event, fn) {
-            if (event == 'collide') {
-                this.collideEvents.push(fn);
+            if (event == 'collision') {
+                this.collisionEvents.push(fn);
             }
         }
     });
+
+    // This will be overwritten elsewhere
+    Wall.collisionHandler = function () { };
+
+    Wall.offColour = '#222222';
 
     return Wall;
 })();
