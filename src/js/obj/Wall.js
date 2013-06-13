@@ -45,7 +45,7 @@ puckt.Wall = (function () {
             this.setLightSwitch(!this.on);
         },
         setLightSwitch: function (on) {
-            if (this.isLightWall()) {
+            if (this.isLightWall() && !Wall.disabled) {
                 var colour;
 
                 this.on = on;
@@ -67,6 +67,8 @@ puckt.Wall = (function () {
             }
         }
     });
+
+    Wall.disabled = false;
 
     // This will be overwritten elsewhere
     Wall.collisionHandler = function () { };

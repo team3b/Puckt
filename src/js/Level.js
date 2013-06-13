@@ -82,6 +82,7 @@ puckt.Level = (function () {
 
     function levelComplete () {
         console.log('levelComplete', this);
+        puckt.Wall.disabled = true;
         var stars = 0;
 
         for (var i in data.stars) {
