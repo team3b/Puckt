@@ -14,19 +14,6 @@ puckt.pxpm = 30 / puckt.Puck.realRadius;
 
 puckt.main = (function () {
     var init = function () {
-        setTimeout(function () {
-            puckt.ui.openPopup({
-                content: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit diam, placerat id enim sed, ullamcorper eleifend enim.</p>",
-                buttons: [
-                    {
-                        text: "Confirm",
-                        callback: function () {
-                            puckt.ui.closePopup();
-                        }
-                    }
-                ]
-            })
-        }, 3000);
         // Inject puckt.canvas.elem
         document.body.appendChild(puckt.canvas.elem);
         puckt.canvas.elem.setAttribute("id", "canvas");
