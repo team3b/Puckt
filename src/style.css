@@ -67,3 +67,32 @@ canvas#ice-rink {
 .button:hover {
 	background: #4593c7;
 }
+
+nav {
+	background: #1177bb;
+	position: relative;
+	padding: 12px;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.7);
+	font-weight: bold;
+}
+
+nav a {
+	position: absolute;
+	top: 0;
+	background: rgba(255, 255, 255, 0.1);
+	color: #ffffff;
+	padding: 11px 16px;
+}
+
+nav a:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+nav a.left {
+	left: 0;
+}
+
+nav a.right {
+	right: 0;
+}

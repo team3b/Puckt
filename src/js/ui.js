@@ -55,9 +55,48 @@ puckt.ui = (function () {
                 message[0].parentNode.removeChild(message[0]);
         }, 250);
     };
+
+    function drawNavigation (currentGame) {
+        var navigation = document.createElement("nav"),
+            backButton = document.createElement("a"),
+            resetButton = document.createElement("a"),
+            levelText = document.createElement("span");
+        // Set up navigation properties
+        navigation.style.width = puckt.canvas.width + "px";
+        navigation.style.height = puckt.canvas.navHeight + "px";
+        // Set up level text
+        levelText.id = "level_text";
+        levelText.innerHTML = "Level " + currentGame.number;
+        // Set up back button properties
+        backButton.className = "left";
+        backButton.href = "";
+        backButton.innerHTML = "<i class=\"icon-large icon-arrow-left\"></i>";
+        backButton.style.height = puckt.canvas.navHeight + "px";
+        backButton.style.width = puckt.canvas.navHeight + "px";
+        backButton.addEventListener("click", function () {
+            console.log("back");
+        });
+        // Set up reset button properties
+        resetButton.className = "right";
+        resetButton.href = "";
+        resetButton.innerHTML = "<i class=\"icon-large icon-refresh\"></i>";
+        resetButton.style.height = puckt.canvas.navHeight + "px";
+        resetButton.style.width = puckt.canvas.navHeight + "px";
+        resetButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            currentGame.reset();
+        });
+        // Add buttons to navigation
+        navigation.appendChild(backButton);
+        navigation.appendChild(resetButton);
+        navigation.appendChild(levelText);
+        // Add navigation to document
+        document.body.appendChild(navigation);
+    };
     
     return {
         openPopup: openPopup,
-        closePopup: closePopup
+        closePopup: closePopup,
+        drawNavigation: drawNavigation
     }
 })();
