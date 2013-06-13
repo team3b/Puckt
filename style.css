@@ -5,6 +5,7 @@ html, body {
 
 body {
 	display: table;
+	overflow: hidden;
 }
 
 section {
