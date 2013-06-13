@@ -15,6 +15,9 @@ puckt.util = (function () {
     radiansToDegrees = function (rad) {
         return rad * (180 / Math.PI); // To do: cache this value
     },
+    findDiff = function (num1, num2) {
+        return (num1 > num2) ? num1 - num2 : num2 - num1;
+    },
     clamp = function (min, max, x) {
         return Math.min(Math.max(x, min), max);
     },
@@ -54,6 +57,7 @@ puckt.util = (function () {
         metresToPixels: metresToPixels,
         degreesToRadians: degreesToRadians,
         radiansToDegrees: radiansToDegrees,
+        findDiff: findDiff,
         clamp: clamp,
         dimTob2Vec2: dimTob2Vec2,
         calcVelocity: calcVelocity,

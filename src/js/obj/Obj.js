@@ -22,7 +22,7 @@ puckt.Obj = (function () {
 	        this.shape.y = props.y;
             this.shape.regX = props.w / 2;
             this.shape.regY = props.h / 2;
-	        this.shape.type = objType;
+            this.shape.type = objType;
 
             this.w = props.w;
             this.h = props.h;
