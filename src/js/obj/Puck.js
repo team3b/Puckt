@@ -20,7 +20,7 @@ puckt.Puck = (function () {
                 },
                 bodyDef: {
                     type: box2d.b2Body.b2_dynamicBody,
-                    angle: props.angle || 0
+                    angle: props.angle || puckt.util.degreesToRadians(0)
                 }
             });
 

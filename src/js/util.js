@@ -21,6 +21,10 @@ puckt.util = (function () {
     clamp = function (min, max, x) {
         return Math.min(Math.max(x, min), max);
     },
+    // A helper function to find the difference between two numbers
+    findDiff = function (num1, num2) {
+        return (num1 > num2) ? num1 - num2 : num2 - num1;
+    },
     // Takes pixel x-axis, y-axis, width, & height and returns a b2Vect2 object
     dimTob2Vec2 = function (props) {
         return new box2d.b2Vec2(pixelsToMetres(props.x), pixelsToMetres(props.y)); 
@@ -59,6 +63,7 @@ puckt.util = (function () {
         radiansToDegrees: radiansToDegrees,
         findDiff: findDiff,
         clamp: clamp,
+        findDiff: findDiff,
         dimTob2Vec2: dimTob2Vec2,
         calcVelocity: calcVelocity,
         setCanvasSize: setCanvasSize,

@@ -22,7 +22,8 @@ puckt.Obj = (function () {
 	        this.shape.y = props.y;
             this.shape.regX = props.w / 2;
             this.shape.regY = props.h / 2;
-            this.shape.type = objType;
+	        this.shape.rotation = props.rotation || 0;
+	        this.shape.type = objType;
 
             this.w = props.w;
             this.h = props.h;
@@ -34,6 +35,8 @@ puckt.Obj = (function () {
 	        puckt.util.extendObject(this.bodyDef, props.bodyDef);
 
             this.bodyDef.position = puckt.util.dimTob2Vec2(props);
+            this.bodyDef.bullet = true;
+            this.bodyDef.angle = puckt.util.degreesToRadians(this.shape.rotation);
 	        
 	        // Create shape's body
 	        this.body = this.shape.body = world.CreateBody(this.bodyDef);
