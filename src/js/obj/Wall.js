@@ -53,7 +53,7 @@ puckt.Wall = (function () {
 
                 this.shape.graphics.clear();
                 this.shape.graphics.beginFill(colour).drawRect(0, 0, this.w, this.h);
-                this.shape.shadow = on ? new createjs.Shadow(colour, 0, 0, 10) : null;
+                this.shape.shadow = on ? new createjs.Shadow(colour, 0, 0, 15) : null;
             }
         },
         collision: function (contact) {

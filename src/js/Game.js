@@ -23,8 +23,9 @@ puckt.Game = (function () {
                             currentGame.boot(function () {
                                 currentGame.begin();
                             }, function () {
-                                // To do: display failure dialog
-                                console.log("Ah, man!");
+                                puckt.ui.openPopup({
+                                    content: "<p>We failed to open your level, please refresh or reload the game.</p>"
+                                })
                             });
                             puckt.ui.drawNavigation(currentGame);
                         }
@@ -111,7 +112,9 @@ puckt.Game = (function () {
         currentGame.boot(function () {
             currentGame.begin();
         }, function () {
-            console.log("Ah, man! Unable to load");
+            puckt.ui.openPopup({
+                content: "<p>We failed to open your level, please refresh or reload the game.</p>"
+            });
         });
 
         // Draw navigation bar
