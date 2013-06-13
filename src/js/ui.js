@@ -84,7 +84,7 @@ puckt.ui = (function () {
         resetButton.style.width = puckt.canvas.navHeight + "px";
         resetButton.addEventListener("click", function (e) {
             e.preventDefault();
-            currentGame.reset();
+            currentGame.begin();
         });
         // Add buttons to navigation
         navigation.appendChild(backButton);
