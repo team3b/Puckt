@@ -28,10 +28,10 @@ puckt.Wall = (function () {
                 }
             });
 
-            this.shape.collide = this.collide.bind(this);
+            this.shape.collision = this.collision.bind(this);
             this.setLightSwitch(props.isOn === true);
 
-            this.collideEvents = [(function () {
+            this.collisionEvents = [(function () {
                 this.toggleLight();
             }).bind(this)];
         },
@@ -48,17 +48,21 @@ puckt.Wall = (function () {
             this.shape.graphics.clear();
             this.shape.graphics.beginFill(colour).drawRect(0, 0, this.w, this.h);
         },
-        collide: function () {
-            for (var i in this.collideEvents) {
-                this.collideEvents[i](this);
+        collision: function (contact) {
+            for (var i in this.collisionEvents) {
+                this.collisionEvents[i](this, contact);
             }
+            Wall.collisionHandler.call(this, contact);
         },
         addEventListener: function (event, fn) {
-            if (event == 'collide') {
-                this.collideEvents.push(fn);
+            if (event == 'collision') {
+                this.collisionEvents.push(fn);
             }
         }
     });
+
+    // This will be overwritten elsewhere
+    Wall.collisionHandler = function () {};
 
     return Wall;
 })();
