@@ -29,6 +29,8 @@ puckt.Level = (function () {
     };
 
     Level.prototype.begin = function () {
+        var theLevel = this;
+        console.log('Level.begin theLevel', theLevel);
         puckt.util.resetWorld(w);
         finished = false;
 
@@ -41,6 +43,7 @@ puckt.Level = (function () {
 
         // Draw level to canvas
         puckt.Wall.collisionHandler = function () {
+            console.log('collisionHandler', this, theLevel);
             if (!finished) {
                 restartFailTimer();
                 collisions++;
@@ -57,7 +60,7 @@ puckt.Level = (function () {
                     stopFailTimer();
                     finished = true;
                     puckt.Wall.collisionHandler = function () {};
-                    LevelComplete.call(this);
+                    levelComplete.call(theLevel);
                 }
             }
         }
@@ -77,17 +80,18 @@ puckt.Level = (function () {
     Level.successCallback = function () { };
     Level.failCallback = function () { };
 
-    function LevelComplete () {
+    function levelComplete () {
+        console.log('levelComplete', this);
         var stars = 0;
 
         for (var i in data.stars) {
-            console.log('LevelComplete loop', collisions, data.stars[i], i);
+            console.log('levelComplete loop', collisions, data.stars[i], i);
             if (collisions <= data.stars[i]) {
                 stars++;
             } else {
                 break;
             }
-            console.log('LevelComplete loop stars', stars);
+            console.log('levelComplete loop stars', stars);
         }
 
         Level.successCallback.call(this, stars, collisions);
