@@ -3,14 +3,14 @@
 var puckt = puckt || {};
 puckt.Level = (function () {
     var data, w, number, 
-        lightWalls = 0, lightWallsOn = 0, collisions = 0, finished = false;
+        lightWalls = 0, lightWallsOn = 0, collisions = 0, failTimeout = 4, failTimer, finished;
 
     function Level (world, lvlNum) {
         w = world;
         number = lvlNum;
     }
 
-    Level.prototype.boot = function (success, failed) {
+    Level.prototype.boot = function (success, fail) {
         // AJAX call to retreive level definition
         var xhr = new XMLHttpRequest();
         xhr.open("GET", 'levels/' + number + '.json', true);
@@ -21,19 +21,18 @@ puckt.Level = (function () {
                 data = JSON.parse(xhr.responseText);
                 success();
             } else {
-                failed();
+                fail();
             }
         }
         xhr.send(null);
     };
 
-    Level.prototype.begin = function (won, lost) {
+    Level.prototype.begin = function () {
+        finished = false;
         // Draw level to canvas
-        drawBoundaries(data.boundaries);
-        drawWalls(data.walls);
-        drawPuck(data.puck);
         puckt.Wall.collisionHandler = function () {
             if (!finished) {
+                restartFailTimer();
                 collisions++;
 
                 if (this.isLightWall()) {
@@ -45,20 +44,32 @@ puckt.Level = (function () {
                 }
                 if (lightWalls === lightWallsOn) {
                     console.log("User won with " + collisions + " collision(s)");
+                    stopFailTimer();
+                    finished = true;
                     puckt.Wall.collisionHandler = function () {};
-                    LevelComplete(won);
+                    LevelComplete();
                 }
             }
         }
+
+
+
+        drawBoundaries(data.boundaries);
+        drawWalls(data.walls);
+        drawPuck(data.puck);
     };
 
     Level.prototype.reset = function () {
+        finished = true;
+        stopFailTimer();
         puckt.util.resetWorld(w);
-        finished = false;
         this.begin();
     }
 
-    function LevelComplete (callback) {
+    Level.successCallback = function () { };
+    Level.failCallback = function () { };
+
+    function LevelComplete () {
         var stars = 0;
 
         for (var i in data.stars) {
@@ -71,7 +82,24 @@ puckt.Level = (function () {
             console.log('LevelComplete loop stars', stars);
         }
 
-        callback(stars, collisions);
+        Level.successCallback.call(this, stars, collisions);
+    }
+
+    function failLevel () {
+        Level.failCallback.call(this, collisions);
+    }
+    
+    function stopFailTimer() {
+        clearTimeout(failTimer);
+    }
+
+    function startFailTimer () {
+        failTimer = setTimeout(failLevel.bind(this), failTimeout);
+    }
+
+    function restartFailTimer () {
+        stopFailTimer();
+        startFailTimer();
     }
 
     function drawBoundaries (boundaries) {

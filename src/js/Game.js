@@ -9,6 +9,14 @@ puckt.Game = (function () {
         stage = new createjs.Stage(puckt.canvas.elem);
         createjs.Touch.enable(stage);
 
+        puckt.Level.successCallback = function (stars, collisions) {
+            console.log('User achieved ' + stars + ' star(s)');
+        }
+
+        puckt.Level.failCallback = function (collisions) {
+            console.log('You FAILED!');
+        }
+
         // Set the scene
         createWorld();
 
@@ -40,7 +48,7 @@ puckt.Game = (function () {
         // Draw Level
         currentGame = new puckt.Level(world, level);
         currentGame.boot(function () {
-            currentGame.begin(function (stars, collisions) { console.log ('User achieved ' + stars + ' star(s)'); });
+            currentGame.begin();
         }, function () {
             console.log("Ah, man!");
         });
