@@ -29,6 +29,24 @@ puckt.main = (function () {
         new puckt.Game(startingLevel);
     },
 
+    loadAssets = function (callback) {
+        //var queue = createjs.LoadQueue(false, '/');
+        //queue.installPlugin(createjs.Sound);
+        // queue.addEventListener("complete", function () {
+        //     console.log('complete');
+        //     Puck.image = queue.getItem("puck");
+        //     callback();
+        // });
+        // queue.loadManifest([
+        //     {
+        //         id: 'puck',
+        //         src: 'img/puck.svg'
+        //         //type: createjs.LoadQueue.IMAGE
+        //     }
+        // ]);
+        puckt.music.load(callback);
+    },
+
     init = function () {
         var popupProps = {
             content: "<h1>Puckt</h1> <small>beta</small><p>Puckt is a mobile HTML5 game designed to test your visual and mathematical skills.</p>",
@@ -58,7 +76,9 @@ puckt.main = (function () {
         // Ensure game is viewed from the home screen
         // if (window.navigator.standalone) {
             // Inject menu
-            puckt.ui.openPopup(popupProps);
+            loadAssets(function () {
+                puckt.ui.openPopup(popupProps);
+            });
         // } else {
         //     // Inject install instructions
         //     puckt.ui.openPopup({
