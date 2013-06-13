@@ -33,6 +33,10 @@ puckt.Puck = (function () {
             // this.shape.graphics.beginBitmapFill(puckImg).drawCircle(props.radius, props.radius, props.radius);
 
             this.shape.graphics.beginFill('#222222').drawCircle(props.radius, props.radius, props.radius);
+        },
+        isInFlickZone: function () {
+            // To do: return whether the puck is in the flick zone
+            return true;
         }
     });
 

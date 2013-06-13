@@ -2,127 +2,128 @@
 
 var puckt = puckt || {};
 puckt.Level = (function () {
-    var data, w, lightWalls = 0, initialLightsOn = 0, lightWallsOn = 0, collisions = 0, 
-        failTimeout = 4000, failTimer, finished;
+    var failTimeout = 4000;
 
-    function Level (world, level) {
-        w = world;
-        this.number = level;
-        lightWalls = 0;
+    function Level (world, num) {
+        this.world = world;
+        this.number = num;
+        this.lightWalls = 0;
+        this.initialLightsOn = 0;
+        this.lightWallsOn = 0;
+        this.collisions = 0;
     }
 
     Level.prototype.boot = function (success, fail) {
-
+        var theLevel = this,
         // AJAX call to retreive level definition
-        var xhr = new XMLHttpRequest();
+        xhr = new XMLHttpRequest();
         xhr.open("GET", 'levels/' + this.number + '.json', true);
         xhr.responseType = 'text';
         // Once ready state is 4
         xhr.onload = function (e) {
             if (this.status == 200) {
-                data = JSON.parse(xhr.responseText);
+                theLevel.data = JSON.parse(xhr.responseText);
                 success();
             } else {
                 fail();
             }
-        }
+        };
         xhr.send(null);
     };
 
     Level.prototype.begin = function () {
         var theLevel = this;
-        puckt.Wall.disabled = false;
-        collisions = 0;
-        lightWallsOn = initialLightsOn;
-        puckt.util.resetWorld(w);
-        finished = false;
+        this.reset();
 
         // When the user flicks the puck, start the fail timer,
         // then remove the flick event
-        puckt.flick.addFlickEventListener((function () {
-            startFailTimer.bind(this);
-            puckt.flick.removeAllFlickEventListeners();
-        }).bind(this));
+        puckt.flick.addFlickEventListener(function () {
+            // TO DO: only execute this if the puck is in the puck zone when the event is triggered
+            theLevel.restartFailTimer();
+        });
 
         // Draw level to canvas
         puckt.Wall.collisionHandler = function () {
-            if (!finished) {
-                restartFailTimer();
-                collisions++;
+            if (!theLevel.finished) {
+                theLevel.restartFailTimer();
+                theLevel.collisions++;
 
                 if (this.isLightWall()) {
                     if (this.isOn()) {
-                        lightWallsOn++;
+                        theLevel.lightWallsOn++;
                     } else {
-                        lightWallsOn--;
+                        theLevel.lightWallsOn--;
                     }
                 }
-                if (lightWalls === lightWallsOn) {
-                    console.log("User won with " + collisions + " collision(s)");
-                    stopFailTimer();
-                    finished = true;
-                    puckt.Wall.collisionHandler = function () {};
-                    levelComplete.call(theLevel);
+                if (theLevel.lightWalls === theLevel.lightWallsOn) {
+                    theLevel._levelComplete();
                 }
             }
         }
 
-        drawBoundaries(data.boundaries);
-        drawWalls(data.walls);
-        drawPuck(data.puck);
+        this._drawBoundaries(this.data.boundaries);
+        this._drawWalls(this.data.walls);
+        this._drawPuck(this.data.puck);
+
+        this.lightWallsOn = this.initialLightsOn;
     };
 
     Level.prototype.reset = function () {
-        finished = true;
-        stopFailTimer();
-        puckt.util.resetWorld(w);
-        this.begin();
+        this.finished = true;
+        this.stopFailTimer();
+        this.collisions = 0;
+        puckt.util.resetWorld(this.world);
+        this.finished = false;
+        puckt.Wall.disabled = false;
     }
 
     Level.successCallback = function () { };
     Level.failCallback = function () { };
 
-    function levelComplete () {
-        console.log('levelComplete', this);
+    Level.prototype._levelComplete = function () {
         puckt.Wall.disabled = true;
-        var stars = 0;
+        this.stopFailTimer();
+        this.finished = true;
 
-        for (var i in data.stars) {
-            console.log('levelComplete loop', collisions, data.stars[i], i);
-            if (collisions <= data.stars[i]) {
+        console.log("User won with " + this.collisions + " collision(s)");
+
+        var stars = 0;
+        for (var i in this.data.stars) {
+            if (this.collisions <= this.data.stars[i]) {
                 stars++;
             } else {
                 break;
             }
-            console.log('levelComplete loop stars', stars);
         }
 
-        Level.successCallback.call(this, stars, collisions);
-    }
-
-    function failLevel () {
-        Level.failCallback.call(this, collisions);
+        Level.successCallback.call(this, stars, this.collisions);
     }
     
-    function stopFailTimer() {
-        clearTimeout(failTimer);
+    Level.prototype.stopFailTimer = function () {
+        console.log('stopFailTimer', this, this.failTimer);
+        clearTimeout(this.failTimer);
+        console.log('stopFailTimer finished', this.failTimer);
     }
 
-    function startFailTimer () {
-        failTimer = setTimeout(failLevel.bind(this), failTimeout);
+    Level.prototype.startFailTimer = function () {
+        this.failTimer = setTimeout(this._failLevel(), failTimeout);
     }
 
-    function restartFailTimer () {
-        stopFailTimer();
-        startFailTimer();
+    Level.prototype.restartFailTimer = function () {
+        this.stopFailTimer();
+        this.startFailTimer();
     }
 
-    function drawBoundaries (boundaries) {
+    Level.prototype._failLevel = function () {
+        Level.failCallback.call(this, this.collisions);
+    }
+
+    Level.prototype._drawBoundaries = function (boundaries) {
         boundaries = boundaries || {};
         // Draw the boundaries
         switch (true) {
             case boundaries.top !== false:
-                new puckt.Wall(w, {
+                new puckt.Wall(this.world, {
                     lightColour: null,
                     x: puckt.canvas.width / 2,
                     y: 0,
@@ -130,7 +131,7 @@ puckt.Level = (function () {
                     h: 0
                 });
             case boundaries.right !== false:
-                new puckt.Wall(w, {
+                new puckt.Wall(this.world, {
                     lightColour: null,
                     x: puckt.canvas.width,
                     y: puckt.canvas.height / 2,
@@ -138,7 +139,7 @@ puckt.Level = (function () {
                     h: puckt.canvas.height
                 });
             case boundaries.bottom !== false:
-                new puckt.Wall(w, {
+                new puckt.Wall(this.world, {
                     lightColour: null,
                     x: puckt.canvas.width / 2,
                     y: puckt.canvas.height,
@@ -146,7 +147,7 @@ puckt.Level = (function () {
                     h: 0
                 });
             case boundaries.left !== false:
-                new puckt.Wall(w, {
+                new puckt.Wall(this.world, {
                     lightColour: null,
                     x: 0,
                     y: puckt.canvas.height / 2,
@@ -157,12 +158,12 @@ puckt.Level = (function () {
         }
     }
 
-    function drawWalls (walls) {
+    Level.prototype._drawWalls = function (walls) {
         // Check it isn't empty
         if (walls.length) {
             for (var i=0, len=walls.length; i<len; i++) {
                 // Create Wall object
-                var wall = new puckt.Wall(w, {
+                var wall = new puckt.Wall(this.world, {
                     x: walls[i].coords.x,
                     y: walls[i].coords.y,
                     w: walls[i].dimensions.w,
@@ -173,8 +174,8 @@ puckt.Level = (function () {
                 });
 
                 if (wall.isLightWall()) {
-                    lightWalls++;
-                    if (wall.isOn()) initialLightWallsOn++;
+                    this.lightWalls++;
+                    if (wall.isOn()) this.initialLightOn++;
                 }
 
                 stage.addChild(wall.shape);
@@ -182,9 +183,9 @@ puckt.Level = (function () {
         }
     }
 
-    function drawPuck (puck) {
+    Level.prototype._drawPuck = function (puck) {
         // Create Puck object
-        var p = new puckt.Puck(w, {
+        var p = new puckt.Puck(this.world, {
             x: puck.coords.x,
             y: puck.coords.y,
             radius: puck.radius

@@ -31,7 +31,7 @@ puckt.Game = (function () {
                         text: "Retry",
                         callback: function () {
                             puckt.ui.closePopup();
-                            currentGame.reset();
+                            currentGame.begin();
                         }
                     },
                     {
