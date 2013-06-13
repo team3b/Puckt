@@ -12,7 +12,7 @@ puckt.Game = (function () {
         puckt.Level.successCallback = function (stars, collisions) {
             var currentLevel = this;
             puckt.ui.openPopup({
-                content: "<p>Congratulations, you completed level " + currentLevel.number + " with " + stars + " star(s)!</p>",
+                content: "<p>Congratulations, you completed level " + currentLevel.number + " with " + stars + " star" + (stars != 1 ? "s" : "") + "!</p>",
                 buttons: [
                     {
                         text: "Proceed &rarr;",
