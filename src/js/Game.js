@@ -13,7 +13,7 @@ puckt.Game = (function () {
         puckt.Level.successCallback = function (stars, collisions) {
             var currentLevel = this;
             puckt.ui.openPopup({
-                content: "<p>Congratulations, you completed level " + currentLevel.number + " with " + stars + " star(s)!</p>",
+                content: "<p>Congratulations, you completed level " + currentLevel.number + " with " + stars + " star" + (stars != 1 ? "s" : "") + "!</p>",
                 buttons: [
                     {
                         text: "Proceed &rarr;",
@@ -31,12 +31,14 @@ puckt.Game = (function () {
                         text: "Retry",
                         callback: function () {
                             puckt.ui.closePopup();
+                            currentGame.reset();
                         }
                     },
                     {
                         text: "Quit",
                         callback: function () {
                             puckt.ui.closePopup();
+                            // Return to Navigation
                         }
                     }
                 ]
