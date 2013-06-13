@@ -13,7 +13,7 @@ puckt.canvas = {
 puckt.pxpm = 30 / puckt.Puck.realRadius;
 
 puckt.main = (function () {
-    var init = function () {
+    var createGame = function (startingLevel) {
         // Inject puckt.canvas.elem
         document.body.appendChild(puckt.canvas.elem);
         puckt.canvas.elem.setAttribute("id", "canvas");
@@ -26,9 +26,31 @@ puckt.main = (function () {
         // Add background image
         canvg(document.getElementById("ice-rink"), "img/ice_rink.svg");
         // Create test level
-        new puckt.Game();
-    };
+        new puckt.Game(startingLevel);
+    },
 
+    init = function () {
+        // Inject menu
+        puckt.ui.openPopup({
+            content: "<h1>Puckt</h1><p>Puckt is a mobile HTML5 game designed to test your visual and mathematical skills. The game was developed during a week-long Game Jam hosted at the University of Portsmouth.</p>",
+            buttons: [
+                {
+                    text: "New Game",
+                    callback: function () {
+                        puckt.ui.closePopup();
+                        createGame(1);
+                    }
+                },
+                {
+                    text: "Continue Game",
+                    callback: function () {
+                        puckt.ui.closePopup();
+                        createGame(1); // Get local storage's highest level completed
+                    }
+                }
+            ]
+        })
+    };
     
     // Set the options for the box2d variable
     box2d = {

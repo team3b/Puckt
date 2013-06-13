@@ -2,8 +2,8 @@
 
 var puckt = puckt || {};
 puckt.Level = (function () {
-    var data, w, 
-        lightWalls = 0, lightWallsOn = 0, collisions = 0, failTimeout = 4000, failTimer, finished;
+    var data, w, ightWalls = 0, initialLightsOn = 0, lightWallsOn = 0, collisions = 0, 
+        failTimeout = 4000, failTimer, finished;
 
     function Level (world, level) {
         w = world;
@@ -30,8 +30,9 @@ puckt.Level = (function () {
 
     Level.prototype.begin = function () {
         var theLevel = this;
-        console.log('Level.begin theLevel', theLevel);
         puckt.Wall.disabled = false;
+        collisions = 0;
+        lightWallsOn = initialLightsOn;
         puckt.util.resetWorld(w);
         finished = false;
 
@@ -44,7 +45,6 @@ puckt.Level = (function () {
 
         // Draw level to canvas
         puckt.Wall.collisionHandler = function () {
-            console.log('collisionHandler', this, theLevel);
             if (!finished) {
                 restartFailTimer();
                 collisions++;
@@ -173,7 +173,7 @@ puckt.Level = (function () {
 
                 if (wall.isLightWall()) {
                     lightWalls++;
-                    if (wall.isOn()) lightWallsOn++;
+                    if (wall.isOn()) initialLightWallsOn++;
                 }
 
                 stage.addChild(wall.shape);
