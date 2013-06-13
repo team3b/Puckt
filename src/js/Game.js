@@ -2,12 +2,13 @@
 
 var puckt = puckt || {};
 puckt.Game = (function () {
-    var world, currentLevel = 1, currentGame, fps = 60;
+    var world, currentLevel, currentGame, fps = 60;
 
-    function Game () {
+    function Game (startingLevel) {
         // Create stage and enable touch
         stage = new createjs.Stage(puckt.canvas.elem);
         createjs.Touch.enable(stage);
+        currentLevel = startingLevel;
 
         puckt.Level.successCallback = function (stars, collisions) {
             var currentLevel = this;
@@ -39,7 +40,7 @@ puckt.Game = (function () {
                         }
                     }
                 ]
-            })
+            });
         }
 
         puckt.Level.failCallback = function (collisions) {
