@@ -2,7 +2,7 @@
 
 var puckt = puckt || {};
 puckt.Game = (function () {
-    var world, level = 2, fps = 60;
+    var world, currentLevel = 1, currentGame, fps = 60;
 
     function Game () {
         // Create stage and enable touch
@@ -10,7 +10,36 @@ puckt.Game = (function () {
         createjs.Touch.enable(stage);
 
         puckt.Level.successCallback = function (stars, collisions) {
-            console.log('User achieved ' + stars + ' star(s)');
+            var currentLevel = this;
+            puckt.ui.openPopup({
+                content: "<p>Congratulations, you completed level " + currentLevel + " with " + stars + " star(s)!</p>",
+                buttons: [
+                    {
+                        text: "Proceed &rarr;",
+                        callback: function () {
+                            puckt.ui.closePopup();
+                            currentGame = new puckt.Level(world, ++currentLevel);
+                            currentGame.boot(function () {
+                                currentGame.begin();
+                            }, function () {
+                                console.log("Ah, man!");
+                            });
+                        }
+                    },
+                    {
+                        text: "Retry",
+                        callback: function () {
+                            puckt.ui.closePopup();
+                        }
+                    },
+                    {
+                        text: "Quit",
+                        callback: function () {
+                            puckt.ui.closePopup();
+                        }
+                    }
+                ]
+            })
         }
 
         puckt.Level.failCallback = function (collisions) {
@@ -27,7 +56,6 @@ puckt.Game = (function () {
     }
 
     function createWorld () {
-        var currentGame;
         // Create world with no gravity
         world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
 
@@ -46,7 +74,7 @@ puckt.Game = (function () {
         puckt.debug.init(world);
 
         // Draw Level
-        currentGame = new puckt.Level(world, level);
+        currentGame = new puckt.Level(world, currentLevel);
         currentGame.boot(function () {
             currentGame.begin();
         }, function () {

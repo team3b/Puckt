@@ -5,12 +5,13 @@ puckt.Level = (function () {
     var data, w, number, 
         lightWalls = 0, lightWallsOn = 0, collisions = 0, failTimeout = 3200, failTimer, finished;
 
-    function Level (world, lvlNum) {
+    function Level (world, level) {
         w = world;
-        number = lvlNum;
+        number = level;
     }
 
     Level.prototype.boot = function (success, fail) {
+
         // AJAX call to retreive level definition
         var xhr = new XMLHttpRequest();
         xhr.open("GET", 'levels/' + number + '.json', true);
@@ -28,6 +29,7 @@ puckt.Level = (function () {
     };
 
     Level.prototype.begin = function () {
+        puckt.util.resetWorld(w);
         finished = false;
 
         // When the user flicks the puck, start the fail timer,
