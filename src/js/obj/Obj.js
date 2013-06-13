@@ -42,6 +42,8 @@ puckt.Obj = (function () {
 	        this.body = this.shape.body = world.CreateBody(this.bodyDef);
 	        this.body.CreateFixture(this.fixDef);
 	        this.body.SetUserData(this.shape);
+	        this.body.SetLinearDamping(0.4);
+	        this.body.SetAngularDamping(0.4);
 	        
 	        // Attach tick event listener
 	        this.shape.addEventListener('tick', tick.bind(this));
