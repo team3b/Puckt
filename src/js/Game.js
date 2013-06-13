@@ -37,7 +37,7 @@ puckt.Game = (function () {
                                     puckt.ui.drawNavigation(currentGame);
                                 } else {
                                     puckt.ui.openPopup({
-                                        content: "<h1>You're good!</h1><p>Nice job completely all the levels. You have officially been Puckt. Return soon for new levels and features.</p>",
+                                        content: "<h1>You're good!</h1><p>Nice job completing all the levels. You have officially been Puckt. Return soon for new levels and features.</p>",
                                         buttons: [
                                             {
                                                 text: "Quit",
