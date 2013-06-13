@@ -55,7 +55,7 @@ puckt.main = (function () {
         // } else {
         //     // Inject install instructions
         //     puckt.ui.openPopup({
-        //         content: "<h1>Puckt</h1> <small>beta</small><p>To play, you must first add this page to your home screen.</p><i class=\"icon-arrow-down icon-2x\"></i>"
+        //         content: "<h1>Puckt</h1> <small>beta</small><p>To play, you must first add this page to your <strong>Home Screen</strong>.</p>"
         //     })
         // }
     };

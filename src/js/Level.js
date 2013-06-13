@@ -66,6 +66,9 @@ puckt.Level = (function () {
         this._drawPuck(this.data.puck);
 
         this.lightWallsOn = this.initialLightsOn;
+
+        if (this.number === 1 && !localStorage.getItem("seenTutorial"))
+            puckt.ui.tutorial();
     };
 
     Level.prototype.reset = function () {
