@@ -100,13 +100,13 @@ puckt.Level = (function () {
     }
     
     Level.prototype.stopFailTimer = function () {
-        console.log('stopFailTimer', this, this.failTimer);
-        clearTimeout(this.failTimer);
-        console.log('stopFailTimer finished', this.failTimer);
+        //console.log('stopFailTimer', this, this.failTimer);
+        //clearTimeout(this.failTimer);
+        //console.log('stopFailTimer finished', this.failTimer);
     }
 
     Level.prototype.startFailTimer = function () {
-        this.failTimer = setTimeout(this._failLevel(), failTimeout);
+        //this.failTimer = setTimeout(this._failLevel(), failTimeout);
     }
 
     Level.prototype.restartFailTimer = function () {
