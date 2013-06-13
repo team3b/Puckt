@@ -15,6 +15,7 @@ puckt.Wall = (function () {
                 y: props.y,
                 w: props.w,
                 h: props.h,
+                rotation: props.angle,
                 fixDef: {
                     density: 5,
                     friction: 1,

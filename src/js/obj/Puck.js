@@ -11,6 +11,7 @@ puckt.Puck = (function () {
                 x: props.x,
                 y: props.y,
                 w: props.radius * 2,
+                h: props.radius * 2,
                 fixDef: {
                     density: Puck.realMass / (Math.PI * Math.pow(Puck.realRadius, 2)),
                     friction: 1,
@@ -19,7 +20,7 @@ puckt.Puck = (function () {
                 },
                 bodyDef: {
                     type: box2d.b2Body.b2_dynamicBody,
-                    angle: props.angle || 0
+                    angle: props.angle || puckt.util.degreesToRadians(0)
                 }
             });
 
@@ -27,7 +28,7 @@ puckt.Puck = (function () {
             puckImg.src = '/img/puck.svg';
             this.shape.graphics.beginBitmapFill(puckImg).drawCircle(0, 0, props.radius);*/
 
-            this.shape.graphics.beginFill('#222222').drawCircle(props.x, props.y, props.radius);
+            this.shape.graphics.beginFill('#222222').drawCircle(props.radius, props.radius, props.radius);
         }
     });
 
