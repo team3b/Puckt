@@ -3,7 +3,7 @@
 var puckt = puckt || {};
 puckt.Level = (function () {
     var data, w, number, 
-        lightWalls = 0, lightWallsOn = 0, collisions = 0, failTimeout = 4000, failTimer, finished;
+        lightWalls = 0, lightWallsOn = 0, collisions = 0, failTimeout = 3200, failTimer, finished;
 
     function Level (world, lvlNum) {
         w = world;
@@ -29,6 +29,14 @@ puckt.Level = (function () {
 
     Level.prototype.begin = function () {
         finished = false;
+
+        // When the user flicks the puck, start the fail timer,
+        // then remove the flick event
+        puckt.flick.addFlickEventListener((function () {
+            startFailTimer.bind(this);
+            puckt.flick.removeAllFlickEventListeners();
+        }).bind(this));
+
         // Draw level to canvas
         puckt.Wall.collisionHandler = function () {
             if (!finished) {
@@ -51,8 +59,6 @@ puckt.Level = (function () {
                 }
             }
         }
-
-
 
         drawBoundaries(data.boundaries);
         drawWalls(data.walls);

@@ -2,7 +2,7 @@
 
 var puckt = puckt || {};
 puckt.flick = (function() {
-    var mass,
+    var mass, callbacks = {flick: []},
      
     attachEvents = function (pk) {
         // Event listener for the initial touch on the puck
@@ -52,8 +52,10 @@ puckt.flick = (function() {
 
                     // Convert velocity to b2Vec2()
                     var momentumVect = new box2d.b2Vec2(xVel * puckt.Puck.realMass, yVel * puckt.Puck.realMass);
-                    if (d[end].pos.y >= puckt.canvas.height - 112 + puckt.Puck.realRadius)
+                    if (d[end].pos.y >= puckt.canvas.height - 112 + puckt.Puck.realRadius) {
                         pk.body.ApplyImpulse(momentumVect, pk.body.GetWorldCenter());
+                        onflick();
+                    }
 
                     pk.shape.removeEventListener('mousedown', mousedown);
                 }
@@ -78,6 +80,21 @@ puckt.flick = (function() {
         pk.shape.addEventListener('mousedown', mousedown);
 
     },
+
+    onflick = function () {
+        var flickEvents = callbacks.flick.slice();
+        for (var i in flickEvents) {
+            flickEvents[i]();
+        }
+    },
+
+    addFlickEventListener = function (callback) {
+        callbacks.flick.push(callback);
+    },
+
+    removeAllFlickEventListeners = function () {
+        callbacks.flick.length = 0;
+    },
     
     init = function(pk) {
         mass = pk.body.GetMass();
@@ -86,6 +103,8 @@ puckt.flick = (function() {
     
     return {
         init: init,
-        attachEvents: attachEvents
+        attachEvents: attachEvents,
+        addFlickEventListener: addFlickEventListener,
+        removeAllFlickEventListeners: removeAllFlickEventListeners
     };
 })();
