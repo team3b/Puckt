@@ -27,10 +27,11 @@ puckt.Puck = (function () {
             this.radius = props.radius;
             
             this.body.SetLinearDamping(0.4);
-            //this.body.SetAngularDamping(0.4);
 
             // puckImg = new Image(props.w, props.h);
             // puckImg.src = 'img/puck.svg';
+            // puckImg.width = puckImg.height = props.radius * 2;
+            // console.log('puckImg', puckImg);
             // this.shape.graphics.beginBitmapFill(puckImg).drawCircle(props.radius, props.radius, props.radius);
 
             this.shape.graphics.beginFill('#222222').drawCircle(props.radius, props.radius, props.radius);
@@ -43,6 +44,7 @@ puckt.Puck = (function () {
 
     Puck.realMass = 0.17 * 100;
     Puck.realRadius = (0.0762 / 2) * 100;
+    Puck.image = null;
 
     return Puck;
 })();
