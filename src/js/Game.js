@@ -24,6 +24,7 @@ puckt.Game = (function () {
                             currentGame.boot(function () {
                                 currentGame.begin();
                             }, function () {
+                                // To do: display failure dialog
                                 console.log("Ah, man!");
                             });
                             levelText.innerHTML = "Level " + currentLevel.number;
@@ -55,9 +56,11 @@ puckt.Game = (function () {
         }
 
         puckt.Level.failCallback = function (stars, collisions) {
-            var currentLevel = this;
+            var currentLevel = this,
+            reason = stars === null ? "turn on all the lights" : "get any stars";
+
             puckt.ui.openPopup({
-                content: "<p>Unlucky, please try again.</p>",
+                content: "<p>Unlucky, you didn't " + reason + ". Please try again.</p>",
                 buttons: [
                     {
                         text: "Retry",
