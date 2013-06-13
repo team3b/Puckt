@@ -96,14 +96,6 @@ puckt.Game = (function () {
         createjs.Ticker.useRAF = true;
     }
 
-    Game.prototype.playMusic = function () {
-        puckt.music.sounds.background.play(createjs.Sound.INTERRUPT_NONE, 0, 0, -1, 1, 0);
-    };
-
-    Game.prototype.stopMusic = function () {
-        puckt.music.sounds.background.stop();
-    }
-
     function createWorld () {
         // Create world with no gravity
         world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
