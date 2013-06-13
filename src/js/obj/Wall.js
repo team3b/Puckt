@@ -29,30 +29,32 @@ puckt.Wall = (function () {
             });
 
             this.shape.collision = this.collision.bind(this);
+            this.shape.isOn = this.isOn.bind(this);
             this.setLightSwitch(props.isOn === true);
 
             this.collisionEvents = [(function () {
                 this.toggleLight();
             }).bind(this)];
         },
-        isOn: false,
+        on: false,
+        isOn: function () { return this.on },
         toggleLight: function () {
-            this.setLightSwitch(!this.isOn);
+            this.setLightSwitch(!this.on);
         },
         setLightSwitch: function (on) {
             var colour;
 
-            this.isOn = on;
-            colour = on && this.lightColour != null ? this.lightColour : '#222222';
+            this.on = on;
+            colour = this.lightColour != null && on ? this.lightColour : Wall.offColour;
 
             this.shape.graphics.clear();
             this.shape.graphics.beginFill(colour).drawRect(0, 0, this.w, this.h);
         },
-        collision: function (contact) {
+        collision: function (on, contact) {
             for (var i in this.collisionEvents) {
-                this.collisionEvents[i](this, contact);
+                this.collisionEvents[i](this, on, contact);
             }
-            Wall.collisionHandler.call(this, contact);
+            Wall.collisionHandler.call(this, on, contact);
         },
         addEventListener: function (event, fn) {
             if (event == 'collision') {
@@ -62,7 +64,9 @@ puckt.Wall = (function () {
     });
 
     // This will be overwritten elsewhere
-    Wall.collisionHandler = function () {};
+    Wall.collisionHandler = function () { };
+
+    Wall.offColour = '#222222';
 
     return Wall;
 })();
