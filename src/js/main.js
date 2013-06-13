@@ -45,7 +45,7 @@ puckt.main = (function () {
             ]
         };
         // Check to see if the user can continue a previous game
-        if (JSON.parse(localStorage.getItem("levelsCompleted")).length > 0) {
+        if (JSON.parse(localStorage.getItem("levelsCompleted")) && JSON.parse(localStorage.getItem("levelsCompleted")).length > 0) {
             popupProps.buttons.push({
                 text: "Continue Game",
                 callback: function () {
