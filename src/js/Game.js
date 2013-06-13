@@ -40,7 +40,7 @@ puckt.Game = (function () {
         // Draw Level
         currentGame = new puckt.Level(world, level);
         currentGame.boot(function () {
-            currentGame.begin();
+            currentGame.begin(function (stars, collisions) { console.log ('User achieved ' + stars + ' star(s)'); });
         }, function () {
             console.log("Ah, man!");
         });

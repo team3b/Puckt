@@ -3,7 +3,7 @@
 var puckt = puckt || {};
 puckt.Level = (function () {
     var data, w, number, 
-        lightWalls = 0, lightWallsOn = 0, collisions = 0;
+        lightWalls = 0, lightWallsOn = 0, collisions = 0, finished = false;
 
     function Level (world, lvlNum) {
         w = world;
@@ -33,30 +33,45 @@ puckt.Level = (function () {
         drawWalls(data.walls);
         drawPuck(data.puck);
         puckt.Wall.collisionHandler = function () {
-            collisions++;
+            if (!finished) {
+                collisions++;
 
-            if (this.isLightWall()) {
-                if (this.isOn()) {
-                    lightWallsOn++;
-                } else {
-                    lightWallsOn--;
+                if (this.isLightWall()) {
+                    if (this.isOn()) {
+                        lightWallsOn++;
+                    } else {
+                        lightWallsOn--;
+                    }
                 }
-            }
-            if (lightWalls === lightWallsOn) {
-                console.log("User won with " + collisions + " collision");
-                puckt.Wall.collisionHandler = function () {};
-                LevelComplete(won);
+                if (lightWalls === lightWallsOn) {
+                    console.log("User won with " + collisions + " collision(s)");
+                    puckt.Wall.collisionHandler = function () {};
+                    LevelComplete(won);
+                }
             }
         }
     };
 
     Level.prototype.reset = function () {
         puckt.util.resetWorld(w);
+        finished = false;
         this.begin();
     }
 
     function LevelComplete (callback) {
-        //won(stars, collisions);
+        var stars = 0;
+
+        for (var i in data.stars) {
+            console.log('LevelComplete loop', collisions, data.stars[i], i);
+            if (collisions <= data.stars[i]) {
+                stars++;
+            } else {
+                break;
+            }
+            console.log('LevelComplete loop stars', stars);
+        }
+
+        callback(stars, collisions);
     }
 
     function drawBoundaries (boundaries) {
