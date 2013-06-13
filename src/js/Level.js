@@ -8,6 +8,7 @@ puckt.Level = (function () {
     function Level (world, level) {
         w = world;
         this.number = level;
+        lightWalls = 0;
     }
 
     Level.prototype.boot = function (success, fail) {
