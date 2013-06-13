@@ -24,9 +24,9 @@ puckt.Puck = (function () {
                 }
             });
 
-            /*puckImg = new Image(props.w, props.h);
-            puckImg.src = '/img/puck.svg';
-            this.shape.graphics.beginBitmapFill(puckImg).drawCircle(0, 0, props.radius);*/
+            // puckImg = new Image(props.w, props.h);
+            // puckImg.src = 'img/puck.svg';
+            // this.shape.graphics.beginBitmapFill(puckImg).drawCircle(props.radius, props.radius, props.radius);
 
             this.shape.graphics.beginFill('#222222').drawCircle(props.radius, props.radius, props.radius);
         }
