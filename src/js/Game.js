@@ -45,7 +45,26 @@ puckt.Game = (function () {
         }
 
         puckt.Level.failCallback = function (collisions) {
-            console.log('You FAILED!');
+            var currentLevel = this;
+            puckt.ui.openPopup({
+                content: "<p>Unlucky, please try again.</p>",
+                buttons: [
+                    {
+                        text: "Retry",
+                        callback: function () {
+                            puckt.ui.closePopup();
+                            currentGame.reset();
+                        }
+                    },
+                    {
+                        text: "Quit",
+                        callback: function () {
+                            puckt.ui.closePopup();
+                            // Return to Navigation
+                        }
+                    }
+                ]
+            })
         }
 
         // Set the scene
