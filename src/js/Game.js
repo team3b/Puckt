@@ -25,15 +25,29 @@ puckt.Game = (function () {
                             text: "Proceed",
                             callback: function () {
                                 puckt.ui.closePopup();
-                                currentGame = new puckt.Level(world, ++currentLevel.number);
-                                currentGame.boot(function () {
-                                    currentGame.begin();
-                                }, function () {
+                                if (!currentGame.data.last) {
+                                    currentGame = new puckt.Level(world, ++currentLevel.number);
+                                    currentGame.boot(function () {
+                                        currentGame.begin();
+                                    }, function () {
+                                        puckt.ui.openPopup({
+                                            content: "<p>We failed to open your level, please refresh or reload the game.</p>"
+                                        })
+                                    });
+                                    puckt.ui.drawNavigation(currentGame);
+                                } else {
                                     puckt.ui.openPopup({
-                                        content: "<p>We failed to open your level, please refresh or reload the game.</p>"
+                                        content: "<h1>You're good!</h1><p>Nice job completely all the levels. You have officially been Puckt. Return soon for new levels and features.</p>",
+                                        buttons: [
+                                            {
+                                                text: "Quit",
+                                                callback: function () {
+                                                    console.log("Return to main menu");
+                                                }
+                                            }
+                                        ]
                                     })
-                                });
-                                puckt.ui.drawNavigation(currentGame);
+                                }
                             }
                         }
                     ]
