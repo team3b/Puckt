@@ -69,6 +69,9 @@ puckt.Level = (function () {
     };
 
     Level.prototype.reset = function () {
+        this.lightWalls = 0;
+        this.initialLightsOn = 0;
+        this.lightWallsOn = 0;
         this.finished = true;
         this.stopFailTimer();
         this.collisions = 0;
