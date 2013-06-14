@@ -21,7 +21,6 @@
         },
 
         {
-            "lightColour": "#FF0000",
             "coords": { "x": 165, "y": 280 },
             "dimensions": { "w": 60, "h": 5 },
             "angle": 225
