@@ -9,6 +9,7 @@ puckt.Game = (function () {
         stage = new createjs.Stage(puckt.canvas.elem);
         createjs.Touch.enable(stage);
         currentLevel = startingLevel;
+        puckt.music.play('backgroundMusic');
 
         puckt.Level.successCallback = function (stars, collisions) {
             var currentLevel = this,

@@ -26,6 +26,7 @@ puckt.main = (function () {
         // Add background image
         canvg(document.getElementById("ice-rink"), "img/ice_rink.svg");
         // Create test level
+
         new puckt.Game(startingLevel);
     },
 
@@ -77,6 +78,7 @@ puckt.main = (function () {
         // if (window.navigator.standalone) {
             // Inject menu
             loadAssets(function () {
+                puckt.music.play();
                 puckt.ui.openPopup(popupProps);
             });
         // } else {
