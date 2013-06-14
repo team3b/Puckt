@@ -32,7 +32,15 @@ puckt.Game = (function () {
                                         currentGame.begin();
                                     }, function () {
                                         puckt.ui.openPopup({
-                                            content: "<p>We failed to open your level, please refresh or reload the game.</p>"
+                                            content: "<p>We failed to open your level, please refresh or reload the game.</p>",
+                                            buttons: [
+                                                {
+                                                    text: "Reload",
+                                                    callback: function () {
+                                                        location.reload();
+                                                    }
+                                                }
+                                            ]
                                         })
                                     });
                                     puckt.ui.drawNavigation(currentGame);
@@ -43,7 +51,7 @@ puckt.Game = (function () {
                                             {
                                                 text: "Quit",
                                                 callback: function () {
-                                                    console.log("Return to main menu");
+                                                    location.reload();
                                                 }
                                             }
                                         ]
@@ -66,8 +74,7 @@ puckt.Game = (function () {
             {
                 text: "Quit",
                 callback: function () {
-                    puckt.ui.closePopup();
-                    // Return to Navigation
+                    location.reload();
                 }
             });
             puckt.ui.openPopup(popupProps);
@@ -95,7 +102,7 @@ puckt.Game = (function () {
                     {
                         text: "Quit",
                         callback: function () {
-                            puckt.ui.closePopup();
+                            location.reload();
                         }
                     }
                 ]

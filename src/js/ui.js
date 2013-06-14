@@ -105,7 +105,7 @@ puckt.ui = (function () {
         backButton.style.height = puckt.canvas.navHeight + "px";
         backButton.style.width = puckt.canvas.navHeight + "px";
         backButton.addEventListener("click", function () {
-            console.log("back");
+            location.reload();
         });
         // Set up reset button properties
         resetButton.className = "right";
