@@ -2,7 +2,7 @@
 
 var puckt = puckt || {};
 puckt.Game = (function () {
-    var world, currentLevel, currentGame, fps = 60;
+    var world, currentLevel, currentGame, fps = 30;
 
     function Game (startingLevel) {
         // Create stage and enable touch
