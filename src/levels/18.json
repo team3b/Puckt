@@ -31,14 +31,12 @@
         },
 
         {
-            "lightColour": "#FF0000",
             "coords": { "x": 115, "y": 300 },
             "dimensions": { "w": 40, "h": 5 },
             "angle": 225
         },
 
         {
-            "lightColour": "#FF0000",
             "coords": { "x": 140, "y": 220 },
             "dimensions": { "w": 270, "h": 5 },
             "angle": 225
@@ -51,7 +49,6 @@
         },
 
         {
-            "lightColour": "#000000",
             "coords": { "x": 25, "y": 390 },
             "dimensions": { "w": 100, "h": 5 },
             "angle": 225
@@ -66,5 +63,5 @@
         "radius": 15
     },
 
-    "stars": [3,5,7]
+    "stars": [10,8,6]
 }
