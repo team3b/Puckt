@@ -11,6 +11,7 @@ puckt.Level = (function () {
         this.initialLightsOn = 0;
         this.lightWallsOn = 0;
         this.collisions = 0;
+        this.last = false;
     }
 
     Level.prototype.boot = function (success, fail) {
@@ -34,18 +35,19 @@ puckt.Level = (function () {
     Level.prototype.begin = function () {
         var theLevel = this;
         this.reset();
+        this.last = theLevel.data.last;
 
-        // When the user flicks the puck, start the fail timer,
-        // then remove the flick event
-        puckt.flick.addFlickEventListener(function () {
-            // TO DO: only execute this if the puck is in the puck zone when the event is triggered
-            theLevel.restartFailTimer();
-        });
+        // // When the user flicks the puck, start the fail timer,
+        // // then remove the flick event
+        // puckt.flick.addFlickEventListener(function () {
+        //     // TO DO: only execute this if the puck is in the puck zone when the event is triggered
+        //     theLevel.restartFailTimer();
+        // });
 
         // Draw level to canvas
         puckt.Wall.collisionHandler = function () {
             if (!theLevel.finished) {
-                theLevel.restartFailTimer();
+                // theLevel.restartFailTimer();
                 theLevel.collisions++;
 
                 if (this.isLightWall()) {
@@ -76,8 +78,9 @@ puckt.Level = (function () {
         this.initialLightsOn = 0;
         this.lightWallsOn = 0;
         this.finished = true;
-        this.stopFailTimer();
+        // this.stopFailTimer();
         this.collisions = 0;
+        this.last = false;
         puckt.util.resetWorld(this.world);
         this.finished = false;
         puckt.Wall.disabled = false;
@@ -88,7 +91,7 @@ puckt.Level = (function () {
 
     Level.prototype._levelComplete = function () {
         puckt.Wall.disabled = true;
-        this.stopFailTimer();
+        // this.stopFailTimer();
         this.finished = true;
 
         var stars = 0;
@@ -107,20 +110,20 @@ puckt.Level = (function () {
         }
     }
     
-    Level.prototype.stopFailTimer = function () {
-        //console.log('stopFailTimer', this, this.failTimer);
-        //clearTimeout(this.failTimer);
-        //console.log('stopFailTimer finished', this.failTimer);
-    }
+    // Level.prototype.stopFailTimer = function () {
+    //     //console.log('stopFailTimer', this, this.failTimer);
+    //     //clearTimeout(this.failTimer);
+    //     //console.log('stopFailTimer finished', this.failTimer);
+    // }
 
-    Level.prototype.startFailTimer = function () {
-        //this.failTimer = setTimeout(this._failLevel(), failTimeout);
-    }
+    // Level.prototype.startFailTimer = function () {
+    //     //this.failTimer = setTimeout(this._failLevel(), failTimeout);
+    // }
 
-    Level.prototype.restartFailTimer = function () {
-        this.stopFailTimer();
-        this.startFailTimer();
-    }
+    // Level.prototype.restartFailTimer = function () {
+    //     this.stopFailTimer();
+    //     this.startFailTimer();
+    // }
 
     Level.prototype._failLevel = function () {
         Level.failCallback.call(this, this.collisions);

@@ -1,4 +1,6 @@
 {
+    "last": true,
+    
     "walls": [
         {
             "coords": { "x": 10, "y": 150 },

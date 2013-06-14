@@ -7,7 +7,8 @@ Each level should be defined in a seperate file, stored in `/src/levels/{level n
 		"boundaries": Boundaries,
 		"walls": [Wall, ...], // 0 or more walls present in this level
 		"puck": Puck, // The initial puck position
-        "stars": [Integer, …] // 0 or more
+        "stars": [Integer, …], // 0 or more
+        "last": Bool
 	}
 
 `stars` is the minimum number of bounces required to get 1 star, 2 stars, ..., n stars. The length of the `stars` array is the number of stars available.
@@ -97,3 +98,6 @@ This array uses the index as the number of stars, and stored in each position is
 
 This example outlines that 1 star is achieved if the user turns on all lights in 3 collisions,
 2 stars in 2 collitions, and 3 stars (maximum) if they complete in 1 collision - *Hole in one*
+
+## Last Boolean
+This value should only be specified on one level, the last level. Simply set it as true to signal to the game that this will be the last level.
