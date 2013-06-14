@@ -86,12 +86,12 @@ puckt.ui = (function () {
             navigation = document.createElement("nav"),
             backButton = document.createElement("a"),
             resetButton = document.createElement("a"),
-            muteButton = document.createElement("a"),
-            levelText = document.createElement("span"),
-            music = true;
+            levelText = document.createElement("span");
+
         if (oldNavigation) {
             oldNavigation.parentNode.removeChild(oldNavigation);
         }
+
         // Set up navigation properties
         navigation.style.width = puckt.canvas.width + "px";
         navigation.style.height = puckt.canvas.navHeight + "px";
@@ -117,29 +117,9 @@ puckt.ui = (function () {
             e.preventDefault();
             currentGame.begin();
         }, false);
-        // Add toggle volume button
-        muteButton.className = "right";
-        muteButton.href = "";
-        muteButton.style.right = puckt.canvas.navHeight + "px";
-        muteButton.innerHTML = "<i class=\"icon-volume-off\"></i>";
-        muteButton.style.height = puckt.canvas.navHeight + "px";
-        muteButton.style.width = puckt.canvas.navHeight + "px";
-        muteButton.addEventListener("click", function (e) {
-            e.preventDefault();
-            if (music) {
-                puckt.music.stop();
-                muteButton.innerHTML = "<i class=\"icon-volume-up\"></i>";
-                music = false;
-            } else {
-                puckt.music.play();
-                muteButton.innerHTML = "<i class=\"icon-volume-off\"></i>";
-                music = true;
-            }
-        }, false);
         // Add buttons to navigation
         navigation.appendChild(backButton);
         navigation.appendChild(resetButton);
-        navigation.appendChild(muteButton);
         navigation.appendChild(levelText);
         // Add navigation to document
         document.body.appendChild(navigation);
