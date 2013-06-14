@@ -63,8 +63,8 @@ puckt.main = (function () {
             });
         }
         // Ensure game is viewed from the home screen and on an iPhone or iPod
-        if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
-            if (window.navigator.standalone) {
+        if (puckt.debug.isOn() || (navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
+            if (puckt.debug.isOn() || window.navigator.standalone) {
                 // Inject menu
                 loadAssets();
                 puckt.ui.openPopup(popupProps);
