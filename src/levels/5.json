@@ -7,6 +7,12 @@
         },
 
         {
+            "coords": { "x": 285, "y": 80},
+            "dimensions": { "w": 125, "h": 5 },
+            "angle": 90
+        },
+
+        {
             "coords": { "x": 35, "y": 147 },
             "dimensions": { "w": 260, "h": 5 },
             "angle": 90
@@ -21,12 +27,8 @@
             "coords": { "x": 245, "y": 145 },
             "dimensions": { "w": 85, "h": 5 },
             "angle": 180
-        },
-
-        {
-            "coords": { "x": 95, "y": 276 },
-            "dimensions": { "w": 125, "h": 5 }
         }
+
     ],
 
     "puck": {
