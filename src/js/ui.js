@@ -65,7 +65,7 @@ puckt.ui = (function () {
                 callback: function () {
                     closePopup();
                     openPopup({
-                        content: "Use the Puck at the bottom to toggle all the walls. You can move the puck anywhere below the blue line, and must release it in that area. The less collisions, the more stars. Happy days.</p>",
+                        content: "Flick the puck to toggle the walls. Line up and release your shot below the blue line. Made a mistake? Don't fret mutton, use the reset button. The less collisions, the more stars. Happy days.</p>",
                         buttons: [
                             {
                                 text: "Close",
@@ -105,7 +105,7 @@ puckt.ui = (function () {
         backButton.style.height = puckt.canvas.navHeight + "px";
         backButton.style.width = puckt.canvas.navHeight + "px";
         backButton.addEventListener("click", function () {
-            console.log("back");
+            location.reload();
         });
         // Set up reset button properties
         resetButton.className = "right";
