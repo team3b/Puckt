@@ -32,7 +32,7 @@ puckt.main = (function () {
 
     loadAssets = function () {
         puckt.music.load(function () {
-            //puckt.music.play();
+            puckt.music.play();
         });
     },
 
