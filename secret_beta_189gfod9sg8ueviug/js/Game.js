@@ -9,29 +9,50 @@ puckt.Game = (function () {
         stage = new createjs.Stage(puckt.canvas.elem);
         createjs.Touch.enable(stage);
         currentLevel = startingLevel;
+        puckt.music.play('backgroundMusic');
 
         puckt.Level.successCallback = function (stars, collisions) {
             var currentLevel = this,
-            popupProps = {
-                content: "<p>Congratulations, you completed level " + currentLevel.number + " with " + stars + " star" + (stars != 1 ? "s" : "") + "!</p>",
-                buttons: [
-                    {
-                        text: "Proceed",
-                        callback: function () {
-                            puckt.ui.closePopup();
-                            currentGame = new puckt.Level(world, ++currentLevel.number);
-                            currentGame.boot(function () {
-                                currentGame.begin();
-                            }, function () {
-                                // To do: display failure dialog
-                                console.log("Ah, man!");
-                            });
-                            puckt.ui.drawNavigation(currentGame);
+                levelsComplete,
+                levelObject = {
+                    number: currentLevel.number,
+                    stars: stars,
+                    collisions: collisions
+                },
+                popupProps = {
+                    content: "<p>Congratulations, you completed level " + currentLevel.number + " with " + stars + " star" + (stars != 1 ? "s" : "") + "!</p>",
+                    buttons: [
+                        {
+                            text: "Proceed",
+                            callback: function () {
+                                puckt.ui.closePopup();
+                                if (!currentGame.data.last) {
+                                    currentGame = new puckt.Level(world, ++currentLevel.number);
+                                    currentGame.boot(function () {
+                                        currentGame.begin();
+                                    }, function () {
+                                        puckt.ui.openPopup({
+                                            content: "<p>We failed to open your level, please refresh or reload the game.</p>"
+                                        })
+                                    });
+                                    puckt.ui.drawNavigation(currentGame);
+                                } else {
+                                    puckt.ui.openPopup({
+                                        content: "<h1>You're good!</h1><p>Nice job completing all the levels. You have officially been Puckt. Return soon for new levels and features.</p>",
+                                        buttons: [
+                                            {
+                                                text: "Quit",
+                                                callback: function () {
+                                                    console.log("Return to main menu");
+                                                }
+                                            }
+                                        ]
+                                    })
+                                }
+                            }
                         }
-                    }
-                ]
-            };
-
+                    ]
+                };
             if (stars != currentLevel.data.stars.length) {
                 popupProps.buttons.push({
                     text: "Retry",
@@ -41,7 +62,6 @@ puckt.Game = (function () {
                     }
                 });
             }
-
             popupProps.buttons.push(
             {
                 text: "Quit",
@@ -50,8 +70,12 @@ puckt.Game = (function () {
                     // Return to Navigation
                 }
             });
-
             puckt.ui.openPopup(popupProps);
+            // TO DO - ensure values are only stored if the score is better
+            // Add completed level to local storage, together with attributes
+            var levelsComplete = JSON.parse(localStorage.getItem("levelsCompleted"));
+            levelsComplete.push(levelObject);
+            localStorage.setItem("levelsCompleted", JSON.stringify(levelsComplete));
         }
 
         puckt.Level.failCallback = function (stars, collisions) {
@@ -72,7 +96,6 @@ puckt.Game = (function () {
                         text: "Quit",
                         callback: function () {
                             puckt.ui.closePopup();
-                            // Return to Navigation
                         }
                     }
                 ]
@@ -111,7 +134,9 @@ puckt.Game = (function () {
         currentGame.boot(function () {
             currentGame.begin();
         }, function () {
-            console.log("Ah, man! Unable to load");
+            puckt.ui.openPopup({
+                content: "<p>We failed to open your level, please refresh or reload the game.</p>"
+            });
         });
 
         // Draw navigation bar

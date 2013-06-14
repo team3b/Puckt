@@ -1,46 +1,25 @@
 {
     "walls": [
         {
-            "coords": { "x": 80, "y": 150 },
+            "coords": { "x": 250, "y": 200 },
+            "dimensions": { "w": 50, "h": 5 }
+        },
+
+        {
+            "coords": { "x": 70, "y": 40 },
             "dimensions": { "w": 100, "h": 5 },
             "angle": 135
         },
 
         {
-            "coords": { "x": 50, "y": 0 },
-            "dimensions": { "w": 100, "h": 5 },
-            "angle": 135
-        },
-
-        {
-            "coords": { "x": 290, "y": 180 },
+            "coords": { "x": 280, "y": 100 },
             "dimensions": { "w": 100, "h": 5 },
             "angle": 225
-        },
-
-        {
-            "coords": { "x": 170, "y": 80 },
-            "dimensions": { "w": 100, "h": 5 },
-            "angle": 225
-        },
-
-        {
-            "lightColour": "#FF0000",
-            "coords": { "x": 165, "y": 280 },
-            "dimensions": { "w": 250, "h": 5 },
-            "angle": 225
-        },
-
-        {
-            "coords": { "x": 300, "y": 360 },
-            "dimensions": { "w": 100, "h": 5 },
-            "angle": 135
         }
-
     ],
 
     "puck": {
-        "coords": { "x": 150, "y": 380 },
+        "coords": { "x": 160, "y": 370 },
         "radius": 15
     },
 

@@ -26,30 +26,74 @@ puckt.main = (function () {
         // Add background image
         canvg(document.getElementById("ice-rink"), "img/ice_rink.svg");
         // Create test level
+
         new puckt.Game(startingLevel);
     },
 
+    loadAssets = function (callback) {
+        //var queue = createjs.LoadQueue(false, '/');
+        //queue.installPlugin(createjs.Sound);
+        // queue.addEventListener("complete", function () {
+        //     console.log('complete');
+        //     Puck.image = queue.getItem("puck");
+        //     callback();
+        // });
+        // queue.loadManifest([
+        //     {
+        //         id: 'puck',
+        //         src: 'img/puck.svg'
+        //         //type: createjs.LoadQueue.IMAGE
+        //     }
+        // ]);
+        puckt.music.load(callback);
+    },
+
     init = function () {
-        // Inject menu
-        puckt.ui.openPopup({
-            content: "<h1>Puckt</h1><p>Puckt is a mobile HTML5 game designed to test your visual and mathematical skills. The game was developed during a week-long Game Jam hosted at the University of Portsmouth.</p>",
+        var popupProps = {
+            content: "<h1>Puckt</h1> <small>beta</small><p>Puckt is a mobile HTML5 game designed to test your visual and mathematical skills.</p>",
             buttons: [
                 {
                     text: "New Game",
                     callback: function () {
                         puckt.ui.closePopup();
+                        // Set up local storage
+                        localStorage.setItem("levelsCompleted", JSON.stringify([]));
                         createGame(1);
-                    }
-                },
-                {
-                    text: "Continue Game",
-                    callback: function () {
-                        puckt.ui.closePopup();
-                        createGame(1); // Get local storage's highest level completed
                     }
                 }
             ]
-        })
+        };
+        // Check to see if the user can continue a previous game
+        if (JSON.parse(localStorage.getItem("levelsCompleted")) && JSON.parse(localStorage.getItem("levelsCompleted")).length > 0) {
+            popupProps.buttons.push({
+                text: "Continue Game",
+                callback: function () {
+                    puckt.ui.closePopup();
+                    var highestLevel = JSON.parse(localStorage.getItem("levelsCompleted")).pop().number + 1;
+                    createGame(highestLevel);
+                }
+            });
+        }
+        // Ensure game is viewed from the home screen and on an iPhone or iPod
+        // if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
+        //     if (window.navigator.standalone) {
+                // Inject menu
+                loadAssets(function () {
+                    puckt.music.play();
+                    puckt.ui.openPopup(popupProps);
+                });
+        //     } else {
+        //         // Inject install instructions
+        //         puckt.ui.openPopup({
+        //             content: "<h1>Puckt</h1> <small>beta</small><p>To play, you must first add this page to your <strong>Home Screen</strong>.</p>"
+        //         })
+        //     }
+        // } else {
+        //     // Inject install instructions
+        //     puckt.ui.openPopup({
+        //         content: "<h1>Puckt</h1> <small>beta</small><p>This game requires an iPhone or iPod Touch running iOS 5 or above.</p>"
+        //     })
+        // }
     };
     
     // Set the options for the box2d variable

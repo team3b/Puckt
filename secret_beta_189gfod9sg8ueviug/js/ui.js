@@ -56,6 +56,31 @@ puckt.ui = (function () {
         }, 250);
     };
 
+    function tutorial () {
+        console.log('here');
+        openPopup({
+            content: "<h1>Tutorial</h1><p>Welcome to Puckt.<p>",
+            buttons: [{
+                text: "Next",
+                callback: function () {
+                    closePopup();
+                    openPopup({
+                        content: "Use the Puck at the bottom to toggle all the walls. You can move the puck anywhere below the blue line, and must release it in that area. The less collisions, the more stars. Happy days.</p>",
+                        buttons: [
+                            {
+                                text: "Close",
+                                callback: function() {
+                                    puckt.ui.closePopup();
+                                }
+                            }
+                        ]
+                    })
+                }
+            }]
+        });
+        localStorage.setItem("seenTutorial", true);
+    }
+
     function drawNavigation (currentGame) {
         var oldNavigation = document.querySelector("nav"),
             navigation = document.createElement("nav"),
@@ -103,6 +128,7 @@ puckt.ui = (function () {
     return {
         openPopup: openPopup,
         closePopup: closePopup,
+        tutorial: tutorial,
         drawNavigation: drawNavigation,
     }
 })();
