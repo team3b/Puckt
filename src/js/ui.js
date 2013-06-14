@@ -129,6 +129,6 @@ puckt.ui = (function () {
         openPopup: openPopup,
         closePopup: closePopup,
         tutorial: tutorial,
-        drawNavigation: drawNavigation,
+        drawNavigation: drawNavigation
     }
 })();
