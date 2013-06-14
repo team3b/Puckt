@@ -30,22 +30,10 @@ puckt.main = (function () {
         new puckt.Game(startingLevel);
     },
 
-    loadAssets = function (callback) {
-        //var queue = createjs.LoadQueue(false, '/');
-        //queue.installPlugin(createjs.Sound);
-        // queue.addEventListener("complete", function () {
-        //     console.log('complete');
-        //     Puck.image = queue.getItem("puck");
-        //     callback();
-        // });
-        // queue.loadManifest([
-        //     {
-        //         id: 'puck',
-        //         src: 'img/puck.svg'
-        //         //type: createjs.LoadQueue.IMAGE
-        //     }
-        // ]);
-        puckt.music.load(callback);
+    loadAssets = function () {
+        puckt.music.load(function () {
+            puckt.music.play();
+        });
     },
 
     init = function () {
@@ -78,10 +66,8 @@ puckt.main = (function () {
         // if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
         //     if (window.navigator.standalone) {
                 // Inject menu
-                loadAssets(function () {
-                    puckt.music.play();
-                    puckt.ui.openPopup(popupProps);
-                });
+                loadAssets();
+                puckt.ui.openPopup(popupProps);
         //     } else {
         //         // Inject install instructions
         //         puckt.ui.openPopup({
