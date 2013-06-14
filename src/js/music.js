@@ -2,7 +2,7 @@
 
 var puckt = puckt || {};
 puckt.music = (function () {
-	var sounds = {}, counter = 0, music, loader, volume = 1, playing = false,
+	var sounds = {}, counter = 0, music, loader,
 
 	load = function (readyCallback) {
 		loader = new createjs.LoadQueue();
@@ -16,35 +16,22 @@ puckt.music = (function () {
 			console.log('loadHandler', event, music);
 			music = createjs.Sound.createInstance('bg');
 			console.log('loadHandler', event, music);
-			music.setVolume(volume);
 			music.play();
 		}
 
 	},
 
 	play = function () {
-		if (music != null) {
-			music.play();
-		}
-	},
-
-	stop = function () {
-		if (music != null) {
-			music.stop();
-		}
+		// music.play();
 	},
 
 	setVolume = function (vol) {
-		volume = vol;
-		if (music != null) {
-			music.setVolume(volume);
-		}
+		// music.setVolume(vol);
 	};
 
 	return {
 		load: load,
 		play: play,
-		stop: stop,
 		setVolume: setVolume
 	};
 })();
