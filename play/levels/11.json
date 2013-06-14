@@ -1,0 +1,28 @@
+{
+    "walls": [
+        {
+            "coords": { "x": 140, "y": 142 },
+            "dimensions": { "w": 325, "h": 5 },
+            "angle":45
+        },
+
+        {
+            "coords": { "x": 130, "y": 200 },
+            "dimensions": { "w": 300, "h": 5 },
+            "angle":45
+        },
+
+        {
+            "coords": { "x": 25 , "y": 60 },
+            "dimensions": { "w": 70, "h": 5 },
+            "angle":90
+        }
+    ],
+
+    "puck": {
+        "coords": { "x": 100, "y": 370 },
+        "radius": 15
+    },
+
+    "stars": [9,5,3]
+}
