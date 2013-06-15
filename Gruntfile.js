@@ -141,6 +141,13 @@ module.exports = function (grunt) {
 		concat: {
 		},
 
+		// Congigue json-minify task
+		'json-minify': {
+			publish: {
+				files: '<%= dirs.intermediate %>/levels/**/*.json'
+			}
+		},
+
 		// Configure rev task
 		rev: {
 			assets: {
@@ -202,7 +209,7 @@ module.exports = function (grunt) {
 	});
 
 	// Build tasks
-	grunt.registerTask('build', ['clean', 'mkdir', 'copy:build', 'useminPrepare', 'concat', 'rename:js', 'closure-compiler:frontend', 'cssmin', 'rev', 'usemin', 'htmlmin:publish', 'copy:publish']);
+	grunt.registerTask('build', ['clean', 'mkdir', 'copy:build', 'useminPrepare', 'concat', 'rename:js', 'closure-compiler:frontend', 'cssmin', 'rev', 'usemin', 'json-minify:publish', 'htmlmin:publish', 'copy:publish']);
 
 	// Default tasks
 	grunt.registerTask('default', ['build']);
@@ -211,6 +218,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-rev');
 	grunt.loadNpmTasks('grunt-rename');
 	grunt.loadNpmTasks('grunt-usemin');
+	grunt.loadNpmTasks('grunt-json-minify');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-concat');
