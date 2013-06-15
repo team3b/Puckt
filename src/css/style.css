@@ -92,3 +92,7 @@ nav a {
 nav a.left { left: 0; }
 
 nav a.right { right: 0; }
+
+audio {
+	display: none;
+}

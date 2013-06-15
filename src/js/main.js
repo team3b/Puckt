@@ -31,8 +31,10 @@ puckt.main = (function () {
     },
 
     loadAssets = function () {
-        puckt.music.load(function () {
-            //puckt.music.play();
+        puckt.music.load(puckt.music.BACKGROUND_MUSIC, 'audio/background.mp3', function (e) {
+            puckt.music.play(puckt.music.BACKGROUND_MUSIC);
+        }, function (e) {
+            console.log('music fail', e);
         });
     },
 

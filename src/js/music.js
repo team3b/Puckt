@@ -2,47 +2,53 @@
 
 var puckt = puckt || {};
 puckt.music = (function () {
-	var sounds = {}, counter = 0, music, loader, volume = 1, playing = false,
+	var music = {},
 
-	load = function (readyCallback) {
-		// loader = new createjs.LoadQueue();
-		// loader.onComplete = loadHandler;
-		// loader.installPlugin(createjs.Sound);
-		// loader.loadFile({id: 'bg', src:'audio/background.mp3'});
-
-		// function loadHandler (event) {
-		// 	console.log('loadHandler', event, music);
-		// 	music = createjs.Sound.createInstance('bg');
-		// 	console.log('loadHandler', event, music);
-		// 	music.setVolume(volume);
-		// 	music.play();
-		// }
-
+	load = function (id, src, readyCallback, failCallback) {
+		music[id] = document.createElement('audio');
+		music[id].setAttribute('src', src);
+		music[id].addEventListener('canplay', readyCallback, false);
+		music[id].addEventListener('error', failCallback, false);
+		music[id].load();
+		return music[id];
 	},
 
-	play = function () {
-		// if (music != null) {
-		// 	music.play();
-		// }
+	play = function (id, pos) {
+		if (music[id]) {
+			pos = pos || 0;
+
+			if (music[id].readyState == 4) {
+				music[id].currentTime = pos;
+				music[id].play();
+			} else {
+				music[id].addEventListener('canplay', function () {
+					playWhenReady(id, pos);
+				});
+			}
+		}
+		return music[id];
 	},
 
-	stop = function () {
-		// if (music != null) {
-		// 	music.stop();
-		// }
+	pause = function (id) {
+		if (music[id]) {
+			music[id].pause();
+		}
 	},
 
-	setVolume = function (vol) {
-		// volume = vol;
-		// if (music != null) {
-		// 	music.setVolume(volume);
-		// }
+	setVolume = function (id, vol) {
+		music[id].volume = vol;
 	};
+
+	function playWhenReady(id, pos) {
+		plau(id, pos);
+		music[id].removeEventListener('canplay', playWhenReady);
+	}
 
 	return {
 		load: load,
 		play: play,
 		stop: stop,
-		setVolume: setVolume
+		setVolume: setVolume,
+		BACKGROUND_MUSIC: 'bgMusic'
 	};
 })();
