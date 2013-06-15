@@ -48,6 +48,11 @@ module.exports = function (grunt) {
 					cwd: '<%= dirs.src %>',
 					src: ['css/**/*.css'],
 					dest: '<%= dirs.intermediate %>'
+				},{
+					expand: true,
+					cwd: '<%= dirs.src %>',
+					src: ['levels/**/*.json'],
+					dest: '<%= dirs.intermediate %>'
 				}]
 			},
 			publish: {
@@ -60,6 +65,12 @@ module.exports = function (grunt) {
 					expand: true,
 					cwd: '<%= dirs.intermediate %>',
 					src: ['css/*.game.css'],
+					dest: '<%= dirs.publish %>'
+				},
+				{
+					expand: true,
+					cwd: '<%= dirs.intermediate %>',
+					src: ['levels/**/*.json'],
 					dest: '<%= dirs.publish %>'
 				},
 				{
