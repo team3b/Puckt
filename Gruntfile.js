@@ -178,9 +178,14 @@ module.exports = function (grunt) {
 				jsOutputFile: '<%= dirs.intermediate %>/js/game.js',
 				// Options to be passed to the closure compiler
 				options: {
-					compilation_level: 'SIMPLE_OPTIMIZATIONS', // TO DO: change to ADVANCED_OPTIMIZATIONS
-					language_in: 'ECMASCRIPT5_STRICT'
-					//externs: '<%= intermediateDirectory%>/vendor/js/externs.js' // TO DO: generate the externs file
+					compilation_level: 'ADVANCED_OPTIMIZATIONS', // TO DO: change to ADVANCED_OPTIMIZATIONS
+					//language_in: 'ECMASCRIPT5_STRICT',
+					externs: [
+						'<%= dirs.src %>/vendor/js/Box2dWeb-2.1.a.3.js',
+						'<%= dirs.src %>/vendor/js/canvg.js',
+						'<%= dirs.src %>/vendor/js/Class.js',
+						'<%= dirs.src %>/vendor/js/rgbcolor.js'
+					] // TO DO: generate the externs file
 				}
 			}
 		}
