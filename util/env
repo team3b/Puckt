@@ -1,0 +1,8 @@
+#!/bin/bash
+# Provides instructions on what environment variables to set
+
+CLOSURE_BREW_DIR="`brew --prefix closure-compiler`"
+CLOSURE_PATH="$CLOSURE_BREW_DIR/libexec/"
+
+echo "Execute the following instructions:"
+echo "export CLOSURE_PATH=\"$CLOSURE_PATH\""

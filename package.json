@@ -1,0 +1,34 @@
+{
+  "name": "Puckt",
+  "version": "0.0.1",
+  "description": "A mobile, HTML5 game designed to test your visual and mathematical skills.",
+  "main": "src/main.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/team3b/Puckt.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "13c13b3d1af6601a80ff096a3db539538501ce0f",
+  "private": true,
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-usemin": "~0.1.12",
+    "grunt-closure-compiler": "0.0.18",
+    "grunt-rev": "~0.1.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-htmlmin": "~0.1.3",
+    "grunt-rename": "~0.1.2",
+    "grunt-contrib-cssmin": "~0.6.1"
+  }
+}
