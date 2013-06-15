@@ -23,7 +23,7 @@ a { text-decoration: none; }
 
 canvas {
 	position: absolute;
-	bottom: 0;
+	top: 50px;
 	left: 0;
 }
 

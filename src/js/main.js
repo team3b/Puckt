@@ -20,9 +20,9 @@ puckt.main = (function () {
         // Set canvas size
         puckt.util.setCanvasSize(puckt.canvas.elem, puckt.canvas.width, puckt.canvas.height);
         // Set canvas to have a margin top (for nav bar)
-        puckt.canvas.elem.style.top = puckt.canvas.navHeight + "px";
+        // puckt.canvas.elem.style.top = puckt.canvas.navHeight + "px";
         // Set ice rink to have a margin top (for nav bar)
-        puckt.canvas.iceRink.style.top = puckt.canvas.navHeight + "px";
+        // puckt.canvas.iceRink.style.top = puckt.canvas.navHeight + "px";
         // Add background image
         canvg(document.getElementById("ice-rink"), "img/ice_rink.svg");
         // Create test level
