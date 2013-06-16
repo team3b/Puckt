@@ -216,18 +216,20 @@ module.exports = function (grunt) {
 		manifest: {
 			index: {
 				options: {
-					basePath: '<%= dirs.root %>',
+					basePath: '<%= dirs.publish %>',
 					preferOnline: false,
 					verbose: false,
 					timestamp: true
 				},
 				src: [
-					'<%= dirs.publish %>/**/*.html',
-					'<%= dirs.publish %>/js/**/*.js',
-					'<%= dirs.publish %>/css/**/*.css',
-					'<%= dirs.publish %>/img/**/*.*',
-					'<%= dirs.publish %>/audio/**/*.*',
-					'<%= dirs.publish %>/levels/**/*.json'
+					'/',
+					'**/*.html',
+					'!index.html',
+					'js/**/*.js',
+					'css/**/*.css',
+					'img/**/*.*',
+					'audio/**/*.*',
+					'levels/**/*.json'
 				],
 				dest: '<%= dirs.publish %>/manifest.appcache'
 			}
