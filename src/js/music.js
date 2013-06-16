@@ -10,6 +10,12 @@ puckt.music = (function () {
 		music[id].addEventListener('canplay', readyCallback, false);
 		music[id].addEventListener('error', failCallback, false);
 		music[id].load();
+
+		// Set the volume to 0 when debuggind, so we don't go insane
+		puckt.debug.run(function () {
+			music[id].volume = 0;
+		});
+
 		return music[id];
 	},
 

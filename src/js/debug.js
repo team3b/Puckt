@@ -2,7 +2,8 @@
 
 var puckt = puckt || {};
 puckt.debug = (function () {
-    var DEBUGGING = false,
+    var DEBUGGING_PHYSICS = false,
+        DEBUGGING = true,
         debugCanvas;
     
     function isOn() {
@@ -16,7 +17,7 @@ puckt.debug = (function () {
     }
 
     function init(world) {
-        if (DEBUGGING) {
+        if (DEBUGGING_PHYSICS) {
             var debugDraw;
             
             debugCanvas = document.createElement('canvas');
