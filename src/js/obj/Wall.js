@@ -6,7 +6,7 @@ puckt.Wall = (function () {
         init: function (world, props) {
             var s;
             s = new box2d.b2PolygonShape();
-            s.SetAsBox(puckt.util.pixelsToMetres(props.w  / puckt.canvas.ratio) / 2, puckt.util.pixelsToMetres(props.h  / puckt.canvas.ratio) / 2);
+            s.SetAsBox(puckt.util.pixelsToMetres(props.w) / 2, puckt.util.pixelsToMetres(props.h) / 2);
 
             this.lightColour = props.lightColour === undefined ? '#92d548' : props.lightColour;
             this.on = props.lightOn === true && this.isLightWall();

@@ -15,7 +15,7 @@ puckt.Puck = (function () {
     var Puck = puckt.Obj.extend({
         init: function (world, props) {
             var s, puckImg;
-            s = new box2d.b2CircleShape(puckt.util.pixelsToMetres(props.radius * puckt.canvas.ratio));
+            s = new box2d.b2CircleShape(puckt.util.pixelsToMetres(props.radius));
 
             this._super(world, "puck", {
                 x: props.x,
@@ -23,7 +23,7 @@ puckt.Puck = (function () {
                 w: props.radius * 2,
                 h: props.radius * 2,
                 fixDef: {
-                    density: Puck.realMass / (Math.PI * Math.pow(Puck.realRadius, 2)),
+                    density: Puck.realWorldMass / (Math.PI * Math.pow(Puck.realWorldRadius, 2)),
                     friction: 1,
                     restitution: 0.8,
                     shape: s
@@ -49,8 +49,8 @@ puckt.Puck = (function () {
         }
     });
 
-    Puck.realMass = 0.17 * 100;
-    Puck.realRadius = (0.0762 / 2) * 100;
+    Puck.realWorldMass = 0.17 * 100;
+    Puck.realWorldRadius = (0.0762 / 2) * 100;
     Puck.image = null;
 
     return Puck;
