@@ -3,7 +3,7 @@
 var puckt = puckt || {};
 puckt.debug = (function () {
     var DEBUGGING_PHYSICS = false,
-        DEBUGGING = true,
+        DEBUGGING = false,
         debugCanvas;
     
     function isOn() {
