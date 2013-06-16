@@ -203,6 +203,26 @@ module.exports = function (grunt) {
 					// ] // TO DO: generate the externs file
 				}
 			}
+		},
+
+		manifest: {
+			index: {
+				options: {
+					basePath: '<%= dirs.root %>',
+					preferOnline: false,
+					verbose: false,
+					timestamp: true
+				},
+				src: [
+					'<%= dirs.publish %>/**/*.html',
+					'<%= dirs.publish %>/js/**/*.js',
+					'<%= dirs.publish %>/css/**/*.css',
+					'<%= dirs.publish %>/img/**/*.*',
+					'<%= dirs.publish %>/audio/**/*.*',
+					'<%= dirs.publish %>/levels/**/*.json'
+				],
+				dest: '<%= dirs.publish %>/manifest.appcache'
+			}
 		}
 	});
 
@@ -229,7 +249,7 @@ module.exports = function (grunt) {
 	});
 
 	// Build tasks
-	grunt.registerTask('build', ['clean', 'mkdir', 'copy:build', 'useminPrepare', 'concat', 'rename:js', 'closure-compiler:frontend', 'cssmin', 'rev', 'usemin', 'json-minify:publish', 'htmlmin:publish', 'copy:publish']);
+	grunt.registerTask('build', ['clean', 'mkdir', 'copy:build', 'useminPrepare', 'concat', 'rename:js', 'closure-compiler:frontend', 'cssmin', 'rev', 'usemin', 'json-minify:publish', 'htmlmin:publish', 'copy:publish', 'manifest:index']);
 
 	// Default tasks
 	grunt.registerTask('default', ['build']);
@@ -238,6 +258,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-rev');
 	grunt.loadNpmTasks('grunt-rename');
 	grunt.loadNpmTasks('grunt-usemin');
+	grunt.loadNpmTasks('grunt-manifest');
 	grunt.loadNpmTasks('grunt-json-minify');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
