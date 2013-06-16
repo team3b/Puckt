@@ -2,22 +2,32 @@
 
 var puckt = puckt || {};
 puckt.debug = (function () {
-    var DEBUGGING_PHYSICS = false,
-        DEBUGGING = false,
-        debugCanvas;
-    
-    function isOn() {
-        return DEBUGGING;
-    }
+    var debugCanvas,
+        oldConsole,
+
+    _console = {
+        log: function () {
+            if (puckt.debug_switch.logging) {
+                oldConsole.log(arguments);
+            }
+        }
+    };
     
     function run(fn) {
-        if (DEBUGGING) {
+        if (puckt.debug_switch.logic) {
             fn();
         }
     }
 
-    function init(world) {
-        if (DEBUGGING_PHYSICS) {
+    // Initialise debugging mode
+    function init() {
+        oldConsole = console;
+        console = _console;
+    }
+
+    // Initialize the box2d debug canvas, if required
+    function initCanvas(world) {
+        if (puckt.debug_switch.physics) {
             var debugDraw;
             
             debugCanvas = document.createElement('canvas');
@@ -37,11 +47,12 @@ puckt.debug = (function () {
     function initFlick() {
 
     }
-    
+
     return {
         init: init,
-        isOn: isOn,
+        initCanvas: initCanvas,
         run: run,
-        canvas: debugCanvas
+        canvas: debugCanvas,
+        console: _console
     }
 })();

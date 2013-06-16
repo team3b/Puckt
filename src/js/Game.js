@@ -134,8 +134,8 @@ puckt.Game = (function () {
         };
         world.SetContactListener(contactListener);
 
-        // Initialise debugger
-        puckt.debug.init(world);
+        // Initialise canvas debugger
+        puckt.debug.initCanvas(world);
 
         // Draw Level
         currentGame = new puckt.Level(world, currentLevel);

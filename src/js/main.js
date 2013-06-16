@@ -12,6 +12,9 @@ puckt.canvas = {
 puckt.pxpm = 30 / puckt.Puck.realRadius;
 
 puckt.main = (function () {
+    // Initialise the debugger
+    puckt.debug.init();
+
     var createGame = function (startingLevel) {
         // Inject puckt.canvas.elem
         document.body.appendChild(puckt.canvas.elem);
@@ -61,8 +64,8 @@ puckt.main = (function () {
             });
         }
         // Ensure game is viewed from the home screen and on an iPhone or iPod
-        if (puckt.debug.isOn() || (navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
-            if (puckt.debug.isOn() || window.navigator.standalone) {
+        if (puckt.debug_switch.bypassDeviceCheck || (navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
+            if (puckt.debug_switch.bypassDeviceCheck || window.navigator.standalone) {
                 // Inject menu
                 loadAssets();
                 puckt.ui.openPopup(popupProps);
