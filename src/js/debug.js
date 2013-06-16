@@ -6,6 +6,9 @@ puckt.debug = (function () {
 
     // Initialise debugging mode
     init = function () {
+        if (puckt.debug_switch.clearLocalStorage) {
+            localStorage.setItem("levelsCompleted", JSON.stringify([]));
+        }
     },
 
     // Initialize the box2d debug canvas, if required

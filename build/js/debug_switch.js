@@ -6,5 +6,6 @@ puckt.debug_switch = {
 	music_off: false,
 	logic: false,
 	logging: false,
-	bypassDeviceCheck: false
+	bypassDeviceCheck: false,
+	clearLocalStorage: false
 };
