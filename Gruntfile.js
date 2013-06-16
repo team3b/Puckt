@@ -91,12 +91,6 @@ module.exports = function (grunt) {
 				{
 					expand: true,
 					cwd: '<%= dirs.src %>',
-					src: ['vendor/**/*.*'],
-					dest: '<%= dirs.publish %>'
-				},
-				{
-					expand: true,
-					cwd: '<%= dirs.src %>',
 					src: ['img/**/*.*'],
 					dest: '<%= dirs.publish %>'
 				},
