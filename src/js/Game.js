@@ -118,6 +118,8 @@ puckt.Game = (function () {
     }
 
     function createWorld () {
+        // Make the background visible
+        document.getElementById('ice-rink').classList.remove('hidden');
         // Create world with no gravity
         world = new box2d.b2World(new box2d.b2Vec2(0, 0), true);
 

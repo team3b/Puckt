@@ -40,10 +40,14 @@ small {
 }
 
 #ice-rink {
+	display: block;
 	opacity: 0.2;
 	background: #fff url('../img/ice_rink.svg') no-repeat center center;
 	width: 320px;
 	height: 410px;
+}
+#ice-rink.hidden {
+	display: none;
 }
 
 .message {
