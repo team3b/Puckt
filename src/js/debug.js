@@ -17,7 +17,7 @@ puckt.debug = (function () {
             var debugDraw;
             
             debugCanvas = document.createElement('canvas');
-            puckt.util.setCanvasSize(debugCanvas, puckt.canvas.width, puckt.canvas.height);
+            puckt.util.setCanvasSize(debugCanvas, puckt.canvas.scaledWidth, puckt.canvas.scaledHeight);
 
             puckt.canvas.elem.parentNode.appendChild(debugCanvas);
             

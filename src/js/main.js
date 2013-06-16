@@ -17,7 +17,7 @@ puckt.main = (function () {
 
     var createGame = function (startingLevel) {
         var context;
-        
+
         // Inject puckt.canvas.elem
         document.body.appendChild(puckt.canvas.elem);
         puckt.canvas.elem.setAttribute("id", "canvas");
@@ -31,7 +31,10 @@ puckt.main = (function () {
                                          context.oBackingStorePixelRatio ||
                                          context.backingStorePixelRatio || 1;
 
-        puckt.canvas.ratio = puckt.canvas.devicePixelRatio / puckt.canvas.backingStoreRatio;
+        puckt.canvas.scale = puckt.canvas.devicePixelRatio / puckt.canvas.backingStoreRatio;
+
+        puckt.canvas.scaledWidth = puckt.canvas.width * puckt.canvas.scale;
+        puckt.canvas.scaledHeight = puckt.canvas.height * puckt.canvas.scale;
 
         // Set canvas size
         puckt.util.setCanvasSize(puckt.canvas.elem, puckt.canvas.width, puckt.canvas.height);

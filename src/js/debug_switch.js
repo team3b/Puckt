@@ -2,7 +2,7 @@
 
 var puckt = puckt || {};
 puckt.debug_switch = {
-	box2d_debug: false,
+	box2d_debug: true,
 	music_off: true,
 	logic: true,
 	logging: true,
