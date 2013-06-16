@@ -1,6 +1,6 @@
 "use strict";
 
-var box2d, stage;           
+var box2d, stage,
 
 puckt = puckt || {};
 puckt.canvas = {
@@ -16,9 +16,23 @@ puckt.main = (function () {
     puckt.debug.init();
 
     var createGame = function (startingLevel) {
+        var context;
+
         // Inject puckt.canvas.elem
         document.body.appendChild(puckt.canvas.elem);
         puckt.canvas.elem.setAttribute("id", "canvas");
+
+        // Set puckt.canvas properties
+        context = puckt.canvas.elem.getContext('2d');
+        puckt.canvas.devicePixelRatio = window.devicePixelRatio || 1;
+        puckt.canvas.backingStoreRatio = context.webkitBackingStorePixelRatio ||
+                                         context.mozBackingStorePixelRatio ||
+                                         context.msBackingStorePixelRatio ||
+                                         context.oBackingStorePixelRatio ||
+                                         context.backingStorePixelRatio || 1;
+
+        puckt.canvas.ratio = puckt.canvas.devicePixelRatio / puckt.canvas.backingStoreRatio;
+
         // Set canvas size
         puckt.util.setCanvasSize(puckt.canvas.elem, puckt.canvas.width, puckt.canvas.height);
         // Set canvas to have a margin top (for nav bar)

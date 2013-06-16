@@ -12,16 +12,18 @@ puckt.Obj = (function () {
 	        this.shape = new createjs.Shape();
 
 	        // Set shape properties
-	        this.shape.x = props.x;
-	        this.shape.y = props.y;
-            this.shape.regX = props.w / 2;
-            this.shape.regY = props.h / 2;
+	        this.shape.x = props.x * puckt.canvas.ratio;
+	        this.shape.y = props.y * puckt.canvas.ratio;
+            this.shape.regX = (props.w / 2) * puckt.canvas.ratio;
+            this.shape.regY = (props.h / 2) * puckt.canvas.ratio;
 	        this.shape.rotation = props.rotation || 0;
 	        this.shape.type = objType;
 
-	        // Set a w (width) and h (height) property on the object
-            this.w = props.w;
-            this.h = props.h;
+	        // Set the object's width and height properties
+            this.realWidth = props.w;
+            this.realHeight = props.h;
+            this.canvasWidth = this.realWidth * puckt.canvas.ratio;
+            this.canvasHeight = this.realHeight * puckt.canvas.ratio;
 
 	        // Set fixture attributes
 	        puckt.util.extendObject(this.fixDef, props.fixDef);
@@ -40,7 +42,7 @@ puckt.Obj = (function () {
 		},
 		// Sets the position of the object
 		setPosition: function (x, y) {
-	        this.body.SetPosition(puckt.util.dimTob2Vec2({x: x, y: y, w: this.w, h: this.h}));
+	        this.body.SetPosition(puckt.util.dimTob2Vec2({x: x, y: y}));
 	    }
 	});
 })();

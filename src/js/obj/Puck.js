@@ -6,8 +6,8 @@ puckt.Puck = (function () {
     function tick() {
         var pos = this.body.GetPosition();
         this.shape.set({
-            x: puckt.util.metresToPixels(pos.x),
-            y: puckt.util.metresToPixels(pos.y),
+            x: puckt.util.metresToPixels(pos.x) * puckt.canvas.ratio,
+            y: puckt.util.metresToPixels(pos.y) * puckt.canvas.ratio,
             rotation: puckt.util.radiansToDegrees(this.body.GetAngle())
         });
     }
@@ -38,9 +38,7 @@ puckt.Puck = (function () {
             
             this.body.SetLinearDamping(0.4);
 
-            // this.shape.graphics.beginBitmapFill(Puck.image).drawCircle(props.radius, props.radius, props.radius);
-
-            this.shape.graphics.beginFill('#222222').drawCircle(props.radius, props.radius, props.radius);
+            this.shape.graphics.beginFill('#222222').drawCircle(props.radius * puckt.canvas.ratio, props.radius * puckt.canvas.ratio, props.radius * puckt.canvas.ratio);
             
             // Attach tick event listener
             this.shape.addEventListener('tick', tick.bind(this));
