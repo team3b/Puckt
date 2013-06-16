@@ -2,6 +2,16 @@
 
 var puckt = puckt || {};
 puckt.Puck = (function () {
+
+    function tick() {
+        var pos = this.body.GetPosition();
+        this.shape.set({
+            x: puckt.util.metresToPixels(pos.x),
+            y: puckt.util.metresToPixels(pos.y),
+            rotation: puckt.util.radiansToDegrees(this.body.GetAngle())
+        });
+    }
+
     var Puck = puckt.Obj.extend({
         init: function (world, props) {
             var s, puckImg;
@@ -31,6 +41,9 @@ puckt.Puck = (function () {
             // this.shape.graphics.beginBitmapFill(Puck.image).drawCircle(props.radius, props.radius, props.radius);
 
             this.shape.graphics.beginFill('#222222').drawCircle(props.radius, props.radius, props.radius);
+            
+            // Attach tick event listener
+            this.shape.addEventListener('tick', tick.bind(this));
         },
         isInFlickZone: function () {
             // To do: return whether the puck is in the flick zone

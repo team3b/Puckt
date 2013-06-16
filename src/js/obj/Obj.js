@@ -2,17 +2,11 @@
 
 var puckt = puckt || {};
 puckt.Obj = (function () {
-    function tick() {
-        var pos = this.body.GetPosition();
-        this.shape.set({
-            x: puckt.util.metresToPixels(pos.x),
-            y: puckt.util.metresToPixels(pos.y),
-            rotation: puckt.util.radiansToDegrees(this.body.GetAngle())
-        });
-    }
-
+	// Define and return the Obj class
 	return Class.extend({
+		// Instatniate a new instance of the Obj class
 		init: function (world, objType, props) {
+			// Create 
 	        this.fixDef = new box2d.b2FixtureDef();
 	        this.bodyDef = new box2d.b2BodyDef();
 	        this.shape = new createjs.Shape();
@@ -25,6 +19,7 @@ puckt.Obj = (function () {
 	        this.shape.rotation = props.rotation || 0;
 	        this.shape.type = objType;
 
+	        // Set a w (width) and h (height) property on the object
             this.w = props.w;
             this.h = props.h;
 
@@ -42,10 +37,8 @@ puckt.Obj = (function () {
 	        this.body = this.shape.body = world.CreateBody(this.bodyDef);
 	        this.body.CreateFixture(this.fixDef);
 	        this.body.SetUserData(this.shape);
-	        
-	        // Attach tick event listener
-	        this.shape.addEventListener('tick', tick.bind(this));
 		},
+		// Sets the position of the object
 		setPosition: function (x, y) {
 	        this.body.SetPosition(puckt.util.dimTob2Vec2({x: x, y: y, w: this.w, h: this.h}));
 	    }
