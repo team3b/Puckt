@@ -3,30 +3,13 @@
 var puckt = puckt || {};
 puckt.debug = (function () {
     var debugCanvas,
-        oldConsole,
-
-    _console = {
-        log: function () {
-            if (puckt.debug_switch.logging) {
-                oldConsole.log(arguments);
-            }
-        }
-    };
-    
-    function run(fn) {
-        if (puckt.debug_switch.logic) {
-            fn();
-        }
-    }
 
     // Initialise debugging mode
-    function init() {
-        oldConsole = console;
-        console = _console;
-    }
+    init = function () {
+    },
 
     // Initialize the box2d debug canvas, if required
-    function initCanvas(world) {
+    initCanvas = function (world) {
         if (puckt.debug_switch.physics) {
             var debugDraw;
             
@@ -42,17 +25,32 @@ puckt.debug = (function () {
             debugDraw.SetFlags(box2d.b2DebugDraw.e_shapeBit | box2d.b2DebugDraw.e_jointBit);
             world.SetDebugDraw(debugDraw);
         }
-    }
+    },
 
-    function initFlick() {
+    // Initialise flick debugging
+    initFlick = function() {
 
-    }
+    },
+    
+    // Execute a function if debug logic is turned on
+    run = function (fn) {
+        if (puckt.debug_switch.logic) {
+            fn();
+        }
+    },
+
+    // Log things to toe console, if debug logging is turned on
+    log = function () {
+        if (puckt.debug_switch.logging) {
+            console.log.apply(console, arguments);
+        }
+    };
 
     return {
         init: init,
         initCanvas: initCanvas,
         run: run,
-        canvas: debugCanvas,
-        console: _console
+        log: log,
+        canvas: debugCanvas
     }
 })();
