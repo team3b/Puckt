@@ -5,11 +5,11 @@ var box2d, stage,
 puckt = puckt || {};
 puckt.canvas = {
     elem: document.createElement('canvas'),
-    width: 320,
-    height: 410,
+    realWidth: 320,
+    realHeight: 410,
     navHeight: 50
 };
-puckt.pxpm = 30 / puckt.Puck.realRadius;
+puckt.pxpm = 30 / puckt.Puck.realWorldRadius;
 
 puckt.main = (function () {
     // Initialise the debugger
@@ -33,8 +33,11 @@ puckt.main = (function () {
 
         puckt.canvas.ratio = puckt.canvas.devicePixelRatio / puckt.canvas.backingStoreRatio;
 
+        puckt.canvas.width = puckt.canvas.realWidth * puckt.canvas.ratio;
+        puckt.canvas.height = puckt.canvas.realHeight * puckt.canvas.ratio;
+
         // Set canvas size
-        puckt.util.setCanvasSize(puckt.canvas.elem, puckt.canvas.width, puckt.canvas.height);
+        puckt.util.setCanvasSize(puckt.canvas.elem, puckt.canvas.realWidth, puckt.canvas.realHeight);
         // Set canvas to have a margin top (for nav bar)
         // puckt.canvas.elem.style.top = puckt.canvas.navHeight + "px";
         // Set ice rink to have a margin top (for nav bar)

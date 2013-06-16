@@ -25,9 +25,16 @@ puckt.util = (function () {
     findDiff = function (num1, num2) {
         return (num1 > num2) ? num1 - num2 : num2 - num1;
     },
-    // Takes pixel x-axis, y-axis, width, & height and returns a b2Vect2 object
-    dimTob2Vec2 = function (props) {
-        return new box2d.b2Vec2(pixelsToMetres(props.x / puckt.canvas.ratio), pixelsToMetres(props.y / puckt.canvas.ratio)); 
+    // Takes pixel x and y position, and returns a b2Vect2 object
+    posTob2Vec2 = function (props) {
+        return new box2d.b2Vec2(pixelsToMetres(props.x), pixelsToMetres(props.y)); 
+    },
+    // Takes a b2Vec2 and returns object with x and y postion
+    b2Vec2ToPos = function (v) {
+        return {
+            x: metresToPixels(v.x),
+            y: metresToPixels(v.y)
+        }
     },
     // Takes a distance in pixels, and an array of times, converts pixels to
     // metres, and calculates the time period covered
@@ -70,7 +77,8 @@ puckt.util = (function () {
         radiansToDegrees: radiansToDegrees,
         clamp: clamp,
         findDiff: findDiff,
-        dimTob2Vec2: dimTob2Vec2,
+        posTob2Vec2: posTob2Vec2,
+        b2Vec2ToPos: b2Vec2ToPos,
         calcVelocity: calcVelocity,
         setCanvasSize: setCanvasSize,
         extendObject: extendObject,

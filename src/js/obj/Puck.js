@@ -5,17 +5,15 @@ puckt.Puck = (function () {
 
     function tick() {
         var pos = this.body.GetPosition();
-        this.shape.set({
-            x: puckt.util.metresToPixels(pos.x) * puckt.canvas.ratio,
-            y: puckt.util.metresToPixels(pos.y) * puckt.canvas.ratio,
-            rotation: puckt.util.radiansToDegrees(this.body.GetAngle())
-        });
+        pos = puckt.util.b2Vec2ToPos(pos);
+        pos.rotation = puckt.util.radiansToDegrees(this.body.GetAngle())
+        this.shape.set(pos);
     }
 
     var Puck = puckt.Obj.extend({
         init: function (world, props) {
             var s, puckImg;
-            s = new box2d.b2CircleShape(puckt.util.pixelsToMetres(props.radius));
+            s = new box2d.b2CircleShape(puckt.util.pixelsToMetres(props.radius * puckt.canvas.ratio));
 
             this._super(world, "puck", {
                 x: props.x,
@@ -34,11 +32,12 @@ puckt.Puck = (function () {
                 }
             });
 
-            this.radius = props.radius;
+            this.realRadius = props.radius;
+            this.canvasRadius = props.radius * puckt.canvas.ratio;
             
             this.body.SetLinearDamping(0.4);
 
-            this.shape.graphics.beginFill('#222222').drawCircle(props.radius * puckt.canvas.ratio, props.radius * puckt.canvas.ratio, props.radius * puckt.canvas.ratio);
+            this.shape.graphics.beginFill('#222222').drawCircle(this.canvasRadius, this.canvasRadius, this.canvasRadius);
             
             // Attach tick event listener
             this.shape.addEventListener('tick', tick.bind(this));

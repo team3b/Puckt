@@ -13,11 +13,11 @@ puckt.debug = (function () {
 
     // Initialize the box2d debug canvas, if required
     initCanvas = function (world) {
-        if (puckt.debug_switch.box2d_debug) {
+        if (puckt.debug_switch.box2d) {
             var debugDraw;
             
             debugCanvas = document.createElement('canvas');
-            puckt.util.setCanvasSize(debugCanvas, puckt.canvas.width, puckt.canvas.height);
+            puckt.util.setCanvasSize(debugCanvas, puckt.canvas.realWidth, puckt.canvas.realHeight);
 
             puckt.canvas.elem.parentNode.appendChild(debugCanvas);
             

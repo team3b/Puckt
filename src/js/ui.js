@@ -11,8 +11,8 @@ puckt.ui = (function () {
         // Add content to message box
         section.innerHTML = props.content;
         // Ensure dimensions are the same dimensions as the canvas
-        message.style.width = puckt.canvas.width + "px";
-        message.style.height = puckt.canvas.height + puckt.canvas.navHeight + "px";
+        message.style.width = puckt.canvas.realWidth + "px";
+        message.style.height = puckt.canvas.realHeight + puckt.canvas.navHeight + "px";
         // Make transparent (for fading)
         message.style.opacity = "0";
         // Add buttons to message
@@ -93,7 +93,7 @@ puckt.ui = (function () {
         }
 
         // Set up navigation properties
-        navigation.style.width = puckt.canvas.width + "px";
+        navigation.style.width = puckt.canvas.realWidth + "px";
         navigation.style.height = puckt.canvas.navHeight + "px";
         // Set up level text
         levelText.id = "level_text";

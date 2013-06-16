@@ -78,7 +78,6 @@ puckt.Level = (function () {
         this.initialLightsOn = 0;
         this.lightWallsOn = 0;
         this.finished = true;
-        // this.stopFailTimer();
         this.collisions = 0;
         this.last = false;
         puckt.util.resetWorld(this.world);
@@ -91,7 +90,6 @@ puckt.Level = (function () {
 
     Level.prototype._levelComplete = function () {
         puckt.Wall.disabled = true;
-        // this.stopFailTimer();
         this.finished = true;
 
         var stars = 0;
@@ -109,21 +107,6 @@ puckt.Level = (function () {
             Level.failCallback.call(this,stars, this.collisions);
         }
     }
-    
-    // Level.prototype.stopFailTimer = function () {
-    //     //console.log('stopFailTimer', this, this.failTimer);
-    //     //clearTimeout(this.failTimer);
-    //     //console.log('stopFailTimer finished', this.failTimer);
-    // }
-
-    // Level.prototype.startFailTimer = function () {
-    //     //this.failTimer = setTimeout(this._failLevel(), failTimeout);
-    // }
-
-    // Level.prototype.restartFailTimer = function () {
-    //     this.stopFailTimer();
-    //     this.startFailTimer();
-    // }
 
     Level.prototype._failLevel = function () {
         Level.failCallback.call(this, this.collisions);
@@ -136,34 +119,34 @@ puckt.Level = (function () {
             case boundaries.top !== false:
                 new puckt.Wall(this.world, {
                     lightColour: null,
-                    x: puckt.canvas.width / 2,
+                    x: puckt.canvas.realWidth / 2,
                     y: 0,
-                    w: puckt.canvas.width,
+                    w: puckt.canvas.realWidth,
                     h: 0
                 });
             case boundaries.right !== false:
                 new puckt.Wall(this.world, {
                     lightColour: null,
-                    x: puckt.canvas.width,
-                    y: puckt.canvas.height / 2,
+                    x: puckt.canvas.realWidth,
+                    y: puckt.canvas.realHeight / 2,
                     w: 0,
-                    h: puckt.canvas.height
+                    h: puckt.canvas.realHeight
                 });
             case boundaries.bottom !== false:
                 new puckt.Wall(this.world, {
                     lightColour: null,
-                    x: puckt.canvas.width / 2,
-                    y: puckt.canvas.height,
-                    w: puckt.canvas.width,
+                    x: puckt.canvas.realWidth / 2,
+                    y: puckt.canvas.realHeight,
+                    w: puckt.canvas.realWidth,
                     h: 0
                 });
             case boundaries.left !== false:
                 new puckt.Wall(this.world, {
                     lightColour: null,
                     x: 0,
-                    y: puckt.canvas.height / 2,
+                    y: puckt.canvas.realHeight / 2,
                     w: 0,
-                    h: puckt.canvas.height
+                    h: puckt.canvas.realHeight
                 })
                 break;
         }

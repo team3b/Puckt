@@ -18,11 +18,11 @@ puckt.flick = (function() {
                 pk.setPosition(
                     puckt.util.clamp(
                         pk.radius + 1, 
-                        puckt.canvas.width - pk.radius - 1,
+                        puckt.canvas.realWidth - pk.radius - 1,
                         e.stageX + offset.x
                     ), puckt.util.clamp(
-                        puckt.canvas.height - 104 + pk.radius,
-                        puckt.canvas.height - pk.radius - 1,
+                        puckt.canvas.realHeight - 104 + pk.radius,
+                        puckt.canvas.realHeight - pk.radius - 1,
                         e.stageY + offset.y
                     )
                 );
@@ -52,7 +52,7 @@ puckt.flick = (function() {
 
                     // Convert velocity to b2Vec2()
                     var momentumVect = new box2d.b2Vec2(xVel * puckt.Puck.realMass, yVel * puckt.Puck.realMass);
-                    if (d[end].pos.y >= puckt.canvas.height - 112 + puckt.Puck.realRadius) {
+                    if (d[end].pos.y >= puckt.canvas.realHeight - 112 + puckt.Puck.realRadius) {
                         pk.body.ApplyImpulse(momentumVect, pk.body.GetWorldCenter());
                         onflick();
                     }
@@ -60,6 +60,7 @@ puckt.flick = (function() {
             },
             
             mousedown = function (e) {
+                console.log('mousedown', e);
                 var pos = pk.body.GetPosition();
                 if (puckt.util.metresToPixels(pos.y) > 300) {
                     pk.body.SetLinearVelocity(new box2d.b2Vec2(0, 0));

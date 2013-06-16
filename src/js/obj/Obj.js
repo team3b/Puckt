@@ -31,7 +31,7 @@ puckt.Obj = (function () {
 	        // Set bodyDef properties
 	        puckt.util.extendObject(this.bodyDef, props.bodyDef);
 
-            this.bodyDef.position = puckt.util.dimTob2Vec2(props);
+            this.bodyDef.position = puckt.util.posTob2Vec2(props);
             this.bodyDef.bullet = true;
             this.bodyDef.angle = puckt.util.degreesToRadians(this.shape.rotation);
 	        
@@ -42,7 +42,7 @@ puckt.Obj = (function () {
 		},
 		// Sets the position of the object
 		setPosition: function (x, y) {
-	        this.body.SetPosition(puckt.util.dimTob2Vec2({x: x, y: y}));
+	        this.body.SetPosition(puckt.util.posTob2Vec2({x: x, y: y}));
 	    }
 	});
 })();
