@@ -5,7 +5,6 @@ var box2d, stage;
 puckt = puckt || {};
 puckt.canvas = {
     elem: document.createElement('canvas'),
-    iceRink: document.getElementById("ice-rink"),
     width: 320,
     height: 410,
     navHeight: 50
@@ -23,9 +22,6 @@ puckt.main = (function () {
         // puckt.canvas.elem.style.top = puckt.canvas.navHeight + "px";
         // Set ice rink to have a margin top (for nav bar)
         // puckt.canvas.iceRink.style.top = puckt.canvas.navHeight + "px";
-        // Add background image
-        canvg(document.getElementById("ice-rink"), "img/ice_rink.svg");
-        // Create test level
 
         new puckt.Game(startingLevel);
     },
@@ -103,4 +99,4 @@ puckt.main = (function () {
     }
 }());
 
-window.addEventListener("load", puckt.main.init);
+window.addEventListener("load", puckt.main.init, false);

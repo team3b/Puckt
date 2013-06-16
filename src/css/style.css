@@ -21,7 +21,8 @@ body {
 
 a { text-decoration: none; }
 
-canvas {
+canvas,
+#ice-rink {
 	position: absolute;
 	top: 50px;
 	left: 0;
@@ -38,7 +39,12 @@ small {
 	color: #bbbbbb;
 }
 
-canvas#ice-rink { opacity: 0.2; }
+#ice-rink {
+	opacity: 0.2;
+	background: #fff url('../img/ice_rink.svg') no-repeat center center;
+	width: 320px;
+	height: 410px;
+}
 
 .message {
 	position: absolute;
