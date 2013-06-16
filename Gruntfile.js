@@ -200,7 +200,7 @@ module.exports = function (grunt) {
 					// 	'<%= dirs.src %>/vendor/js/Box2dWeb-2.1.a.3.min.js',
 					// 	'<%= dirs.src %>/vendor/js/Class.js',
 					// 	'<%= dirs.build %>/vendor/js/easeljs-0.6.1.min.js'
-					] // TO DO: generate the externs file
+					// ] // TO DO: generate the externs file
 				}
 			}
 		}
