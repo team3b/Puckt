@@ -7,6 +7,7 @@ puckt.Game = (function () {
     function Game (startingLevel) {
         // Create stage and enable touch
         stage = new createjs.Stage(puckt.canvas.elem);
+        stage.scaleX = stage.scaleY = puckt.canvas.ratio;
         createjs.Touch.enable(stage);
         currentLevel = startingLevel;
 

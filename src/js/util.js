@@ -38,6 +38,13 @@ puckt.util = (function () {
     },
     // Set the width and height of an HTML canvas element
     setCanvasSize = function (canvas, width, height) {
+        if (puckt.canvas.devicePixelRatio !== puckt.canvas.backingStoreRatio) {
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+
+            width *= puckt.canvas.ratio;
+            height *= puckt.canvas.ratio;
+        }
         canvas.setAttribute('width', width);
         canvas.setAttribute('height', height);
     },
