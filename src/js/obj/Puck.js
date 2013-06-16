@@ -15,7 +15,7 @@ puckt.Puck = (function () {
     var Puck = puckt.Obj.extend({
         init: function (world, props) {
             var s, puckImg;
-            s = new box2d.b2CircleShape(puckt.util.pixelsToMetres(props.radius));
+            s = new box2d.b2CircleShape(puckt.util.pixelsToMetres(props.radius * puckt.canvas.ratio));
 
             this._super(world, "puck", {
                 x: props.x,
