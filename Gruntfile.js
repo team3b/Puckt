@@ -14,6 +14,8 @@ module.exports = function (grunt) {
 		dirs: {
 			// The repository's root directory
 			root: __dirname,
+			// The build directory
+			build: 'build',
 			// The source directory
 			src: 'src',
 			// The source directory containing third party assets
@@ -30,18 +32,29 @@ module.exports = function (grunt) {
 		},
 
 		// Configure clean task
-		clean: ['<%= dirs.intermediate %>', '<%= dirs.publish %>'],
+		clean: {
+			build: ['<%= dirs.intermediate %>', '<%= dirs.publish %>'],
+			intermediate: ['<%= dirs.intermediate %>']
+		},
 
 		// Configure copy task
 		copy: {
 			build: {
-				files: [{
+				files: [
+				{
 					src: ['<%= dirs.src %>/index.html'],
 					dest: '<%= dirs.intermediate %>/index.html'
-				},{
+				},
+				{
 					expand: true,
 					cwd: '<%= dirs.src %>',
 					src: ['js/**/*.js'],
+					dest: '<%= dirs.intermediate %>'
+				},
+				{
+					expand: true,
+					cwd: '<%= dirs.build %>',
+					src: ['js/debug_Switch.js'],
 					dest: '<%= dirs.intermediate %>'
 				},
 				{
@@ -64,7 +77,8 @@ module.exports = function (grunt) {
 				}]
 			},
 			publish: {
-				files: [{
+				files: [
+				{
 					expand: true,
 					cwd: '<%= dirs.intermediate %>',
 					src: ['js/*.game.js'],
@@ -243,7 +257,7 @@ module.exports = function (grunt) {
 	});
 
 	// Build tasks
-	grunt.registerTask('build', ['clean', 'mkdir', 'copy:build', 'useminPrepare', 'concat', 'rename:js', 'closure-compiler:frontend', 'cssmin', 'rev', 'usemin', 'json-minify:publish', 'htmlmin:publish', 'copy:publish', 'manifest:index']);
+	grunt.registerTask('build', ['clean:build', 'mkdir', 'copy:build', 'useminPrepare', 'concat', 'rename:js', 'closure-compiler:frontend', 'cssmin', 'rev', 'usemin', 'json-minify:publish', 'htmlmin:publish', 'copy:publish', 'manifest:index']);
 
 	// Default tasks
 	grunt.registerTask('default', ['build']);
