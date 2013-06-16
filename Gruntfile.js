@@ -43,12 +43,20 @@ module.exports = function (grunt) {
 					cwd: '<%= dirs.src %>',
 					src: ['js/**/*.js'],
 					dest: '<%= dirs.intermediate %>'
-				},{
+				},
+				{
 					expand: true,
 					cwd: '<%= dirs.src %>',
 					src: ['css/**/*.css'],
 					dest: '<%= dirs.intermediate %>'
-				},{
+				},
+				{
+					expand: true,
+					cwd: '<%= dirs.src %>',
+					src: ['vendor/**/*.*'],
+					dest: '<%= dirs.intermediate %>'
+				},
+				{
 					expand: true,
 					cwd: '<%= dirs.src %>',
 					src: ['levels/**/*.json'],
@@ -61,7 +69,8 @@ module.exports = function (grunt) {
 					cwd: '<%= dirs.intermediate %>',
 					src: ['js/*.game.js'],
 					dest: '<%= dirs.publish %>'
-				},{
+				},
+				{
 					expand: true,
 					cwd: '<%= dirs.intermediate %>',
 					src: ['css/*.game.css'],
@@ -71,6 +80,12 @@ module.exports = function (grunt) {
 					expand: true,
 					cwd: '<%= dirs.intermediate %>',
 					src: ['levels/**/*.json'],
+					dest: '<%= dirs.publish %>'
+				},
+				{
+					expand: true,
+					cwd: '<%= dirs.intermediate %>',
+					src: ['js/*.3p.js'],
 					dest: '<%= dirs.publish %>'
 				},
 				{
@@ -154,7 +169,8 @@ module.exports = function (grunt) {
 				files: [{
 					src: [
 						'<%= dirs.intermediate %>/js/game.js',
-						'<%= dirs.intermediate %>/css/game.css'
+						'<%= dirs.intermediate %>/css/game.css',
+						'<%= dirs.intermediate %>/js/3p.js'
 					]
 				}]
 			},
