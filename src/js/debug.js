@@ -13,7 +13,7 @@ puckt.debug = (function () {
 
     // Initialize the box2d debug canvas, if required
     initCanvas = function (world) {
-        if (puckt.debug_switch.physics) {
+        if (puckt.debug_switch.box2d_debug) {
             var debugDraw;
             
             debugCanvas = document.createElement('canvas');
