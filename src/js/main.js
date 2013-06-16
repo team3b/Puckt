@@ -1,6 +1,6 @@
 "use strict";
 
-var box2d, stage;           
+var box2d, stage,
 
 puckt = puckt || {};
 puckt.canvas = {
